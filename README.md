@@ -6,7 +6,7 @@ This project deploys `microsoft/TRELLIS.2-4B` on an NVIDIA GPU and uses it to ge
 
 The project also investigates the model's two-stage flow-matching process by extracting, decoding, and rendering intermediate sampler states. Finally, generated assets are assembled into a composed 3D scene.
 
-Current progress: **Step 1 complete — awaiting approval to start Step 2**
+Current progress: **Steps 1–2 complete — awaiting approval to start Step 3**
 
 ## Table of Contents
 
@@ -102,7 +102,90 @@ No substitute 3D model was used. RMBG-2.0 and FLUX.1-schnell were selected from 
 
 ## Step 2 — Build the Environment
 
-Not started. This step will create an isolated Python environment and install PyTorch, the CUDA toolchain, and all required compiled CUDA extensions.
+### Objective
+
+Create an isolated, reproducible runtime for TRELLIS.2 with its required CUDA toolchain and source-built native extensions. No package was installed into the cluster's system Python.
+
+### Implementation
+
+The environment was created at:
+
+```text
+/home/h/hongshan/cp4281-as2/envs/trellis2
+```
+
+Miniconda was loaded explicitly because non-interactive Slurm shells do not automatically source the user's `.bashrc`:
+
+```bash
+source "$HOME/miniconda3/etc/profile.d/conda.sh"
+conda activate "$HOME/cp4281-as2/envs/trellis2"
+```
+
+The installation was performed in the following order:
+
+1. Create a Python 3.10 environment and install the CUDA 12.4 compiler toolkit, GCC/G++ 12, CMake, and Ninja.
+2. Install PyTorch 2.6.0 and torchvision 0.21.0 using their CUDA 12.4 builds.
+3. Install the standard Python dependencies required by TRELLIS.2.
+4. Clone TRELLIS.2 recursively and retain its exact Git revision.
+5. Compile and test FlashAttention.
+6. Compile and test `nvdiffrast` and `nvdiffrec_render`.
+7. Compile and load-test CuMesh, O-Voxel, and FlexGEMM.
+8. Import the complete TRELLIS.2 pipeline and export final pip, conda, version, and source-revision manifests.
+
+Compilation ran in Slurm GPU jobs against an NVIDIA A100 80 GB PCIe MIG 3g.40gb instance. Temporary build trees and pip caches were placed together under `/tmp` to avoid cross-filesystem wheel operations. CUDA extensions were built for compute capability 8.0. The CUDA driver stub directory was supplied only to the linker for extensions that link against `libcuda.so`.
+
+The reproducible scripts retained in this repository are:
+
+| Script | Purpose |
+|---|---|
+| [`scripts/setup_step2_render.sbatch`](scripts/setup_step2_render.sbatch) | Build and functionally test `nvdiffrast` and `nvdiffrec_render` |
+| [`scripts/setup_step2_geometry.sbatch`](scripts/setup_step2_geometry.sbatch) | Build and load-test CuMesh, O-Voxel, and FlexGEMM |
+| [`scripts/verify_step2_environment.sbatch`](scripts/verify_step2_environment.sbatch) | Perform the final TRELLIS.2 import, CUDA execution, dependency, version, and revision checks |
+
+### Results
+
+The isolated environment passed the complete TRELLIS.2 pipeline import, all compiled-extension imports, a CUDA tensor execution test, and `pip check`.
+
+| Component | Installed version or build identity |
+|---|---|
+| Python | 3.10.21 |
+| pip | 26.2.1 |
+| CUDA toolkit / NVCC | 12.4.131 |
+| PyTorch | 2.6.0+cu124 |
+| torchvision | 0.21.0+cu124 |
+| CMake | 4.4.3 |
+| Ninja | 1.13.2 |
+| FlashAttention | 2.7.3; CUDA kernel test passed |
+| nvdiffrast | 0.4.0; commit `253ac4fcea7de5f396371124af597e6cc957bfae` |
+| nvdiffrec_render | Source build at commit `b296927cc7fd01c2ac1087c8065c4d7248f72da4` |
+| CuMesh | Source build at commit `12289e1062f0603f2f0d0771b02e1395d247f26f` |
+| O-Voxel | Source build from the pinned TRELLIS.2 repository |
+| FlexGEMM | Source build at commit `6dd94a859c26ee8246888502eada3dd8ad85532e` |
+| Pillow | 12.3.0 |
+| Transformers | 5.17.0 |
+| Gradio | 6.0.1 |
+| Trimesh | 5.1.0 |
+| utils3d | 0.0.2 |
+
+Source identities used by the final environment:
+
+| Source | Revision |
+|---|---|
+| TRELLIS.2 | `75fbf0183001ed9876c8dbb35de6b68552ee08bd` |
+| nvdiffrast | `253ac4fcea7de5f396371124af597e6cc957bfae` |
+| nvdiffrec | `b296927cc7fd01c2ac1087c8065c4d7248f72da4` |
+| CuMesh | `12289e1062f0603f2f0d0771b02e1395d247f26f` |
+| FlexGEMM | `6dd94a859c26ee8246888502eada3dd8ad85532e` |
+| Eigen submodule | `21e4582d1739107337a03460c81412981130373e` |
+
+The final verification completed on 15 September 2026 at 20:28:36 +08:00. Detailed package inventories are retained on the cluster at:
+
+```text
+~/cp4281-as2/logs/step2-final-versions.txt
+~/cp4281-as2/logs/step2-final-pip-freeze.txt
+~/cp4281-as2/logs/step2-final-conda-explicit.txt
+~/cp4281-as2/logs/step2-final-conda-list.txt
+```
 
 ## Step 3 — Deploy and Generate
 
@@ -121,7 +204,7 @@ Not started. This step will arrange at least five generated assets into one inte
 ### Report
 
 - [x] Step 1: downloaded models, official sources, revisions, storage location, and substitution statement
-- [ ] Step 2: ordered copy-pasteable environment commands and exact versions of Python, PyTorch, CUDA, and every compiled extension
+- [x] Step 2: ordered copy-pasteable environment commands and exact versions of Python, PyTorch, CUDA, and every compiled extension
 - [ ] Step 3a: five original input images, selection rationale, five `.glb` assets, at least two rendered viewpoints per asset, and individual generation times
 - [ ] Step 3b: five original prompts, the prompt template, intermediate text-to-image outputs, five `.glb` assets, at least two rendered viewpoints per asset, and individual generation times
 - [ ] Step 3b: explain that TRELLIS.2 never receives text directly and include at least one case where the text-to-image stage limits the final result
