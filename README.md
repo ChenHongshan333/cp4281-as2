@@ -55,6 +55,8 @@ hf download black-forest-labs/FLUX.1-schnell \
   --exclude "flux1-schnell.safetensors"
 ```
 
+The complete reproducible Slurm download job and verification procedure are preserved in [`scripts/download_models.sbatch`](scripts/download_models.sbatch) and [`scripts/verify_models.sh`](scripts/verify_models.sh).
+
 The standalone `flux1-schnell.safetensors` file was excluded because the required Diffusers-format transformer, text encoders, and VAE were downloaded from the same repository. This avoided storing a duplicate 23.8 GB FLUX checkpoint.
 
 ### Results
@@ -84,6 +86,19 @@ All weights were obtained from their official Hugging Face repositories:
 - [`black-forest-labs/FLUX.1-schnell`](https://huggingface.co/black-forest-labs/FLUX.1-schnell)
 
 No substitute 3D model was used. RMBG-2.0 and FLUX.1-schnell were selected from the implementations suggested by the assignment.
+
+### Cluster Artifacts
+
+| Cluster path | Purpose | Keep for submission? |
+|---|---|---|
+| `~/cp4281-as2/download_models.sbatch` | Slurm job that downloaded all required checkpoints | Keep as reproducibility evidence; not a submitted file |
+| `~/cp4281-as2/verify_models.sh` | Verifies revisions, required files, weight counts, and incomplete downloads | Keep as reproducibility evidence; not a submitted file |
+| `~/cp4281-as2/hf-cache/` | The 53 GB model cache used by later inference jobs | Keep on the cluster; do not submit |
+| `~/cp4281-as2/logs/download-models-849112.log` | Download timing, node, versions, and completion log | Keep as evidence; do not submit |
+| `~/cp4281-as2/logs/model-manifest.txt` | Verified revisions, sizes, and checkpoint inventory | Keep for the report; do not submit separately |
+| `~/cp4281-as2/access-check/` | Small files used only to test gated-repository access | Temporary; not needed for submission |
+| `~/cp4281-as2/tools/hf-download-env/` | Lightweight Hugging Face download environment | Re-creatable; not the Step 2 runtime environment |
+| `~/cp4281-as2/tmp/` | Temporary download workspace | Not needed for submission after successful verification |
 
 ## Step 2 — Build the Environment
 
