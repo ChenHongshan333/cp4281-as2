@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "stage": "Step 3 - Deploy and Generate",
+  "status": "inputs_pending",
+  "timing_policy": {
+    "primary_reported_metric": "per_case_end_to_end_seconds",
+    "exclude_shared_model_initialization_from_primary_metric": true,
+    "record_shared_model_initialization_separately": true,
+    "synchronize_cuda_before_and_after_timed_gpu_sections": true,
+    "required_breakdown": [
+      "preprocessing_seconds",
+      "text_to_image_seconds",
+      "trellis_generation_seconds",
+      "glb_export_seconds",
+      "per_case_end_to_end_seconds"
+    ]
+  },
+  "reproducibility_fields": [
+    "case_id",
+    "source_input",
+    "source_provenance",
+    "selection_rationale",
+    "expanded_prompt",
+    "seed",
+    "generation_parameters",
+    "model_revisions",
+    "background_removal_applied",
+    "gpu_name",
+    "timings_seconds",
+    "output_files",
+    "status"
+  ],
+  "image_conditioned_cases": [
+    {
+      "case_id": "img01_thin_structure",
+      "status": "awaiting_user_input",
+      "source_input": null,
+      "source_provenance": null,
+      "challenge": "thin structures",
+      "selection_rationale": "Evaluate whether narrow parts, gaps, and disconnected-looking details survive single-view reconstruction.",
+      "step4_candidate": true
+    },
+    {
+      "case_id": "img02_hard_surface",
+      "status": "awaiting_user_input",
+      "source_input": null,
+      "source_provenance": null,
+      "challenge": "hard surfaces",
+      "selection_rationale": "Evaluate planar faces, sharp edges, symmetry, and mechanically regular geometry.",
+      "step4_candidate": true
+    },
+    {
+      "case_id": "img03_transparency",
+      "status": "awaiting_user_input",
+      "source_input": null,
+      "source_provenance": null,
+      "challenge": "transparent or translucent material",
+      "selection_rationale": "Evaluate how matting and image conditioning handle view-dependent appearance and weak object boundaries.",
+      "step4_candidate": false
+    },
+    {
+      "case_id": "img04_organic_shape",
+      "status": "awaiting_user_input",
+      "source_input": null,
+      "source_provenance": null,
+      "challenge": "organic shape",
+      "selection_rationale": "Evaluate curved, irregular surfaces without strong geometric primitives.",
+      "step4_candidate": true
+    },
+    {
+      "case_id": "img05_complex_shape",
+      "status": "awaiting_user_input",
+      "source_input": null,
+      "source_provenance": null,
+      "challenge": "concavity, asymmetry, or fine components",
+      "selection_rationale": "Evaluate hallucination and topology when the visible silhouette does not fully determine the hidden structure.",
+      "step4_candidate": false
+    }
+  ],
+  "text_conditioned": {
+    "prompt_template": "A studio product photograph of {subject_description}. One isolated object, centered and fully visible, shown from a three-quarter front view on a plain light-gray background, with even diffuse lighting and soft minimal shadows. High object-background contrast, realistic materials, sharp focus. No people, no hands, no stand, no surrounding props, no text, no logo, no watermark, no cropped parts, no duplicate objects.",
+    "cases": [
+      {
+        "case_id": "txt01_desk_fan",
+        "subject_description": "a vintage mint-green metal desk fan with five blades, a circular wire cage, and a compact rounded base",
+        "challenge": "thin cage wires and repeated radial structures",
+        "analysis_focus": "Whether FLUX preserves a single coherent wire cage and the correct blade count before 3D reconstruction."
+      },
+      {
+        "case_id": "txt02_toolbox",
+        "subject_description": "a compact teal steel toolbox with a raised folding handle, two silver latches, and slightly rounded corners",
+        "challenge": "hard-surface geometry and small hardware",
+        "analysis_focus": "Whether planar faces, bilateral symmetry, handle attachment, and latch geometry remain consistent."
+      },
+      {
+        "case_id": "txt03_perfume_bottle",
+        "subject_description": "an asymmetric translucent amber glass perfume bottle with a faceted clear stopper and a curved silhouette",
+        "challenge": "transparency and asymmetric reflective material",
+        "analysis_focus": "How the text-to-image depiction of transparency constrains the opaque surface reconstructed by TRELLIS.2."
+      },
+      {
+        "case_id": "txt04_root_sculpture",
+        "subject_description": "a small freestanding sculpture shaped like an intertwined weathered tree root with branching knots and a broad stable base",
+        "challenge": "irregular organic branching and concavities",
+        "analysis_focus": "Whether branches remain separated and whether hidden concavities are plausibly completed."
+      },
+      {
+        "case_id": "txt05_lunar_rover",
+        "subject_description": "a stylized compact lunar rover toy with four ribbed wheels, a small tilted dish antenna, and an asymmetric instrument box",
+        "challenge": "multiple components, count consistency, and asymmetry",
+        "analysis_focus": "A candidate limitation case if FLUX changes wheel count, merges components, or hides the antenna attachment."
+      }
+    ]
+  },
+  "acceptance": {
+    "image_case_count": 5,
+    "text_case_count": 5,
+    "minimum_rendered_viewpoints_per_asset": 2,
+    "required_glb_count": 10,
+    "required_text_to_image_intermediates": 5,
+    "required_step4_candidates_from_image_cases": 3,
+    "required_text_to_image_limitation_cases": 1
+  }
+}
