@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "stage": "Step 3a - Image-conditioned generation",
+  "status": "completed",
+  "slurm_job_id": "853514",
+  "created_at": "2026-09-16T23:57:11+08:00",
+  "case_count": 5,
+  "total_primary_generation_seconds": 1039.4811,
+  "cases": [
+    {
+      "case_id": "img01_thin_structure",
+      "challenge": "thin structures",
+      "selection_rationale": "Use a wired earphone to evaluate whether narrow cables, separated earbuds, and the connector survive single-view reconstruction.",
+      "source_input": "/home/h/hongshan/cp4281-as2/inputs/step3/image_conditioned/img01_thin_structure/earphone.JPG",
+      "source_sha256": "2aa20de79ed0bc817f4319235f18c57a7d032025c6b470ec23b4aca26c27728c",
+      "background_removal_applied": true,
+      "gpu_name": "NVIDIA A100-PCIE-40GB",
+      "seed": 42,
+      "timings_seconds": {
+        "shared_model_initialization": 111.7177,
+        "preprocessing": 1.9361,
+        "trellis_generation": 321.3225,
+        "glb_export": 36.1229,
+        "per_case_end_to_end": 359.4251,
+        "preview_rendering": 5.8129
+      },
+      "peak_cuda_memory_bytes": 2849168384,
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "glb": {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img01_thin_structure/asset.glb",
+        "size_bytes": 18865004,
+        "sha256": "137a719b70a27dd3fe86eb75ff131cba0973b23e582de7e259e65d9d97c6ee79"
+      },
+      "rendered_views": [
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img01_thin_structure/view_00.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img01_thin_structure/view_01.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img01_thin_structure/view_02.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img01_thin_structure/view_03.png"
+      ],
+      "metadata_path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img01_thin_structure/metadata.json"
+    },
+    {
+      "case_id": "img02_hard_surface",
+      "challenge": "hard surfaces",
+      "selection_rationale": "Use a complete three-quarter view of a car to evaluate smooth hard surfaces, bilateral structure, wheels, windows, and small mechanical details.",
+      "source_input": "/home/h/hongshan/cp4281-as2/inputs/step3/image_conditioned/img02_hard_surface/white_car.JPG",
+      "source_sha256": "6856e821856b00ec47360a0c7c924280dc63ed95753af89b1ac80960cb6505fc",
+      "background_removal_applied": true,
+      "gpu_name": "NVIDIA A100-PCIE-40GB",
+      "seed": 42,
+      "timings_seconds": {
+        "shared_model_initialization": 112.0224,
+        "preprocessing": 1.974,
+        "trellis_generation": 144.6468,
+        "glb_export": 55.2153,
+        "per_case_end_to_end": 201.9455,
+        "preview_rendering": 3.5054
+      },
+      "peak_cuda_memory_bytes": 3628340736,
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "glb": {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img02_hard_surface/asset.glb",
+        "size_bytes": 16729320,
+        "sha256": "4111df05fbdf7af305dc49681cd4f0ac5b99885a7145a537c56cf14d796d9571"
+      },
+      "rendered_views": [
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img02_hard_surface/view_00.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img02_hard_surface/view_01.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img02_hard_surface/view_02.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img02_hard_surface/view_03.png"
+      ],
+      "metadata_path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img02_hard_surface/metadata.json"
+    },
+    {
+      "case_id": "img03_transparency",
+      "challenge": "transparent or translucent material",
+      "selection_rationale": "Use a translucent glass cup with a handle to evaluate matting, weak transparent boundaries, reflections, and a large opening.",
+      "source_input": "/home/h/hongshan/cp4281-as2/inputs/step3/image_conditioned/img03_transparency/glass_cup.JPG",
+      "source_sha256": "a140109cbccf2bd427372c04544d66e7d01424dc5171d18af7027e9271d251e0",
+      "background_removal_applied": true,
+      "gpu_name": "NVIDIA A100-PCIE-40GB",
+      "seed": 42,
+      "timings_seconds": {
+        "shared_model_initialization": 114.7255,
+        "preprocessing": 1.9069,
+        "trellis_generation": 64.7484,
+        "glb_export": 59.7091,
+        "per_case_end_to_end": 126.48,
+        "preview_rendering": 3.5805
+      },
+      "peak_cuda_memory_bytes": 7509300224,
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "glb": {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img03_transparency/asset.glb",
+        "size_bytes": 16217772,
+        "sha256": "e94924fc91406cf79eec16fa12fec7b89a3aae8fcbb63b32bce4168b32ff8743"
+      },
+      "rendered_views": [
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img03_transparency/view_00.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img03_transparency/view_01.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img03_transparency/view_02.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img03_transparency/view_03.png"
+      ],
+      "metadata_path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img03_transparency/metadata.json"
+    },
+    {
+      "case_id": "img04_organic_shape",
+      "challenge": "curved upholstered form and thin legs",
+      "selection_rationale": "Use a clearly separated armchair to evaluate smooth curved upholstery, recessed seating geometry, fabric appearance, and four narrow legs.",
+      "source_input": "/home/h/hongshan/cp4281-as2/inputs/step3/image_conditioned/img04_organic_shape/yellow_sofa.JPG",
+      "source_sha256": "b0288103d46d272465c51584361d506b0b05b48c4bb8d7a1a6ef3c8c091e4b3b",
+      "background_removal_applied": true,
+      "gpu_name": "NVIDIA A100-PCIE-40GB",
+      "seed": 42,
+      "timings_seconds": {
+        "shared_model_initialization": 113.531,
+        "preprocessing": 1.9517,
+        "trellis_generation": 47.592,
+        "glb_export": 190.8435,
+        "per_case_end_to_end": 240.4743,
+        "preview_rendering": 1.9439
+      },
+      "peak_cuda_memory_bytes": 5781514240,
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "glb": {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img04_organic_shape/asset.glb",
+        "size_bytes": 17674600,
+        "sha256": "4f28ef22cc7b6bcc01cdb8da509df72bd9b8a62417e1a3d64f5b4c57c879b4e8"
+      },
+      "rendered_views": [
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img04_organic_shape/view_00.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img04_organic_shape/view_01.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img04_organic_shape/view_02.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img04_organic_shape/view_03.png"
+      ],
+      "metadata_path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img04_organic_shape/metadata.json"
+    },
+    {
+      "case_id": "img05_complex_shape",
+      "challenge": "concavities and repeated compartments",
+      "selection_rationale": "Use a freestanding bookshelf to evaluate repeated recesses, planar surfaces, thin shelves, asymmetry, and hidden interior structure.",
+      "source_input": "/home/h/hongshan/cp4281-as2/inputs/step3/image_conditioned/img05_complex_shape/bookshelf.JPG",
+      "source_sha256": "598578420aad664d8a66a8f0a37c5c9ce3ef8d46f85dc8d75df7221eb4811358",
+      "background_removal_applied": true,
+      "gpu_name": "NVIDIA A100-PCIE-40GB",
+      "seed": 42,
+      "timings_seconds": {
+        "shared_model_initialization": 114.2619,
+        "preprocessing": 1.9388,
+        "trellis_generation": 61.5257,
+        "glb_export": 47.5584,
+        "per_case_end_to_end": 111.1562,
+        "preview_rendering": 2.2228
+      },
+      "peak_cuda_memory_bytes": 6970343424,
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "glb": {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img05_complex_shape/asset.glb",
+        "size_bytes": 15893584,
+        "sha256": "f0fa78c77cb1a98db74e63966fc4309102d37d42fded5dfcc56e6f8fb8abddeb"
+      },
+      "rendered_views": [
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img05_complex_shape/view_00.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img05_complex_shape/view_01.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img05_complex_shape/view_02.png",
+        "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img05_complex_shape/view_03.png"
+      ],
+      "metadata_path": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514/img05_complex_shape/metadata.json"
+    }
+  ]
+}

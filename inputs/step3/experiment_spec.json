@@ -1,7 +1,21 @@
 {
   "schema_version": 1,
   "stage": "Step 3 - Deploy and Generate",
-  "status": "image_inputs_ready",
+  "status": "image_conditioned_complete_text_conditioned_ready",
+  "image_conditioned_batch": {
+    "status": "completed",
+    "slurm_job_id": "853514",
+    "cluster_output": "/home/h/hongshan/cp4281-as2/outputs/step3/image_conditioned/batch-853514",
+    "local_output": "outputs/step3/image_conditioned/batch-853514",
+    "case_count": 5,
+    "rendered_viewpoints_per_case": 4,
+    "render_mode": "pbr_shaded_procedural_neutral",
+    "seed": 42,
+    "pipeline_type": "1024_cascade",
+    "total_primary_generation_seconds": 1039.4811,
+    "structural_qa": "passed",
+    "visual_qa": "passed"
+  },
   "timing_policy": {
     "primary_reported_metric": "per_case_end_to_end_seconds",
     "exclude_shared_model_initialization_from_primary_metric": true,
@@ -33,7 +47,7 @@
   "image_conditioned_cases": [
     {
       "case_id": "img01_thin_structure",
-      "status": "ready",
+      "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img01_thin_structure/earphone.JPG",
       "source_sha256": "2aa20de79ed0bc817f4319235f18c57a7d032025c6b470ec23b4aca26c27728c",
       "source_provenance": "User-provided photograph; confirm authorship before the final report.",
@@ -51,7 +65,7 @@
     },
     {
       "case_id": "img02_hard_surface",
-      "status": "ready",
+      "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img02_hard_surface/white_car.JPG",
       "source_sha256": "6856e821856b00ec47360a0c7c924280dc63ed95753af89b1ac80960cb6505fc",
       "source_provenance": "User-provided photograph; confirm authorship before the final report.",
@@ -68,7 +82,7 @@
     },
     {
       "case_id": "img03_transparency",
-      "status": "ready",
+      "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img03_transparency/glass_cup.JPG",
       "source_sha256": "a140109cbccf2bd427372c04544d66e7d01424dc5171d18af7027e9271d251e0",
       "source_provenance": "User-provided photograph; confirm authorship before the final report.",
@@ -85,7 +99,7 @@
     },
     {
       "case_id": "img04_organic_shape",
-      "status": "ready",
+      "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img04_organic_shape/yellow_sofa.JPG",
       "source_sha256": "b0288103d46d272465c51584361d506b0b05b48c4bb8d7a1a6ef3c8c091e4b3b",
       "source_provenance": "User-provided photograph; confirm authorship before the final report.",
@@ -102,7 +116,7 @@
     },
     {
       "case_id": "img05_complex_shape",
-      "status": "ready",
+      "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img05_complex_shape/bookshelf.JPG",
       "source_sha256": "598578420aad664d8a66a8f0a37c5c9ce3ef8d46f85dc8d75df7221eb4811358",
       "source_provenance": "User-provided photograph; confirm authorship before the final report.",
