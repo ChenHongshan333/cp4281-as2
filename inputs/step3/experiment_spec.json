@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "stage": "Step 3 - Deploy and Generate",
-  "status": "inputs_pending",
+  "status": "image_inputs_ready",
   "timing_policy": {
     "primary_reported_metric": "per_case_end_to_end_seconds",
     "exclude_shared_model_initialization_from_primary_metric": true,
@@ -33,48 +33,89 @@
   "image_conditioned_cases": [
     {
       "case_id": "img01_thin_structure",
-      "status": "awaiting_user_input",
-      "source_input": null,
-      "source_provenance": null,
+      "status": "ready",
+      "source_input": "inputs/step3/image_conditioned/img01_thin_structure/earphone.JPG",
+      "source_sha256": "2aa20de79ed0bc817f4319235f18c57a7d032025c6b470ec23b4aca26c27728c",
+      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_image": {
+        "format": "JPEG",
+        "stored_width": 5712,
+        "stored_height": 4284,
+        "exif_orientation": 6,
+        "has_alpha": false
+      },
       "challenge": "thin structures",
-      "selection_rationale": "Evaluate whether narrow parts, gaps, and disconnected-looking details survive single-view reconstruction.",
-      "step4_candidate": true
+      "selection_rationale": "Use a wired earphone to evaluate whether narrow cables, separated earbuds, and the connector survive single-view reconstruction.",
+      "review_note": "The source JPEG passes full decoding and is intact. Apply EXIF orientation before resizing; a direct preview tool produced a false vertical artifact when it mishandled Orientation=6.",
+      "step4_candidate": false
     },
     {
       "case_id": "img02_hard_surface",
-      "status": "awaiting_user_input",
-      "source_input": null,
-      "source_provenance": null,
+      "status": "ready",
+      "source_input": "inputs/step3/image_conditioned/img02_hard_surface/white_car.JPG",
+      "source_sha256": "6856e821856b00ec47360a0c7c924280dc63ed95753af89b1ac80960cb6505fc",
+      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_image": {
+        "format": "JPEG",
+        "stored_width": 5712,
+        "stored_height": 4284,
+        "exif_orientation": 1,
+        "has_alpha": false
+      },
       "challenge": "hard surfaces",
-      "selection_rationale": "Evaluate planar faces, sharp edges, symmetry, and mechanically regular geometry.",
+      "selection_rationale": "Use a complete three-quarter view of a car to evaluate smooth hard surfaces, bilateral structure, wheels, windows, and small mechanical details.",
       "step4_candidate": true
     },
     {
       "case_id": "img03_transparency",
-      "status": "awaiting_user_input",
-      "source_input": null,
-      "source_provenance": null,
+      "status": "ready",
+      "source_input": "inputs/step3/image_conditioned/img03_transparency/glass_cup.JPG",
+      "source_sha256": "a140109cbccf2bd427372c04544d66e7d01424dc5171d18af7027e9271d251e0",
+      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_image": {
+        "format": "JPEG",
+        "stored_width": 5712,
+        "stored_height": 4284,
+        "exif_orientation": 6,
+        "has_alpha": false
+      },
       "challenge": "transparent or translucent material",
-      "selection_rationale": "Evaluate how matting and image conditioning handle view-dependent appearance and weak object boundaries.",
+      "selection_rationale": "Use a translucent glass cup with a handle to evaluate matting, weak transparent boundaries, reflections, and a large opening.",
       "step4_candidate": false
     },
     {
       "case_id": "img04_organic_shape",
-      "status": "awaiting_user_input",
-      "source_input": null,
-      "source_provenance": null,
-      "challenge": "organic shape",
-      "selection_rationale": "Evaluate curved, irregular surfaces without strong geometric primitives.",
+      "status": "ready",
+      "source_input": "inputs/step3/image_conditioned/img04_organic_shape/yellow_sofa.JPG",
+      "source_sha256": "b0288103d46d272465c51584361d506b0b05b48c4bb8d7a1a6ef3c8c091e4b3b",
+      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_image": {
+        "format": "JPEG",
+        "stored_width": 5712,
+        "stored_height": 4284,
+        "exif_orientation": 6,
+        "has_alpha": false
+      },
+      "challenge": "curved upholstered form and thin legs",
+      "selection_rationale": "Use a clearly separated armchair to evaluate smooth curved upholstery, recessed seating geometry, fabric appearance, and four narrow legs.",
       "step4_candidate": true
     },
     {
       "case_id": "img05_complex_shape",
-      "status": "awaiting_user_input",
-      "source_input": null,
-      "source_provenance": null,
-      "challenge": "concavity, asymmetry, or fine components",
-      "selection_rationale": "Evaluate hallucination and topology when the visible silhouette does not fully determine the hidden structure.",
-      "step4_candidate": false
+      "status": "ready",
+      "source_input": "inputs/step3/image_conditioned/img05_complex_shape/bookshelf.JPG",
+      "source_sha256": "598578420aad664d8a66a8f0a37c5c9ce3ef8d46f85dc8d75df7221eb4811358",
+      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_image": {
+        "format": "JPEG",
+        "stored_width": 5712,
+        "stored_height": 4284,
+        "exif_orientation": 6,
+        "has_alpha": false
+      },
+      "challenge": "concavities and repeated compartments",
+      "selection_rationale": "Use a freestanding bookshelf to evaluate repeated recesses, planar surfaces, thin shelves, asymmetry, and hidden interior structure.",
+      "step4_candidate": true
     }
   ],
   "text_conditioned": {
