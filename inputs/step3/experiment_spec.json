@@ -50,7 +50,7 @@
       "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img01_thin_structure/earphone.JPG",
       "source_sha256": "2aa20de79ed0bc817f4319235f18c57a7d032025c6b470ec23b4aca26c27728c",
-      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_provenance": "Original photograph captured on location by the author.",
       "source_image": {
         "format": "JPEG",
         "stored_width": 5712,
@@ -68,7 +68,7 @@
       "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img02_hard_surface/white_car.JPG",
       "source_sha256": "6856e821856b00ec47360a0c7c924280dc63ed95753af89b1ac80960cb6505fc",
-      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_provenance": "Original photograph captured on location by the author.",
       "source_image": {
         "format": "JPEG",
         "stored_width": 5712,
@@ -85,7 +85,7 @@
       "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img03_transparency/glass_cup.JPG",
       "source_sha256": "a140109cbccf2bd427372c04544d66e7d01424dc5171d18af7027e9271d251e0",
-      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_provenance": "Original photograph captured on location by the author.",
       "source_image": {
         "format": "JPEG",
         "stored_width": 5712,
@@ -102,7 +102,7 @@
       "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img04_organic_shape/yellow_sofa.JPG",
       "source_sha256": "b0288103d46d272465c51584361d506b0b05b48c4bb8d7a1a6ef3c8c091e4b3b",
-      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_provenance": "Original photograph captured on location by the author.",
       "source_image": {
         "format": "JPEG",
         "stored_width": 5712,
@@ -119,7 +119,7 @@
       "status": "completed",
       "source_input": "inputs/step3/image_conditioned/img05_complex_shape/bookshelf.JPG",
       "source_sha256": "598578420aad664d8a66a8f0a37c5c9ce3ef8d46f85dc8d75df7221eb4811358",
-      "source_provenance": "User-provided photograph; confirm authorship before the final report.",
+      "source_provenance": "Original photograph captured on location by the author.",
       "source_image": {
         "format": "JPEG",
         "stored_width": 5712,

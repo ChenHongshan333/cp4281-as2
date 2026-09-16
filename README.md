@@ -197,7 +197,7 @@ Step 3a is complete. Step 3b has not started.
 
 #### Objective
 
-Generate five textured 3D assets from original photographs that stress different single-view reconstruction capabilities: thin structures, hard surfaces, transparency, curved upholstered geometry, and repeated concave compartments. Each result must include a `.glb`, its background-removed conditioning image, at least two rendered viewpoints, and an individually recorded generation time.
+Generate five textured 3D assets from original photographs captured on location by the author. The photographs stress different single-view reconstruction capabilities: thin structures, hard surfaces, transparency, curved upholstered geometry, and repeated concave compartments. Each result must include a `.glb`, its background-removed conditioning image, at least two rendered viewpoints, and an individually recorded generation time.
 
 #### Implementation
 
