@@ -1,0 +1,524 @@
+{
+  "schema_version": 1,
+  "stage": "Step 4 - Visualise the diffusion process",
+  "status": "completed",
+  "case_id": "img04_organic_shape",
+  "started_at": "2026-09-17T19:51:29+08:00",
+  "source_input": "/home/h/hongshan/cp4281-as2/inputs/step3/image_conditioned/img04_organic_shape/yellow_sofa.JPG",
+  "source_sha256": "b0288103d46d272465c51584361d506b0b05b48c4bb8d7a1a6ef3c8c091e4b3b",
+  "source_provenance": "Original photograph captured on location by the author.",
+  "challenge": "curved upholstered form and thin legs",
+  "selection_rationale": "Use a clearly separated armchair to evaluate smooth curved upholstery, recessed seating geometry, fabric appearance, and four narrow legs.",
+  "seed": 42,
+  "pipeline_type": "1024_cascade",
+  "model_revisions": {
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+  },
+  "trellis_source_revision": "75fbf0183001ed9876c8dbb35de6b68552ee08bd",
+  "capture_policy": {
+    "captured_value": "pred_x_t (the post-update x_{t_prev})",
+    "stage1": {
+      "steps": 24,
+      "rescale_t": 5.0,
+      "target_range": [
+        0.5,
+        0.0
+      ],
+      "selection_targets": [
+        0.5,
+        0.375,
+        0.25,
+        0.125,
+        0.0
+      ]
+    },
+    "stage2": {
+      "steps": 12,
+      "rescale_t": 3.0,
+      "target_range": [
+        1.0,
+        0.0
+      ],
+      "selection_targets": [
+        1.0,
+        0.75,
+        0.5,
+        0.25,
+        0.0
+      ],
+      "formal_render_invocation": "shape_slat_flow_model_1024"
+    },
+    "note": "Stage 1 uses 24 rather than 12 Euler steps, so this Step 4 rerun is deterministic but is not claimed to be byte-identical to the accepted Step 3 asset."
+  },
+  "runtime": {
+    "hostname": "xgph6",
+    "slurm_job_id": "856142",
+    "python": "3.10.21",
+    "torch": "2.6.0+cu124",
+    "torch_cuda": "12.4",
+    "gpu_name": "NVIDIA A100 80GB PCIe"
+  },
+  "timings_seconds": {
+    "model_initialization": 144.7238,
+    "preprocessing": 5.2278,
+    "generation_and_capture": 59.2485,
+    "save_captured_states": 0.2467,
+    "stage1_decode_and_render": 0.2594,
+    "stage2_decode_and_render": 3.1527
+  },
+  "compatibility_patches": [
+    {
+      "name": "dinov3_transformers5_layer_path",
+      "applied": true,
+      "layer_path": "model.layer",
+      "layer_count": 24,
+      "upstream_reference": "microsoft/TRELLIS.2 pull request 156 and commit 3f4faad"
+    }
+  ],
+  "peak_cuda_memory_bytes": 5824199680,
+  "final_mesh": {
+    "vertices": 4470146,
+    "faces": 8982054,
+    "shape_resolution": 1024,
+    "render_mode": "pbr_shaded_procedural_neutral"
+  },
+  "finished_at": "2026-09-17T19:55:15+08:00",
+  "inputs": {
+    "original": "input.png",
+    "preprocessed": "preprocessed.png"
+  },
+  "final_render": {
+    "path": "final_render.png",
+    "size_bytes": 121135,
+    "sha256": "a243dc7a3aac0f96d80abe65ea13ab6a1a05c30de71c76a653dd17a09cdeb020"
+  },
+  "captures": {
+    "stage1": {
+      "stage": "stage1_sparse_structure",
+      "invocation_index": 0,
+      "model_label": "sparse_structure_flow_model",
+      "steps": 24,
+      "rescale_t": 5.0,
+      "returned_timesteps": [
+        0.9913793103448275,
+        0.9821428571428572,
+        0.9722222222222222,
+        0.9615384615384615,
+        0.9500000000000001,
+        0.9375,
+        0.9239130434782608,
+        0.9090909090909092,
+        0.8928571428571429,
+        0.8749999999999999,
+        0.855263157894737,
+        0.8333333333333334,
+        0.8088235294117647,
+        0.7812499999999999,
+        0.75,
+        0.7142857142857144,
+        0.673076923076923,
+        0.625,
+        0.5681818181818183,
+        0.49999999999999994,
+        0.4166666666666667,
+        0.3125000000000001,
+        0.17857142857142844,
+        0.0
+      ],
+      "selected_states": [
+        {
+          "position": 0,
+          "state_index": 19,
+          "timestep": 0.49999999999999994,
+          "target_timestep": 0.5,
+          "path": "stage1/states/state_00_t0.500000.pt",
+          "size_bytes": 132642,
+          "sha256": "8498aabcf89b7cfb05522547d68a2253394c3eeee42df134b8bb5065707fcdab"
+        },
+        {
+          "position": 1,
+          "state_index": 20,
+          "timestep": 0.4166666666666667,
+          "target_timestep": 0.375,
+          "path": "stage1/states/state_01_t0.416667.pt",
+          "size_bytes": 132642,
+          "sha256": "35b4ef14ff59f69e8f6f1236ab8dcce6589e103b68f91099dfaf86952623bdd0"
+        },
+        {
+          "position": 2,
+          "state_index": 21,
+          "timestep": 0.3125000000000001,
+          "target_timestep": 0.25,
+          "path": "stage1/states/state_02_t0.312500.pt",
+          "size_bytes": 132642,
+          "sha256": "395e83ab84bffe1ae05dba6f12cbd2bbb64eee1262b4433e2630acf00adcfa05"
+        },
+        {
+          "position": 3,
+          "state_index": 22,
+          "timestep": 0.17857142857142844,
+          "target_timestep": 0.125,
+          "path": "stage1/states/state_03_t0.178571.pt",
+          "size_bytes": 132642,
+          "sha256": "c3d087066cf44fc7f91da419ec1c92e60b3fb97733beac8c4d9e256451bed5d9"
+        },
+        {
+          "position": 4,
+          "state_index": 23,
+          "timestep": 0.0,
+          "target_timestep": 0.0,
+          "path": "stage1/states/state_04_t0.000000.pt",
+          "size_bytes": 132642,
+          "sha256": "00616a328820e52d7d12015fa567b96cd936388c97e03d4b3716f871509e24a2"
+        }
+      ]
+    },
+    "stage2_low_resolution_evidence": {
+      "stage": "stage2_shape_slat",
+      "invocation_index": 0,
+      "model_label": "shape_slat_flow_model_512",
+      "steps": 12,
+      "rescale_t": 3.0,
+      "returned_timesteps": [
+        0.9705882352941178,
+        0.9374999999999999,
+        0.9,
+        0.8571428571428571,
+        0.8076923076923076,
+        0.75,
+        0.6818181818181819,
+        0.6,
+        0.5,
+        0.37499999999999994,
+        0.21428571428571436,
+        0.0
+      ],
+      "selected_states": [
+        {
+          "position": 0,
+          "state_index": 0,
+          "timestep": 0.9705882352941178,
+          "target_timestep": 1.0,
+          "path": "stage2_lr/states/state_00_t0.970588.pt",
+          "size_bytes": 626796,
+          "sha256": "34c6808bf5df031969c3c03a04dd3487b78e559c13747ab8d21d2ea1eb342993"
+        },
+        {
+          "position": 1,
+          "state_index": 5,
+          "timestep": 0.75,
+          "target_timestep": 0.75,
+          "path": "stage2_lr/states/state_01_t0.750000.pt",
+          "size_bytes": 626796,
+          "sha256": "7f430690ccf3bc342399ba03ac101ba9cf294417aedd05ea239b56ad9e910c57"
+        },
+        {
+          "position": 2,
+          "state_index": 8,
+          "timestep": 0.5,
+          "target_timestep": 0.5,
+          "path": "stage2_lr/states/state_02_t0.500000.pt",
+          "size_bytes": 626796,
+          "sha256": "5d2a00d55f8b96287312072c46f13953ebff9a76c4a7cef751d0a56ee177a27f"
+        },
+        {
+          "position": 3,
+          "state_index": 10,
+          "timestep": 0.21428571428571436,
+          "target_timestep": 0.25,
+          "path": "stage2_lr/states/state_03_t0.214286.pt",
+          "size_bytes": 626796,
+          "sha256": "b4ac7ec998f4ca2406a36383abdb3417ffd7309325f50f0d9ab276d75a99a9b1"
+        },
+        {
+          "position": 4,
+          "state_index": 11,
+          "timestep": 0.0,
+          "target_timestep": 0.0,
+          "path": "stage2_lr/states/state_04_t0.000000.pt",
+          "size_bytes": 626796,
+          "sha256": "8543ee3582604ba9a4a45c5fe7272f06eb6519a5d34e34eb16a5268e0986a088"
+        }
+      ]
+    },
+    "stage2_formal_high_resolution": {
+      "stage": "stage2_shape_slat",
+      "invocation_index": 1,
+      "model_label": "shape_slat_flow_model_1024",
+      "steps": 12,
+      "rescale_t": 3.0,
+      "returned_timesteps": [
+        0.9705882352941178,
+        0.9374999999999999,
+        0.9,
+        0.8571428571428571,
+        0.8076923076923076,
+        0.75,
+        0.6818181818181819,
+        0.6,
+        0.5,
+        0.37499999999999994,
+        0.21428571428571436,
+        0.0
+      ],
+      "selected_states": [
+        {
+          "position": 0,
+          "state_index": 0,
+          "timestep": 0.9705882352941178,
+          "target_timestep": 1.0,
+          "path": "stage2/states/state_00_t0.970588.pt",
+          "size_bytes": 2490732,
+          "sha256": "e3a6bede54668cfb5ae7f35ee0d6f02fe02fdcb9c5caec54d90e8485c509c5cd"
+        },
+        {
+          "position": 1,
+          "state_index": 5,
+          "timestep": 0.75,
+          "target_timestep": 0.75,
+          "path": "stage2/states/state_01_t0.750000.pt",
+          "size_bytes": 2490732,
+          "sha256": "31a81868ee00bd939fbc340fb61cfba2cab724b4cfedf5dc3b790cb028598fd0"
+        },
+        {
+          "position": 2,
+          "state_index": 8,
+          "timestep": 0.5,
+          "target_timestep": 0.5,
+          "path": "stage2/states/state_02_t0.500000.pt",
+          "size_bytes": 2490732,
+          "sha256": "6bd1d68aa60f8028ed1bbcacb256fca2c9b705306c3e94e00bab75bdea452886"
+        },
+        {
+          "position": 3,
+          "state_index": 10,
+          "timestep": 0.21428571428571436,
+          "target_timestep": 0.25,
+          "path": "stage2/states/state_03_t0.214286.pt",
+          "size_bytes": 2490732,
+          "sha256": "40c9356468a0413992172f388edf7d1d8d30fafd2919e7684913c7d4d7237483"
+        },
+        {
+          "position": 4,
+          "state_index": 11,
+          "timestep": 0.0,
+          "target_timestep": 0.0,
+          "path": "stage2/states/state_04_t0.000000.pt",
+          "size_bytes": 2490732,
+          "sha256": "dff645edb6f4d0878211ec3992252f07116706a6630536dc6fe177d1b14f2cea"
+        }
+      ]
+    }
+  },
+  "rendered_frames": {
+    "stage1": [
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 19,
+        "timestep": 0.49999999999999994,
+        "measurement": {
+          "occupied_voxels": 156,
+          "occupancy_fraction": 0.0047607421875,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 0,
+        "path": "stage1/frames/frame_00_t0.500000.png",
+        "size_bytes": 8351,
+        "sha256": "8389785fcfb43c826ec90b304a2ff0d608e54677f641c43f53d1bdfb32eea58c"
+      },
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 20,
+        "timestep": 0.4166666666666667,
+        "measurement": {
+          "occupied_voxels": 716,
+          "occupancy_fraction": 0.0218505859375,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 1,
+        "path": "stage1/frames/frame_01_t0.416667.png",
+        "size_bytes": 21830,
+        "sha256": "51a39a145c17b9e9fab153d9b7520506309fa164ad4558a66c36b5d586deeba3"
+      },
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 21,
+        "timestep": 0.3125000000000001,
+        "measurement": {
+          "occupied_voxels": 3439,
+          "occupancy_fraction": 0.104949951171875,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 2,
+        "path": "stage1/frames/frame_02_t0.312500.png",
+        "size_bytes": 40566,
+        "sha256": "f854efa0b71f4eaf8d30a11a5381f9bcbbcf1b71b17b36dafba938cbcc72bc83"
+      },
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 22,
+        "timestep": 0.17857142857142844,
+        "measurement": {
+          "occupied_voxels": 4286,
+          "occupancy_fraction": 0.13079833984375,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 3,
+        "path": "stage1/frames/frame_03_t0.178571.png",
+        "size_bytes": 32817,
+        "sha256": "15342e8951cacc889e175a3fb6f44e0b542abb3d7d9fc499fd4fad693593244c"
+      },
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 23,
+        "timestep": 0.0,
+        "measurement": {
+          "occupied_voxels": 4340,
+          "occupancy_fraction": 0.1324462890625,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 4,
+        "path": "stage1/frames/frame_04_t0.000000.png",
+        "size_bytes": 33019,
+        "sha256": "47a72e8b9db68864bc7ffcea1e88e1840dd26b52665ad232e7e5387f05c47623"
+      }
+    ],
+    "stage2": [
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 0,
+        "timestep": 0.9705882352941178,
+        "measurement": {
+          "vertices": 1450513,
+          "faces": 1748410,
+          "shape_resolution": 1024,
+          "sparse_tokens": 17284
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 0,
+        "path": "stage2/frames/frame_00_t0.970588.png",
+        "size_bytes": 220693,
+        "sha256": "e7f8f8930879b8adcb9370d70412004512f318399beda33b4de2e4ad037bf50d"
+      },
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 5,
+        "timestep": 0.75,
+        "measurement": {
+          "vertices": 1171005,
+          "faces": 1333786,
+          "shape_resolution": 1024,
+          "sparse_tokens": 17284
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 1,
+        "path": "stage2/frames/frame_01_t0.750000.png",
+        "size_bytes": 200945,
+        "sha256": "e00eefe8b6b8b7c3dfa145b107097753305f968f19c86f66e40f2de69992b201"
+      },
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 8,
+        "timestep": 0.5,
+        "measurement": {
+          "vertices": 1817950,
+          "faces": 2611266,
+          "shape_resolution": 1024,
+          "sparse_tokens": 17284
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 2,
+        "path": "stage2/frames/frame_02_t0.500000.png",
+        "size_bytes": 228991,
+        "sha256": "266a88cde593bbd142545b6a1205129896bf306d7d353637e4d9cd65b8a10e01"
+      },
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 10,
+        "timestep": 0.21428571428571436,
+        "measurement": {
+          "vertices": 4287839,
+          "faces": 8305654,
+          "shape_resolution": 1024,
+          "sparse_tokens": 17284
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 3,
+        "path": "stage2/frames/frame_03_t0.214286.png",
+        "size_bytes": 207238,
+        "sha256": "a55a84d7b5e1999a4311ba6e924d5f43f4c20f6a75457189152085d23cae1e45"
+      },
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 11,
+        "timestep": 0.0,
+        "measurement": {
+          "vertices": 4463215,
+          "faces": 8940018,
+          "shape_resolution": 1024,
+          "sparse_tokens": 17284
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 4,
+        "path": "stage2/frames/frame_04_t0.000000.png",
+        "size_bytes": 149655,
+        "sha256": "1f466dcd84893773fce47fdb62b5a0c4428af25cecbe4846f762714d207332a5"
+      }
+    ]
+  },
+  "acceptance": {
+    "stage1_frame_count": 5,
+    "stage2_frame_count": 5,
+    "all_true_timesteps_recorded": true,
+    "formal_stage2_is_high_resolution_pass": true,
+    "labelled_strips_created": true
+  },
+  "labelled_strips": {
+    "created_at": "2026-09-17T19:55:19+08:00",
+    "created_by": "scripts/step4_make_strips.py",
+    "stage1": {
+      "path": "visualizations/stage1_diffusion_strip.png",
+      "size_bytes": 92767,
+      "sha256": "410dcbd4516dd678ce6e7effada0c73f0f81d061c4acc4f46ab8a3d0a66b1c40",
+      "width": 1744,
+      "height": 530,
+      "panel_count": 5
+    },
+    "stage2": {
+      "path": "visualizations/stage2_diffusion_strip.png",
+      "size_bytes": 476876,
+      "sha256": "00fdd88107d0473a4114f005abc189d7e4a7e0de2f0fd8120180bd85719a6ba5",
+      "width": 1744,
+      "height": 530,
+      "panel_count": 5
+    }
+  }
+}

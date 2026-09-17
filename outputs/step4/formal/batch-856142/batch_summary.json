@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "stage": "Step 4 - Visualise the diffusion process",
+  "status": "completed",
+  "slurm_job_id": "856142",
+  "finished_at": "2026-09-17T19:57:52+08:00",
+  "case_count": 3,
+  "cases": [
+    {
+      "case_id": "img02_hard_surface",
+      "role": "accepted_smoke",
+      "output": "/home/h/hongshan/cp4281-as2/outputs/step4/smoke/img02-hard-surface-job-856096",
+      "stage1_strip": "visualizations/stage1_diffusion_strip.png",
+      "stage2_strip": "visualizations/stage2_diffusion_strip.png",
+      "final_render": "final_render.png"
+    },
+    {
+      "case_id": "img04_organic_shape",
+      "role": "formal_batch",
+      "output": "/home/h/hongshan/cp4281-as2/outputs/step4/formal/batch-856142/img04_organic_shape",
+      "stage1_strip": "visualizations/stage1_diffusion_strip.png",
+      "stage2_strip": "visualizations/stage2_diffusion_strip.png",
+      "final_render": "final_render.png"
+    },
+    {
+      "case_id": "img05_complex_shape",
+      "role": "formal_batch",
+      "output": "/home/h/hongshan/cp4281-as2/outputs/step4/formal/batch-856142/img05_complex_shape",
+      "stage1_strip": "visualizations/stage1_diffusion_strip.png",
+      "stage2_strip": "visualizations/stage2_diffusion_strip.png",
+      "final_render": "final_render.png"
+    }
+  ]
+}

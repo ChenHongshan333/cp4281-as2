@@ -499,6 +499,26 @@
     "stage2_frame_count": 5,
     "all_true_timesteps_recorded": true,
     "formal_stage2_is_high_resolution_pass": true,
-    "labelled_strips_created": false
+    "labelled_strips_created": true
+  },
+  "labelled_strips": {
+    "created_at": "2026-09-17T19:51:05+08:00",
+    "created_by": "scripts/step4_make_strips.py",
+    "stage1": {
+      "path": "visualizations/stage1_diffusion_strip.png",
+      "size_bytes": 63379,
+      "sha256": "3bbcf6219a4234aec67ad02186d65ec881977905c23d0cc27a0cd5e7ba9214d5",
+      "width": 1744,
+      "height": 530,
+      "panel_count": 5
+    },
+    "stage2": {
+      "path": "visualizations/stage2_diffusion_strip.png",
+      "size_bytes": 212775,
+      "sha256": "bf1d23bb70943a0e3a8e18d29a41502b40084941e46ab4cdccbb336fb26944c3",
+      "width": 1744,
+      "height": 530,
+      "panel_count": 5
+    }
   }
 }
