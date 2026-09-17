@@ -6,7 +6,7 @@ This project deploys `microsoft/TRELLIS.2-4B` on an NVIDIA GPU and uses it to ge
 
 The project also investigates the model's two-stage flow-matching process by extracting, decoding, and rendering intermediate sampler states. Finally, generated assets are assembled into a composed 3D scene.
 
-Current progress: **Steps 1–3 complete — awaiting approval to start Step 4.**
+Current progress: **Steps 1–4 complete — awaiting approval to start Step 5.**
 
 ## Table of Contents
 
@@ -333,7 +333,71 @@ The authoritative local evidence is stored in [`outputs/step3/image_conditioned/
 
 ## Step 4 — Visualise the Diffusion Process
 
-Not started. This step will capture and decode five intermediate sampler states from each of TRELLIS.2's two flow-matching stages for three image-conditioned cases.
+### Objective
+
+Visualise how TRELLIS.2 constructs geometry in its two flow-matching stages. Three accepted Step 3a cases were selected because they expose different reconstruction behaviours: the white hatchback for hard surfaces, the yellow armchair for curved upholstery and thin legs, and the bookshelf for repeated concavities and thin shelves. For each case, five real sampler states were retained from Stage 1 and five from Stage 2, giving 30 decoded intermediate renders in total.
+
+### Sampler Capture Method
+
+TRELLIS.2 uses a dense sparse-structure latent in Stage 1 and a sparse shape-SLat latent in Stage 2. [`scripts/step4_capture.py`](scripts/step4_capture.py) temporarily wraps the existing `FlowEulerSampler.sample` method at runtime; the pinned upstream source tree is not modified. The upstream `pred_x_t` history stores the state *after* each Euler update. Entry `i` therefore represents `x_{t_{i+1}}`, not the pre-update state at `t_i`, and is labelled with `schedule[i + 1]`. Only the five selected snapshots are copied to CPU, after which the complete GPU histories are cleared.
+
+The two capture schedules were:
+
+| Stage | Model invocation used for formal renders | Euler steps | `rescale_t` | Selection targets | Actual retained timesteps |
+|---|---|---:|---:|---|---|
+| Stage 1: sparse structure | `sparse_structure_flow_model` | 24 | 5.0 | `0.5, 0.375, 0.25, 0.125, 0.0` | `0.500000, 0.416667, 0.312500, 0.178571, 0.000000` |
+| Stage 2: shape-SLat | `shape_slat_flow_model_1024` | 12 | 3.0 | `1.0, 0.75, 0.5, 0.25, 0.0` | `0.970588, 0.750000, 0.500000, 0.214286, 0.000000` |
+
+Stage 1 was increased from 12 to 24 Euler steps so that five distinct post-update states could be selected across the requested lower half of its trajectory. Stage 2 retained the normal 12-step setting. The `1024_cascade` pipeline invokes the Stage 2 sampler first at resolution 512 and then at resolution 1024. Both invocations are recorded as evidence, but all formal Stage 2 figures explicitly use the second, 1024-resolution invocation.
+
+### Decoding and Rendering
+
+The two latent spaces cannot be rendered by the same method. [`scripts/step4_decode.py`](scripts/step4_decode.py) therefore applies the decoder appropriate to each stage:
+
+- **Stage 1:** each dense latent is passed through `sparse_structure_decoder`; positive decoder outputs become occupied cells, with max pooling applied when required to match the 32-cubed structure grid. The occupied coordinates are rendered as coloured voxels from a fixed camera. Each panel reports its occupied-voxel count.
+- **Stage 2:** the saved coordinates and features reconstruct a `SparseTensor`. The model's shape-SLat normalisation is reversed with its recorded mean and standard deviation before `shape_slat_decoder` decodes a mesh at resolution 1024. Surface normals are rendered from the same fixed camera. Each panel reports the decoded face count.
+
+All cases used seed `42`, the `1024_cascade` pipeline, 24 Stage 1 steps, 12 Stage 2 steps, and 12 texture steps. [`scripts/step4_generate.py`](scripts/step4_generate.py) performs capture, state serialization, decoding, fixed-camera rendering, final PBR rendering, timing, and metadata generation. [`scripts/step4_make_strips.py`](scripts/step4_make_strips.py) verifies every source-frame hash before adding the stage, true timestep, and measurement labels. The single-case validation is preserved in [`scripts/step4_smoke.sbatch`](scripts/step4_smoke.sbatch), while [`scripts/step4_formal.sbatch`](scripts/step4_formal.sbatch) produced and verified the final three-case evidence.
+
+### Inputs and Final Assets
+
+| Case | Conditioning input | Final rendered asset |
+|---|---|---|
+| White hatchback — hard surfaces | <img src="outputs/step4/smoke/img02-hard-surface-job-856096/preprocessed.png" width="240" alt="Background-removed white hatchback input"> | <img src="outputs/step4/smoke/img02-hard-surface-job-856096/final_render.png" width="240" alt="Final reconstructed white hatchback"> |
+| Yellow armchair — organic upholstery | <img src="outputs/step4/formal/batch-856142/img04_organic_shape/preprocessed.png" width="240" alt="Background-removed yellow armchair input"> | <img src="outputs/step4/formal/batch-856142/img04_organic_shape/final_render.png" width="240" alt="Final reconstructed yellow armchair"> |
+| Bookshelf — repeated concavities | <img src="outputs/step4/formal/batch-856142/img05_complex_shape/preprocessed.png" width="240" alt="Background-removed bookshelf input"> | <img src="outputs/step4/formal/batch-856142/img05_complex_shape/final_render.png" width="240" alt="Final reconstructed bookshelf"> |
+
+### Diffusion Strips
+
+#### White hatchback
+
+![White hatchback Stage 1 sparse-structure denoising](outputs/step4/smoke/img02-hard-surface-job-856096/visualizations/stage1_diffusion_strip.png)
+
+![White hatchback Stage 2 high-resolution shape denoising](outputs/step4/smoke/img02-hard-surface-job-856096/visualizations/stage2_diffusion_strip.png)
+
+#### Yellow armchair
+
+![Yellow armchair Stage 1 sparse-structure denoising](outputs/step4/formal/batch-856142/img04_organic_shape/visualizations/stage1_diffusion_strip.png)
+
+![Yellow armchair Stage 2 high-resolution shape denoising](outputs/step4/formal/batch-856142/img04_organic_shape/visualizations/stage2_diffusion_strip.png)
+
+#### Bookshelf
+
+![Bookshelf Stage 1 sparse-structure denoising](outputs/step4/formal/batch-856142/img05_complex_shape/visualizations/stage1_diffusion_strip.png)
+
+![Bookshelf Stage 2 high-resolution shape denoising](outputs/step4/formal/batch-856142/img05_complex_shape/visualizations/stage2_diffusion_strip.png)
+
+### Results and Observations
+
+| Case | Final Stage 1 occupancy | Final Stage 2 decoded faces | Final output mesh | Qualitative observation |
+|---|---:|---:|---:|---|
+| White hatchback | 2,008 voxels | 4,631,952 | 2,298,099 vertices / 4,648,428 faces | A small footprint becomes a coherent car volume in Stage 1; Stage 2 resolves windows, wheels, and the rear body. Fine surface and unseen details remain softened. |
+| Yellow armchair | 4,340 voxels | 8,940,018 | 4,470,146 vertices / 8,982,054 faces | The enclosing curved back and thin legs emerge clearly. The fixed rear view also exposes plausible inference of an unseen surface, although the rear fabric grooves are exaggerated. |
+| Bookshelf | 3,207 voxels | 10,655,286 | 5,283,912 vertices / 10,663,218 faces | The tall volume stabilises early, after which Stage 2 separates repeated shelves and recesses. Some compartments are asymmetric and small printed details are blurred. |
+
+The Stage 2 face count is not expected to increase monotonically at every early step: each noisy latent is decoded independently, and topology changes while the denoising trajectory converges. The visual progression is nevertheless consistent in all three cases, with noise and fragmented surfaces giving way to coherent high-resolution geometry.
+
+The accepted smoke run was Slurm job `856096` on node `xgph0`; the remaining formal cases were produced by job `856142` on `xgph6`. Both used an NVIDIA A100 80 GB PCIe GPU. Generation-and-capture times were 43.11 seconds for the car, 59.25 seconds for the armchair, and 40.30 seconds for the bookshelf, excluding model initialisation. The formal batch summary is stored in [`outputs/step4/formal/batch-856142/batch_summary.json`](outputs/step4/formal/batch-856142/batch_summary.json). Each case directory contains 15 captured state files (five Stage 1, five low-resolution Stage 2 evidence states, and five formal high-resolution Stage 2 states), ten rendered frames, two labelled strips, a final render, hashes, timings, and complete metadata.
 
 ## Step 5 — Composite a Scene
 
@@ -349,11 +413,11 @@ Not started. This step will arrange at least five generated assets into one inte
 - [x] Step 3b: five project-specific prompts, the prompt template, five intermediate text-to-image outputs, five `.glb` assets, four rendered viewpoints per asset, and individual generation times
 - [x] Step 3b: explain that TRELLIS.2 never receives text directly and include at least one case where the text-to-image stage limits the final result
 - [x] Step 3b prompt provenance: disclose that the five prompts were AI-generated and manually reviewed and approved by the student
-- [ ] Step 4: select three Step 3a cases and show the input and final rendered asset for each
-- [ ] Step 4: two labelled strips per case, with five Stage 1 and five Stage 2 renders each, for 30 intermediate renders in total
-- [ ] Step 4: label every frame with its actual stage, true timestep, and a measurement
-- [ ] Step 4: sample Stage 1 across `t = 0.5` to `0.0`, Stage 2 across `t = 1.0` to `0.0`, and report the increased Stage 1 Euler step count
-- [ ] Step 4: explain both sampling locations, captured `x_t`, timestep schedules, and the separate decoding method used for each latent space
+- [x] Step 4: select three Step 3a cases and show the input and final rendered asset for each
+- [x] Step 4: two labelled strips per case, with five Stage 1 and five Stage 2 renders each, for 30 intermediate renders in total
+- [x] Step 4: label every frame with its actual stage, true timestep, and a measurement
+- [x] Step 4: sample Stage 1 across `t = 0.5` to `0.0`, Stage 2 across `t = 1.0` to `0.0`, and report the increased Stage 1 Euler step count
+- [x] Step 4: explain both sampling locations, captured `x_t`, timestep schedules, and the separate decoding method used for each latent space
 - [ ] Step 5: describe the scene concept, assembly tool, asset selection, scale, orientation, placement, and surface contact
 - [ ] Step 5: include at least one rendered scene view
 - [ ] Optional: document either higher-resolution generation or a production-quality creative scene, if attempted
