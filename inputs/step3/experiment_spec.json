@@ -133,36 +133,57 @@
     }
   ],
   "text_conditioned": {
+    "status": "flux_smoke_ready",
+    "text_to_image": {
+      "model_id": "black-forest-labs/FLUX.1-schnell",
+      "model_revision": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+      "dtype": "bfloat16",
+      "memory_strategy": "model_cpu_offload",
+      "seed": 42,
+      "height": 1024,
+      "width": 1024,
+      "num_inference_steps": 4,
+      "guidance_scale": 0.0,
+      "max_sequence_length": 256,
+      "smoke_case_id": "txt02_toolbox"
+    },
+    "prompt_authorship": "All five subject descriptions and the shared prompt template were written by the author for this assignment.",
     "prompt_template": "A studio product photograph of {subject_description}. One isolated object, centered and fully visible, shown from a three-quarter front view on a plain light-gray background, with even diffuse lighting and soft minimal shadows. High object-background contrast, realistic materials, sharp focus. No people, no hands, no stand, no surrounding props, no text, no logo, no watermark, no cropped parts, no duplicate objects.",
+    "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
     "cases": [
       {
         "case_id": "txt01_desk_fan",
         "subject_description": "a vintage mint-green metal desk fan with five blades, a circular wire cage, and a compact rounded base",
         "challenge": "thin cage wires and repeated radial structures",
+        "selection_rationale": "Test whether the text-to-image and image-to-3D stages can preserve thin, disconnected-looking structures and an explicitly requested repeated-part count.",
         "analysis_focus": "Whether FLUX preserves a single coherent wire cage and the correct blade count before 3D reconstruction."
       },
       {
         "case_id": "txt02_toolbox",
         "subject_description": "a compact teal steel toolbox with a raised folding handle, two silver latches, and slightly rounded corners",
         "challenge": "hard-surface geometry and small hardware",
+        "selection_rationale": "Provide a comparatively well-bounded hard-surface object for the smoke test while still evaluating symmetry, planar geometry, and small attached parts.",
         "analysis_focus": "Whether planar faces, bilateral symmetry, handle attachment, and latch geometry remain consistent."
       },
       {
         "case_id": "txt03_perfume_bottle",
         "subject_description": "an asymmetric translucent amber glass perfume bottle with a faceted clear stopper and a curved silhouette",
         "challenge": "transparency and asymmetric reflective material",
+        "selection_rationale": "Probe a material that is difficult for both image synthesis and surface-based 3D reconstruction, with asymmetry preventing an overly simple completion.",
         "analysis_focus": "How the text-to-image depiction of transparency constrains the opaque surface reconstructed by TRELLIS.2."
       },
       {
         "case_id": "txt04_root_sculpture",
         "subject_description": "a small freestanding sculpture shaped like an intertwined weathered tree root with branching knots and a broad stable base",
         "challenge": "irregular organic branching and concavities",
+        "selection_rationale": "Evaluate irregular organic topology, separated branches, self-occlusion, and concave regions that are not captured by simple box-like geometry.",
         "analysis_focus": "Whether branches remain separated and whether hidden concavities are plausibly completed."
       },
       {
         "case_id": "txt05_lunar_rover",
         "subject_description": "a stylized compact lunar rover toy with four ribbed wheels, a small tilted dish antenna, and an asymmetric instrument box",
         "challenge": "multiple components, count consistency, and asymmetry",
+        "selection_rationale": "Create a multi-part count-sensitive case in which any FLUX omission or merger can be traced directly into the final 3D result.",
         "analysis_focus": "A candidate limitation case if FLUX changes wheel count, merges components, or hides the antenna attachment."
       }
     ]
