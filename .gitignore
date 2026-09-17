@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+
+# Local transfer packages are reproducible and should not be committed.
+step5-formal-job-*.tar.gz
+step5-formal-job-*.tar.gz.sha256

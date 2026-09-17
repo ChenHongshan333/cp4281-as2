@@ -6,7 +6,7 @@ This project deploys `microsoft/TRELLIS.2-4B` on an NVIDIA GPU and uses it to ge
 
 The project also investigates the model's two-stage flow-matching process by extracting, decoding, and rendering intermediate sampler states. Finally, generated assets are assembled into a composed 3D scene.
 
-Current progress: **Steps 1–4 complete — awaiting approval to start Step 5.**
+Current progress: **Steps 1–5 complete — final report packaging remains.**
 
 ## Table of Contents
 
@@ -401,7 +401,57 @@ The accepted smoke run was Slurm job `856096` on node `xgph0`; the remaining for
 
 ## Step 5 — Composite a Scene
 
-Not started. This step will arrange at least five generated assets into one intentionally composed 3D scene.
+### Objective
+
+Combine generated TRELLIS.2 assets into one deliberate, consistently scaled 3D scene, export the complete composition as a single GLB, and produce at least one rendered view. The finished concept is **Adaptive Maker Garage**, a split-space interior with a compact vehicle-maintenance bay on the left and a reading/design lounge on the right.
+
+### Asset Selection and Placement
+
+The white hatchback is the primary visual anchor. The teal toolbox reinforces the maintenance narrative, while the yellow armchair and bookshelf establish the lounge. The mint desk fan and amber perfume bottle add small, human-scale objects and contrasting cool and warm accents. Six generated assets were used, exceeding the required minimum of five.
+
+Each source GLB was uniformly normalised from its world-space bounds. Its chosen axis was scaled to a real-world target extent, its X/Z centre was moved to the local origin, and its minimum Y bound was placed exactly on the selected support surface. Position and yaw were then applied intentionally in metres:
+
+| Generated asset | Source case | Target extent | Position `(x, y, z)` m | Yaw | Support |
+|---|---|---:|---:|---:|---|
+| White hatchback | `img02_hard_surface` | Z = 4.20 m | `(-1.35, 0.00, -0.35)` | 20 degrees | Floor |
+| Teal toolbox | `txt02_toolbox` | X = 0.55 m | `(-2.75, 0.00, 2.25)` | 5 degrees | Floor |
+| Yellow armchair | `img04_organic_shape` | X = 0.90 m | `(1.65, 0.02, -0.55)` | -20 degrees | Lounge rug |
+| Bookshelf | `img05_complex_shape` | Y = 1.90 m | `(3.15, 0.00, -3.05)` | -8 degrees | Floor |
+| Mint desk fan | `txt01_desk_fan` | Y = 0.45 m | `(2.70, 0.66, 0.25)` | -18 degrees | Side table |
+| Amber perfume bottle | `txt03_perfume_bottle` | Y = 0.25 m | `(3.08, 0.66, 0.45)` | 12 degrees | Side table |
+
+The procedural environment contains a 9 m by 7 m floor, two walls, a lounge rug, and a four-legged side table. These nine support geometries bring the exported scene to 15 geometries in total. The recorded contact error is zero for five assets and below numerical precision for the armchair (`1.73e-17` m), so every generated object makes verified contact with its stated support.
+
+### Assembly and Rendering
+
+[`inputs/step5/scene_spec.json`](inputs/step5/scene_spec.json) is the authoritative declarative layout. [`scripts/step5_compose.py`](scripts/step5_compose.py) uses Trimesh 5.1.0 to load the six textured source GLBs without mesh processing, apply the recorded transforms, add the support geometry, export the complete scene, and reload it to verify the GLB round trip. Source SHA-256 values are checked before assembly, and the transform, placed bounds, support height, contact error, geometry statistics, software versions, and final artifact hashes are retained in [`scene_manifest.json`](outputs/step5/formal/job-856482/scene_manifest.json).
+
+The cluster did not provide Blender, Pyrender, PyOpenGL, or Pyglet. Rendering therefore used the already installed Nvdiffrast 0.4.0 CUDA backend rather than modifying the validated environment. Texture colours were sampled at mesh vertices, transformed normals were lit with deterministic key, fill, Lambertian, and specular terms, and the scene was rasterised off-screen at 1280 by 720 pixels. [`scripts/step5_formal.sbatch`](scripts/step5_formal.sbatch) performed CUDA validation, both static self-tests, composition, rendering, GLB reload, artifact hashing, and acceptance checks.
+
+The accepted formal run was Slurm job `856482` on node `xgph0`, using an NVIDIA A100 80 GB PCIe GPU. It completed in 28 seconds. The exported GLB contains all six generated assets and nine environment geometries as one scene, while the rendered buffer contains 2,091,117 vertices and 2,892,182 faces.
+
+### Rendered View
+
+![Adaptive Maker Garage rendered scene](outputs/step5/formal/job-856482/hero_view.png)
+
+The three-quarter camera shows all six generated assets. Visual inspection confirmed that the left/right functional zones remain legible, the car is the primary focal object, no main asset is cropped, and there is no obvious floating or severe interpenetration.
+
+### Required Scene Summary
+
+Adaptive Maker Garage was designed as a compact mixed-use interior, with a vehicle maintenance bay on the left and a quieter reading/design lounge on the right. I assembled the scene programmatically with Trimesh from six TRELLIS.2-generated GLBs, using bounds-based uniform scaling to establish consistent metre-scale proportions. Each asset was given an explicit position and yaw, with its lowest transformed point aligned to the floor, rug, or table top; the resulting contact distances were then verified numerically. Procedural walls, flooring, a rug, and a side table provide spatial context and physical support, and the final scene was exported as one GLB and rendered off-screen with Nvdiffrast.
+
+### Results
+
+| Requirement or artifact | Evidence | Status |
+|---|---|---|
+| At least five generated assets | Six assets: three image-conditioned and three text-conditioned | Passed |
+| Intentional scale, orientation, and placement | Explicit target extents, translations, yaw angles, and roles in the scene specification | Passed |
+| Consistent support contact | All six transformed minimum-Y bounds match their support heights within `1e-5` m | Passed |
+| Single scene file | [`scene.glb`](outputs/step5/formal/job-856482/scene.glb), 116,793,092 bytes, 15 round-trip-verified geometries | Passed |
+| At least one rendered view | [`hero_view.png`](outputs/step5/formal/job-856482/hero_view.png), 1280 by 720 pixels | Passed |
+| Local visual quality assurance | All six assets visible; no obvious floating, severe intersection, or subject cropping | Passed |
+
+The final scene SHA-256 is `1600e5c535149d1e3810a1915dbb35897e9e14a4c23d078cf80d7b4578d48cdb`; the rendered-view SHA-256 is `c71f79f7ffb8e4e34f5f21c96218512a026833089601a39443e3760d33d69dfa`.
 
 ## Submission Checklist
 
@@ -418,8 +468,8 @@ Not started. This step will arrange at least five generated assets into one inte
 - [x] Step 4: label every frame with its actual stage, true timestep, and a measurement
 - [x] Step 4: sample Stage 1 across `t = 0.5` to `0.0`, Stage 2 across `t = 1.0` to `0.0`, and report the increased Stage 1 Euler step count
 - [x] Step 4: explain both sampling locations, captured `x_t`, timestep schedules, and the separate decoding method used for each latent space
-- [ ] Step 5: describe the scene concept, assembly tool, asset selection, scale, orientation, placement, and surface contact
-- [ ] Step 5: include at least one rendered scene view
+- [x] Step 5: describe the scene concept, assembly tool, asset selection, scale, orientation, placement, and surface contact
+- [x] Step 5: include at least one rendered scene view
 - [ ] Optional: document either higher-resolution generation or a production-quality creative scene, if attempted
 
 ### Files
@@ -427,7 +477,7 @@ Not started. This step will arrange at least five generated assets into one inte
 - [ ] One PDF report containing all report items above
 - [x] Five image-conditioned `.glb` assets
 - [x] Five text-conditioned `.glb` assets
-- [ ] One composed scene containing at least five generated assets (`.glb` preferred; `.blend` or `.usd` accepted)
+- [x] One composed scene containing at least five generated assets (`.glb` preferred; `.blend` or `.usd` accepted)
 
 ### Oral Preparation
 

@@ -1,0 +1,673 @@
+{
+  "schema_version": 1,
+  "stage": "Step 5 - Composite a scene",
+  "status": "completed",
+  "started_at": "2026-09-17T22:40:31+08:00",
+  "scene_spec": "/home/h/hongshan/cp4281-as2/inputs/step5/scene_spec.json",
+  "finished_at": "2026-09-17T22:40:50+08:00",
+  "concept": {
+    "title": "Adaptive Maker Garage",
+    "description": "A deliberate split-space composition: a compact vehicle maintenance bay on the left and a reading/design lounge on the right.",
+    "design_intent": "Use the car as the visual anchor, connect the toolbox to the maintenance narrative, and use the armchair, bookshelf, fan, and perfume bottle to build a human-scaled lounge with contrasting warm and cool colour accents."
+  },
+  "coordinate_system": {
+    "up_axis": "Y",
+    "units": "metres",
+    "ground_height": 0.0,
+    "asset_normalization": "Uniformly scale from world-space bounds, centre X/Z at the origin, and translate the minimum Y bound to its support height."
+  },
+  "generated_asset_count": 6,
+  "assets": [
+    {
+      "asset_id": "white_hatchback",
+      "case_id": "img02_hard_surface",
+      "source_glb": "outputs/step3/image_conditioned/batch-853514/img02_hard_surface/asset.glb",
+      "source_sha256": "4111df05fbdf7af305dc49681cd4f0ac5b99885a7145a537c56cf14d796d9571",
+      "role": "Primary maintenance-bay focal object",
+      "support": "floor",
+      "support_height_m": 0.0,
+      "contact_error_m": 0.0,
+      "source_bounds": [
+        [
+          -0.24284636974334717,
+          -0.1779910922050476,
+          -0.5008992552757263
+        ],
+        [
+          0.24293114244937897,
+          0.17818740010261536,
+          0.5010199546813965
+        ]
+      ],
+      "placed_bounds": [
+        [
+          -3.025017290355184,
+          0.0,
+          -2.6715921206719155
+        ],
+        [
+          0.3250172903551838,
+          1.4930841257711824,
+          1.9715921206719156
+        ]
+      ],
+      "outer_transform": [
+        [
+          3.939148953406847,
+          0.0,
+          1.4337329673809558,
+          -1.3502534915166478
+        ],
+        [
+          0.0,
+          4.191954758687319,
+          0.0,
+          0.7461306059729027
+        ],
+        [
+          -1.4337329673809558,
+          0.0,
+          3.939148953406847,
+          -0.35017695575707525
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "geometry": [
+        {
+          "node": "asset/white_hatchback/0",
+          "vertices": 313297,
+          "faces": 458050,
+          "colour_source": "texture_sampled_at_vertices"
+        }
+      ]
+    },
+    {
+      "asset_id": "teal_toolbox",
+      "case_id": "txt02_toolbox",
+      "source_glb": "outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/asset.glb",
+      "source_sha256": "0b6674d62f6eca575b13573a2cd1f7b1e9c817589f05a47d0f74c8da80487174",
+      "role": "Maintenance prop near the car",
+      "support": "floor",
+      "support_height_m": 0.0,
+      "contact_error_m": 0.0,
+      "source_bounds": [
+        [
+          -0.5009900331497192,
+          -0.5009703636169434,
+          -0.3356786072254181
+        ],
+        [
+          0.5009841918945312,
+          0.5006585121154785,
+          0.3322393298149109
+        ]
+      ],
+      "placed_bounds": [
+        [
+          -3.0399305428517067,
+          0.0,
+          2.043414215085
+        ],
+        [
+          -2.4600694571482933,
+          0.5498104321281345,
+          2.456585784915
+        ]
+      ],
+      "outer_transform": [
+        [
+          0.5468275233589593,
+          0.0,
+          0.047841209197866344,
+          -2.7499161333254034
+        ],
+        [
+          0.0,
+          0.5489163156624216,
+          0.0,
+          0.2749908062526762
+        ],
+        [
+          -0.047841209197866344,
+          0.0,
+          0.5468275233589593,
+          2.2509402060479102
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "geometry": [
+        {
+          "node": "asset/teal_toolbox/0",
+          "vertices": 303148,
+          "faces": 496851,
+          "colour_source": "texture_sampled_at_vertices"
+        }
+      ]
+    },
+    {
+      "asset_id": "yellow_armchair",
+      "case_id": "img04_organic_shape",
+      "source_glb": "outputs/step3/image_conditioned/batch-853514/img04_organic_shape/asset.glb",
+      "source_sha256": "4f28ef22cc7b6bcc01cdb8da509df72bd9b8a62417e1a3d64f5b4c57c879b4e8",
+      "role": "Lounge focal seat",
+      "support": "lounge_rug",
+      "support_height_m": 0.02,
+      "contact_error_m": 1.734723475976807e-17,
+      "source_bounds": [
+        [
+          -0.5006459951400757,
+          -0.38216060400009155,
+          -0.44075149297714233
+        ],
+        [
+          0.5006115436553955,
+          0.3802962899208069,
+          0.4409872591495514
+        ]
+      ],
+      "placed_bounds": [
+        [
+          1.091601177392035,
+          0.020000000000000018,
+          -1.0762943050851432
+        ],
+        [
+          2.2083988226079647,
+          0.70534935113131,
+          -0.023705694914856967
+        ]
+      ],
+      "outer_transform": [
+        [
+          0.8446611645239009,
+          0.0,
+          -0.3074315219273275,
+          1.650050790892186
+        ],
+        [
+          0.0,
+          0.8988696365599548,
+          0.0,
+          0.3635125632250951
+        ],
+        [
+          0.3074315219273275,
+          0.0,
+          0.8446611645239009,
+          -0.5500942755286873
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "geometry": [
+        {
+          "node": "asset/yellow_armchair/0",
+          "vertices": 340049,
+          "faces": 497479,
+          "colour_source": "texture_sampled_at_vertices"
+        }
+      ]
+    },
+    {
+      "asset_id": "bookshelf",
+      "case_id": "img05_complex_shape",
+      "source_glb": "outputs/step3/image_conditioned/batch-853514/img05_complex_shape/asset.glb",
+      "source_sha256": "f0fa78c77cb1a98db74e63966fc4309102d37d42fded5dfcc56e6f8fb8abddeb",
+      "role": "Lounge background anchor",
+      "support": "floor",
+      "support_height_m": 0.0,
+      "contact_error_m": 0.0,
+      "source_bounds": [
+        [
+          -0.1633574217557907,
+          -0.5006958246231079,
+          -0.16729307174682617
+        ],
+        [
+          0.1628531515598297,
+          0.5009254217147827,
+          0.16685527563095093
+        ]
+      ],
+      "placed_bounds": [
+        [
+          2.799504881607835,
+          0.0,
+          -3.406902739641384
+        ],
+        [
+          3.500495118392165,
+          1.9,
+          -2.693097260358616
+        ]
+      ],
+      "outer_transform": [
+        [
+          1.878463877926036,
+          0.0,
+          -0.26400088136201627,
+          3.1504158373936897
+        ],
+        [
+          0.0,
+          1.8969246179099588,
+          0.0,
+          0.9497822358123007
+        ],
+        [
+          0.26400088136201627,
+          0.0,
+          1.878463877926036,
+          -3.0495222440171266
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "geometry": [
+        {
+          "node": "asset/bookshelf/0",
+          "vertices": 291646,
+          "faces": 477036,
+          "colour_source": "texture_sampled_at_vertices"
+        }
+      ]
+    },
+    {
+      "asset_id": "mint_desk_fan",
+      "case_id": "txt01_desk_fan",
+      "source_glb": "outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/asset.glb",
+      "source_sha256": "f0e123c237131abc44d154d2841b393a7a52b1e115444ad04bf41f34743845cf",
+      "role": "Functional lounge-table prop",
+      "support": "side_table",
+      "support_height_m": 0.66,
+      "contact_error_m": 0.0,
+      "source_bounds": [
+        [
+          -0.4132799506187439,
+          -0.5009710788726807,
+          -0.28699344396591187
+        ],
+        [
+          0.41332119703292847,
+          0.5005617141723633,
+          0.28692081570625305
+        ]
+      ],
+      "placed_bounds": [
+        [
+          2.4835457044728564,
+          0.66,
+          0.0699927067309023
+        ],
+        [
+          2.9164542955271444,
+          1.11,
+          0.43000729326909765
+        ]
+      ],
+      "outer_transform": [
+        [
+          0.42732043853662505,
+          0.0,
+          -0.13884482708343251,
+          2.6999861452530247
+        ],
+        [
+          0.0,
+          0.4493112987661915,
+          0.0,
+          0.8850919660925843
+        ],
+        [
+          0.13884482708343251,
+          0.0,
+          0.42732043853662505,
+          0.2500126543442611
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "geometry": [
+        {
+          "node": "asset/mint_desk_fan/0",
+          "vertices": 422744,
+          "faces": 477583,
+          "colour_source": "texture_sampled_at_vertices"
+        }
+      ]
+    },
+    {
+      "asset_id": "amber_perfume",
+      "case_id": "txt03_perfume_bottle",
+      "source_glb": "outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/asset.glb",
+      "source_sha256": "371c292b2fb4c70b515ef2c0f2dada1d5612d63069cc10fcafebf3132c834016",
+      "role": "Warm-colour decorative table prop",
+      "support": "side_table",
+      "support_height_m": 0.66,
+      "contact_error_m": 0.0,
+      "source_bounds": [
+        [
+          -0.2928165793418884,
+          -0.5009357929229736,
+          -0.1572536677122116
+        ],
+        [
+          0.2928807735443115,
+          0.5008821487426758,
+          0.1576453447341919
+        ]
+      ],
+      "placed_bounds": [
+        [
+          3.0003485957819116,
+          0.66,
+          0.3963736095940037
+        ],
+        [
+          3.1596514042180885,
+          0.91,
+          0.5036263904059963
+        ]
+      ],
+      "outer_transform": [
+        [
+          0.2440931530701854,
+          0.0,
+          0.05188360134379301,
+          3.079982004510129
+        ],
+        [
+          0.0,
+          0.24954633931225398,
+          0.0,
+          0.7850066933544094
+        ],
+        [
+          -0.05188360134379301,
+          0.0,
+          0.2440931530701854,
+          0.4499538624735634
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "geometry": [
+        {
+          "node": "asset/amber_perfume/0",
+          "vertices": 420161,
+          "faces": 485075,
+          "colour_source": "texture_sampled_at_vertices"
+        }
+      ]
+    }
+  ],
+  "procedural_environment": [
+    {
+      "name": "floor",
+      "size_m": [
+        9.0,
+        0.1,
+        7.0
+      ],
+      "centre_m": [
+        0.0,
+        -0.05,
+        0.0
+      ],
+      "colour_rgba": [
+        72,
+        79,
+        88,
+        255
+      ]
+    },
+    {
+      "name": "back_wall",
+      "size_m": [
+        9.0,
+        3.2,
+        0.1
+      ],
+      "centre_m": [
+        0.0,
+        1.6,
+        -3.45
+      ],
+      "colour_rgba": [
+        205,
+        211,
+        219,
+        255
+      ]
+    },
+    {
+      "name": "left_wall",
+      "size_m": [
+        0.1,
+        3.2,
+        7.0
+      ],
+      "centre_m": [
+        -4.45,
+        1.6,
+        0.0
+      ],
+      "colour_rgba": [
+        177,
+        188,
+        201,
+        255
+      ]
+    },
+    {
+      "name": "lounge_rug",
+      "size_m": [
+        2.8,
+        0.02,
+        2.2
+      ],
+      "centre_m": [
+        2.15,
+        0.01,
+        -0.35
+      ],
+      "colour_rgba": [
+        57,
+        92,
+        111,
+        255
+      ]
+    },
+    {
+      "name": "side_table_top",
+      "size_m": [
+        1.0,
+        0.08,
+        0.6
+      ],
+      "centre_m": [
+        2.85,
+        0.62,
+        0.35
+      ],
+      "colour_rgba": [
+        112,
+        74,
+        47,
+        255
+      ]
+    },
+    {
+      "name": "side_table_leg_0_0",
+      "size_m": [
+        0.07,
+        0.58,
+        0.07
+      ],
+      "centre_m": [
+        2.43,
+        0.29,
+        0.13
+      ],
+      "colour_rgba": [
+        94,
+        60,
+        40,
+        255
+      ]
+    },
+    {
+      "name": "side_table_leg_0_1",
+      "size_m": [
+        0.07,
+        0.58,
+        0.07
+      ],
+      "centre_m": [
+        2.43,
+        0.29,
+        0.57
+      ],
+      "colour_rgba": [
+        94,
+        60,
+        40,
+        255
+      ]
+    },
+    {
+      "name": "side_table_leg_1_0",
+      "size_m": [
+        0.07,
+        0.58,
+        0.07
+      ],
+      "centre_m": [
+        3.27,
+        0.29,
+        0.13
+      ],
+      "colour_rgba": [
+        94,
+        60,
+        40,
+        255
+      ]
+    },
+    {
+      "name": "side_table_leg_1_1",
+      "size_m": [
+        0.07,
+        0.58,
+        0.07
+      ],
+      "centre_m": [
+        3.27,
+        0.29,
+        0.57
+      ],
+      "colour_rgba": [
+        94,
+        60,
+        40,
+        255
+      ]
+    }
+  ],
+  "camera": {
+    "name": "hero_three_quarter",
+    "position_m": [
+      8.2,
+      5.0,
+      10.5
+    ],
+    "target_m": [
+      0.0,
+      0.9,
+      -0.25
+    ],
+    "vertical_fov_degrees": 43.0,
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "scene": {
+    "path": "scene.glb",
+    "size_bytes": 116793092,
+    "sha256": "1600e5c535149d1e3810a1915dbb35897e9e14a4c23d078cf80d7b4578d48cdb",
+    "geometry_count": 15,
+    "reload_geometry_count": 15,
+    "bounds": [
+      [
+        -4.5,
+        -0.1,
+        -3.5
+      ],
+      [
+        4.5,
+        3.2,
+        3.5
+      ]
+    ],
+    "extents": [
+      9.0,
+      3.3000000000000003,
+      7.0
+    ]
+  },
+  "render": {
+    "path": "hero_view.png",
+    "size_bytes": 139903,
+    "sha256": "c71f79f7ffb8e4e34f5f21c96218512a026833089601a39443e3760d33d69dfa",
+    "resolution": [
+      1280,
+      720
+    ],
+    "render_mode": "nvdiffrast_vertex_colour_lambert_specular",
+    "vertex_count": 2091117,
+    "face_count": 2892182
+  },
+  "software": {
+    "python": "3.10.21 | packaged by conda-forge | (main, Aug 21 2026, 22:42:31) [GCC 14.4.0]",
+    "trimesh": "5.1.0",
+    "numpy": "2.2.6",
+    "torch": "2.6.0+cu124",
+    "nvdiffrast": "0.4.0",
+    "Pillow": "12.3.0"
+  },
+  "acceptance": {
+    "minimum_generated_asset_count": 5,
+    "generated_asset_count_passed": true,
+    "all_source_hashes_verified": true,
+    "all_support_contacts_verified": true,
+    "single_scene_file_created": true,
+    "rendered_view_count": 1
+  }
+}

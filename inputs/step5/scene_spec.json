@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "stage": "Step 5 - Composite a scene",
+  "status": "initial_layout_pending_render_qa",
+  "concept": {
+    "title": "Adaptive Maker Garage",
+    "description": "A deliberate split-space composition: a compact vehicle maintenance bay on the left and a reading/design lounge on the right.",
+    "design_intent": "Use the car as the visual anchor, connect the toolbox to the maintenance narrative, and use the armchair, bookshelf, fan, and perfume bottle to build a human-scaled lounge with contrasting warm and cool colour accents."
+  },
+  "coordinate_system": {
+    "up_axis": "Y",
+    "units": "metres",
+    "ground_height": 0.0,
+    "asset_normalization": "Uniformly scale from world-space bounds, centre X/Z at the origin, and translate the minimum Y bound to its support height."
+  },
+  "source_batches": {
+    "image_conditioned": "outputs/step3/image_conditioned/batch-853514",
+    "text_conditioned": "outputs/step3/text_conditioned/batch-855432"
+  },
+  "assets": [
+    {
+      "asset_id": "white_hatchback",
+      "case_id": "img02_hard_surface",
+      "source_glb": "outputs/step3/image_conditioned/batch-853514/img02_hard_surface/asset.glb",
+      "source_sha256": "4111df05fbdf7af305dc49681cd4f0ac5b99885a7145a537c56cf14d796d9571",
+      "role": "Primary maintenance-bay focal object",
+      "scale_rule": {
+        "axis": "Z",
+        "target_extent_m": 4.2
+      },
+      "rotation_euler_degrees_xyz": [
+        0.0,
+        20.0,
+        0.0
+      ],
+      "translation_m": [
+        -1.35,
+        0.0,
+        -0.35
+      ],
+      "support": "floor"
+    },
+    {
+      "asset_id": "teal_toolbox",
+      "case_id": "txt02_toolbox",
+      "source_glb": "outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/asset.glb",
+      "source_sha256": "0b6674d62f6eca575b13573a2cd1f7b1e9c817589f05a47d0f74c8da80487174",
+      "role": "Maintenance prop near the car",
+      "scale_rule": {
+        "axis": "X",
+        "target_extent_m": 0.55
+      },
+      "rotation_euler_degrees_xyz": [
+        0.0,
+        5.0,
+        0.0
+      ],
+      "translation_m": [
+        -2.75,
+        0.0,
+        2.25
+      ],
+      "support": "floor"
+    },
+    {
+      "asset_id": "yellow_armchair",
+      "case_id": "img04_organic_shape",
+      "source_glb": "outputs/step3/image_conditioned/batch-853514/img04_organic_shape/asset.glb",
+      "source_sha256": "4f28ef22cc7b6bcc01cdb8da509df72bd9b8a62417e1a3d64f5b4c57c879b4e8",
+      "role": "Lounge focal seat",
+      "scale_rule": {
+        "axis": "X",
+        "target_extent_m": 0.9
+      },
+      "rotation_euler_degrees_xyz": [
+        0.0,
+        -20.0,
+        0.0
+      ],
+      "translation_m": [
+        1.65,
+        0.02,
+        -0.55
+      ],
+      "support": "lounge_rug"
+    },
+    {
+      "asset_id": "bookshelf",
+      "case_id": "img05_complex_shape",
+      "source_glb": "outputs/step3/image_conditioned/batch-853514/img05_complex_shape/asset.glb",
+      "source_sha256": "f0fa78c77cb1a98db74e63966fc4309102d37d42fded5dfcc56e6f8fb8abddeb",
+      "role": "Lounge background anchor",
+      "scale_rule": {
+        "axis": "Y",
+        "target_extent_m": 1.9
+      },
+      "rotation_euler_degrees_xyz": [
+        0.0,
+        -8.0,
+        0.0
+      ],
+      "translation_m": [
+        3.15,
+        0.0,
+        -3.05
+      ],
+      "support": "floor"
+    },
+    {
+      "asset_id": "mint_desk_fan",
+      "case_id": "txt01_desk_fan",
+      "source_glb": "outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/asset.glb",
+      "source_sha256": "f0e123c237131abc44d154d2841b393a7a52b1e115444ad04bf41f34743845cf",
+      "role": "Functional lounge-table prop",
+      "scale_rule": {
+        "axis": "Y",
+        "target_extent_m": 0.45
+      },
+      "rotation_euler_degrees_xyz": [
+        0.0,
+        -18.0,
+        0.0
+      ],
+      "translation_m": [
+        2.7,
+        0.66,
+        0.25
+      ],
+      "support": "side_table"
+    },
+    {
+      "asset_id": "amber_perfume",
+      "case_id": "txt03_perfume_bottle",
+      "source_glb": "outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/asset.glb",
+      "source_sha256": "371c292b2fb4c70b515ef2c0f2dada1d5612d63069cc10fcafebf3132c834016",
+      "role": "Warm-colour decorative table prop",
+      "scale_rule": {
+        "axis": "Y",
+        "target_extent_m": 0.25
+      },
+      "rotation_euler_degrees_xyz": [
+        0.0,
+        12.0,
+        0.0
+      ],
+      "translation_m": [
+        3.08,
+        0.66,
+        0.45
+      ],
+      "support": "side_table"
+    }
+  ],
+  "procedural_environment": {
+    "floor": {
+      "size_m": [
+        9.0,
+        0.1,
+        7.0
+      ],
+      "centre_m": [
+        0.0,
+        -0.05,
+        0.0
+      ]
+    },
+    "back_wall": {
+      "size_m": [
+        9.0,
+        3.2,
+        0.1
+      ],
+      "centre_m": [
+        0.0,
+        1.6,
+        -3.45
+      ]
+    },
+    "left_wall": {
+      "size_m": [
+        0.1,
+        3.2,
+        7.0
+      ],
+      "centre_m": [
+        -4.45,
+        1.6,
+        0.0
+      ]
+    },
+    "lounge_rug": {
+      "size_m": [
+        2.8,
+        0.02,
+        2.2
+      ],
+      "centre_m": [
+        2.15,
+        0.01,
+        -0.35
+      ]
+    },
+    "side_table": {
+      "top_size_m": [
+        1.0,
+        0.08,
+        0.6
+      ],
+      "top_centre_m": [
+        2.85,
+        0.62,
+        0.35
+      ],
+      "top_height_m": 0.66
+    }
+  },
+  "camera": {
+    "name": "hero_three_quarter",
+    "position_m": [
+      8.2,
+      5.0,
+      10.5
+    ],
+    "target_m": [
+      0.0,
+      0.9,
+      -0.25
+    ],
+    "vertical_fov_degrees": 43.0,
+    "resolution": [
+      1280,
+      720
+    ]
+  },
+  "acceptance": {
+    "minimum_generated_asset_count": 5,
+    "planned_generated_asset_count": 6,
+    "single_scene_file_required": true,
+    "minimum_rendered_views": 1,
+    "require_support_contact": true,
+    "require_recorded_transforms": true
+  }
+}
