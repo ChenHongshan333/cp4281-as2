@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "stage": "Step 3 - Deploy and Generate",
-  "status": "image_conditioned_complete_text_conditioned_ready",
+  "status": "step3_complete",
   "image_conditioned_batch": {
     "status": "completed",
     "slurm_job_id": "853514",
@@ -133,7 +133,22 @@
     }
   ],
   "text_conditioned": {
-    "status": "flux_smoke_ready",
+    "status": "completed",
+    "formal_batch": {
+      "status": "completed",
+      "slurm_job_id": "855432",
+      "completed_at": "2026-09-17T16:17:25+08:00",
+      "cluster_output": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432",
+      "local_output": "outputs/step3/text_conditioned/batch-855432",
+      "case_count": 5,
+      "intermediate_image_count": 5,
+      "glb_count": 5,
+      "rendered_viewpoints_per_case": 4,
+      "total_primary_generation_seconds": 912.7341,
+      "batch_summary": "outputs/step3/text_conditioned/batch-855432/batch_summary.json",
+      "structural_verification": "passed",
+      "visual_qa": "passed"
+    },
     "text_to_image": {
       "model_id": "black-forest-labs/FLUX.1-schnell",
       "model_revision": "741f7c3ce8b383c54771c7003378a50191e9efe9",
@@ -147,8 +162,71 @@
       "max_sequence_length": 256,
       "smoke_case_id": "txt02_toolbox"
     },
-    "prompt_authorship": "All five subject descriptions and the shared prompt template were written by the author for this assignment.",
-    "prompt_template": "A studio product photograph of {subject_description}. One isolated object, centered and fully visible, shown from a three-quarter front view on a plain light-gray background, with even diffuse lighting and soft minimal shadows. High object-background contrast, realistic materials, sharp focus. No people, no hands, no stand, no surrounding props, no text, no logo, no watermark, no cropped parts, no duplicate objects.",
+    "verified_software": {
+      "verification_job_id": "855195",
+      "manifest": "/home/h/hongshan/cp4281-as2/logs/step3b-text-stack-final-pip-freeze-855195.txt",
+      "diffusers": "0.40.0",
+      "accelerate": "1.15.0",
+      "psutil": "7.2.2",
+      "pip_check": "passed"
+    },
+    "smoke_test_history": [
+      {
+        "slurm_job_id": "855204",
+        "case_id": "txt02_toolbox",
+        "technical_status": "passed",
+        "visual_status": "passed",
+        "output": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/flux_smoke/txt02-toolbox-job-855204",
+        "follow_up": "Revise the shared template because its 105-token expanded prompt exceeded the CLIP 77-token limit, then repeat the smoke test before the five-case batch."
+      },
+      {
+        "slurm_job_id": "855378",
+        "case_id": "txt02_toolbox",
+        "prompt_template_revision": 3,
+        "technical_status": "passed",
+        "metadata_status": "passed",
+        "visual_status": "passed",
+        "prompt_token_status": "passed",
+        "output": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/flux_smoke/txt02-toolbox-job-855378",
+        "accepted_for_batch": true
+      }
+    ],
+    "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+    "prompt_provenance": "The prompts are project-specific and are not represented as solely student-authored. The local batch and case summaries have been corrected to use the same disclosure.",
+    "historical_metadata_correction": "The original batch summaries incorrectly claimed sole authorship; the local copies are corrected and this record supersedes that original sentence.",
+    "submission_provenance_status": "resolved_by_explicit_disclosure_and_student_review",
+    "prompt_template_revision": 3,
+    "prompt_token_policy": "Every expanded prompt must fit within both the CLIP 77-token limit and the configured T5 256-token limit; generation fails if either limit is exceeded.",
+    "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+    "prompt_token_verification": {
+      "status": "passed",
+      "slurm_job_id": "855278",
+      "report": "/home/h/hongshan/cp4281-as2/logs/step3b-prompt-token-counts-855278.json",
+      "clip_token_limit": 77,
+      "t5_token_limit": 256,
+      "counts": {
+        "txt01_desk_fan": {
+          "clip": 70,
+          "t5": 77
+        },
+        "txt02_toolbox": {
+          "clip": 68,
+          "t5": 76
+        },
+        "txt03_perfume_bottle": {
+          "clip": 65,
+          "t5": 74
+        },
+        "txt04_root_sculpture": {
+          "clip": 72,
+          "t5": 81
+        },
+        "txt05_lunar_rover": {
+          "clip": 74,
+          "t5": 84
+        }
+      }
+    },
     "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
     "cases": [
       {

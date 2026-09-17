@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "stage": "Step 3b - Text-conditioned generation",
+  "status": "completed",
+  "case_id": "txt04_root_sculpture",
+  "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+  "prompt_template_revision": 3,
+  "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+  "subject_description": "a small freestanding sculpture shaped like an intertwined weathered tree root with branching knots and a broad stable base",
+  "expanded_prompt": "Studio image of a small freestanding sculpture shaped like an intertwined weathered tree root with branching knots and a broad stable base. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "challenge": "irregular organic branching and concavities",
+  "selection_rationale": "Evaluate irregular organic topology, separated branches, self-occlusion, and concave regions that are not captured by simple box-like geometry.",
+  "analysis_focus": "Whether branches remain separated and whether hidden concavities are plausibly completed.",
+  "text_to_image_limitation_candidate": false,
+  "seed": 42,
+  "prompt_tokenization": {
+    "clip_token_count": 72,
+    "clip_token_limit": 77,
+    "clip_within_limit": true,
+    "t5_token_count": 81,
+    "t5_requested_limit": 256,
+    "t5_within_requested_limit": true
+  },
+  "model_revisions": {
+    "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+  },
+  "gpu_name": {
+    "flux": "NVIDIA A100-PCIE-40GB",
+    "trellis": "NVIDIA A100-PCIE-40GB"
+  },
+  "background_removal_applied": true,
+  "timings_seconds": {
+    "flux_model_initialization": 1.4847,
+    "text_to_image": 39.2289,
+    "trellis_model_initialization": 112.9938,
+    "trellis_preprocessing": 1.7125,
+    "trellis_generation": 32.3082,
+    "glb_export": 35.3514,
+    "preview_rendering": 2.0548,
+    "trellis_case_end_to_end": 69.424,
+    "combined_primary_end_to_end": 108.6529
+  },
+  "peak_cuda_memory_bytes": {
+    "flux": 24253156864,
+    "trellis": 3454682624
+  },
+  "rendering": {
+    "mode": "pbr_shaded_procedural_neutral",
+    "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+    "envmap_loaded": false,
+    "procedural_envmap": true,
+    "procedural_envmap_shape": [
+      256,
+      512,
+      3
+    ],
+    "procedural_envmap_value_range": [
+      0.20899999141693115,
+      3.411217212677002
+    ],
+    "warning": "OpenCV returned None while reading the EXR file."
+  },
+  "output_files": {
+    "intermediate": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/flux/intermediate.png",
+      "size_bytes": 946119,
+      "sha256": "a61200de64063625ba38f6905012720563ac8edf86a39784f4afc7b4f8982bb1"
+    },
+    "asset_glb": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/asset.glb",
+      "size_bytes": 17175324,
+      "sha256": "26c5464b69016e79f4e693f4fbad2a2af2e794be142fcd7cb7d6b44505d5f60e"
+    },
+    "rendered_views": [
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/view_00.png",
+        "size_bytes": 208010,
+        "sha256": "f2ccffa0f68a61b192b6fcce2072a6f4b73ccb6c31febe23f1cd1525142784e3"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/view_01.png",
+        "size_bytes": 188725,
+        "sha256": "27fdc8f08b12451359c42cc356f9bc0154f6b9731d9f9c764c30e895775d938f"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/view_02.png",
+        "size_bytes": 194408,
+        "sha256": "d72c3123866fe8f532084c20d6b755a76f3a84db1e1d9b87c3732f721a212b5d"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/view_03.png",
+        "size_bytes": 189506,
+        "sha256": "12ca5bef19628b1cf6151fe110d05011ac64df7db43433d6051209ffa37edc65"
+      }
+    ],
+    "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/flux/metadata.json",
+    "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/metadata.json"
+  }
+}

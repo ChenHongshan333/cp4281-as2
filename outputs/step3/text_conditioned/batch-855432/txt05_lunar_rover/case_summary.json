@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "stage": "Step 3b - Text-conditioned generation",
+  "status": "completed",
+  "case_id": "txt05_lunar_rover",
+  "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+  "prompt_template_revision": 3,
+  "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+  "subject_description": "a stylized compact lunar rover toy with four ribbed wheels, a small tilted dish antenna, and an asymmetric instrument box",
+  "expanded_prompt": "Studio image of a stylized compact lunar rover toy with four ribbed wheels, a small tilted dish antenna, and an asymmetric instrument box. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "challenge": "multiple components, count consistency, and asymmetry",
+  "selection_rationale": "Create a multi-part count-sensitive case in which any FLUX omission or merger can be traced directly into the final 3D result.",
+  "analysis_focus": "A candidate limitation case if FLUX changes wheel count, merges components, or hides the antenna attachment.",
+  "text_to_image_limitation_candidate": true,
+  "seed": 42,
+  "prompt_tokenization": {
+    "clip_token_count": 74,
+    "clip_token_limit": 77,
+    "clip_within_limit": true,
+    "t5_token_count": 84,
+    "t5_requested_limit": 256,
+    "t5_within_requested_limit": true
+  },
+  "model_revisions": {
+    "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+  },
+  "gpu_name": {
+    "flux": "NVIDIA A100-PCIE-40GB",
+    "trellis": "NVIDIA A100-PCIE-40GB"
+  },
+  "background_removal_applied": true,
+  "timings_seconds": {
+    "flux_model_initialization": 1.7877,
+    "text_to_image": 46.6689,
+    "trellis_model_initialization": 120.9184,
+    "trellis_preprocessing": 1.7127,
+    "trellis_generation": 105.4967,
+    "glb_export": 51.1202,
+    "preview_rendering": 5.3239,
+    "trellis_case_end_to_end": 159.2263,
+    "combined_primary_end_to_end": 205.8952
+  },
+  "peak_cuda_memory_bytes": {
+    "flux": 24253156864,
+    "trellis": 11461981184
+  },
+  "rendering": {
+    "mode": "pbr_shaded_procedural_neutral",
+    "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+    "envmap_loaded": false,
+    "procedural_envmap": true,
+    "procedural_envmap_shape": [
+      256,
+      512,
+      3
+    ],
+    "procedural_envmap_value_range": [
+      0.20899999141693115,
+      3.411217212677002
+    ],
+    "warning": "OpenCV returned None while reading the EXR file."
+  },
+  "output_files": {
+    "intermediate": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/flux/intermediate.png",
+      "size_bytes": 753920,
+      "sha256": "93ed1101a084d0add46b9ea833cf7ff44b002154d30c549f05b0a35d5329ef13"
+    },
+    "asset_glb": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/asset.glb",
+      "size_bytes": 19301132,
+      "sha256": "5090ed76327404791495f6e614a56bf1d37ef426173ac4c3d9b1401ffb1185ec"
+    },
+    "rendered_views": [
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/view_00.png",
+        "size_bytes": 273467,
+        "sha256": "8dffefeb73bf287e9fcb69b656ee00fc0c68c4c4f779b7b298bc0c715d86abef"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/view_01.png",
+        "size_bytes": 297613,
+        "sha256": "2754bf88f79ac1fce7cc35d4b7f5dbb385ddbaaa78878d48cd430ef423c1ec5d"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/view_02.png",
+        "size_bytes": 263117,
+        "sha256": "fe6b372c08a608f206192b700481beddcede0c05ac696447bfb9d1303508cf5b"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/view_03.png",
+        "size_bytes": 302236,
+        "sha256": "6d9376ccbab82a63dc82a650d1d74ecb13c10009f583591b9506bf590f6fc0b7"
+      }
+    ],
+    "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/flux/metadata.json",
+    "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/metadata.json"
+  }
+}

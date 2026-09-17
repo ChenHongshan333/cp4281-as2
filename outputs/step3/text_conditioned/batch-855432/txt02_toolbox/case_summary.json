@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "stage": "Step 3b - Text-conditioned generation",
+  "status": "completed",
+  "case_id": "txt02_toolbox",
+  "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+  "prompt_template_revision": 3,
+  "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+  "subject_description": "a compact teal steel toolbox with a raised folding handle, two silver latches, and slightly rounded corners",
+  "expanded_prompt": "Studio image of a compact teal steel toolbox with a raised folding handle, two silver latches, and slightly rounded corners. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "challenge": "hard-surface geometry and small hardware",
+  "selection_rationale": "Provide a comparatively well-bounded hard-surface object for the smoke test while still evaluating symmetry, planar geometry, and small attached parts.",
+  "analysis_focus": "Whether planar faces, bilateral symmetry, handle attachment, and latch geometry remain consistent.",
+  "text_to_image_limitation_candidate": false,
+  "seed": 42,
+  "prompt_tokenization": {
+    "clip_token_count": 68,
+    "clip_token_limit": 77,
+    "clip_within_limit": true,
+    "t5_token_count": 76,
+    "t5_requested_limit": 256,
+    "t5_within_requested_limit": true
+  },
+  "model_revisions": {
+    "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+  },
+  "gpu_name": {
+    "flux": "NVIDIA A100-PCIE-40GB",
+    "trellis": "NVIDIA A100-PCIE-40GB"
+  },
+  "background_removal_applied": true,
+  "timings_seconds": {
+    "flux_model_initialization": 2.4041,
+    "text_to_image": 37.5764,
+    "trellis_model_initialization": 112.6455,
+    "trellis_preprocessing": 1.713,
+    "trellis_generation": 63.4361,
+    "glb_export": 83.2891,
+    "preview_rendering": 2.0947,
+    "trellis_case_end_to_end": 148.5418,
+    "combined_primary_end_to_end": 186.1182
+  },
+  "peak_cuda_memory_bytes": {
+    "flux": 24253156864,
+    "trellis": 9482222080
+  },
+  "rendering": {
+    "mode": "pbr_shaded_procedural_neutral",
+    "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+    "envmap_loaded": false,
+    "procedural_envmap": true,
+    "procedural_envmap_shape": [
+      256,
+      512,
+      3
+    ],
+    "procedural_envmap_value_range": [
+      0.20899999141693115,
+      3.411217212677002
+    ],
+    "warning": "OpenCV returned None while reading the EXR file."
+  },
+  "output_files": {
+    "intermediate": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/flux/intermediate.png",
+      "size_bytes": 603479,
+      "sha256": "905ddf1aeb90fdd2c707c943fb2b108e2aab70aed8c101e93a35b9ca83429ca9"
+    },
+    "asset_glb": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/asset.glb",
+      "size_bytes": 16616236,
+      "sha256": "0b6674d62f6eca575b13573a2cd1f7b1e9c817589f05a47d0f74c8da80487174"
+    },
+    "rendered_views": [
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/view_00.png",
+        "size_bytes": 284052,
+        "sha256": "f69ea3ec66ddbd8ca1847e5b2c56fd1aecbeed1bddd64336ad4f64adff0cd706"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/view_01.png",
+        "size_bytes": 267636,
+        "sha256": "2b216ece9ab3fed6ffbcdf68e275ac1a6c9999affa116d520cc0f42320258147"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/view_02.png",
+        "size_bytes": 286562,
+        "sha256": "a0b7cedd221b54770e4e950d2c2584a83fc384441839a525241f3ecc0aafe4a1"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/view_03.png",
+        "size_bytes": 258788,
+        "sha256": "f00c9906c764a82cb10d361affcef0f77f027f66e36f72b0a64d439b2dbcadb2"
+      }
+    ],
+    "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/flux/metadata.json",
+    "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/metadata.json"
+  }
+}

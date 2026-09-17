@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "stage": "Step 3b - Text-conditioned generation",
+  "status": "completed",
+  "case_id": "txt01_desk_fan",
+  "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+  "prompt_template_revision": 3,
+  "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+  "subject_description": "a vintage mint-green metal desk fan with five blades, a circular wire cage, and a compact rounded base",
+  "expanded_prompt": "Studio image of a vintage mint-green metal desk fan with five blades, a circular wire cage, and a compact rounded base. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "challenge": "thin cage wires and repeated radial structures",
+  "selection_rationale": "Test whether the text-to-image and image-to-3D stages can preserve thin, disconnected-looking structures and an explicitly requested repeated-part count.",
+  "analysis_focus": "Whether FLUX preserves a single coherent wire cage and the correct blade count before 3D reconstruction.",
+  "text_to_image_limitation_candidate": false,
+  "seed": 42,
+  "prompt_tokenization": {
+    "clip_token_count": 70,
+    "clip_token_limit": 77,
+    "clip_within_limit": true,
+    "t5_token_count": 77,
+    "t5_requested_limit": 256,
+    "t5_within_requested_limit": true
+  },
+  "model_revisions": {
+    "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+  },
+  "gpu_name": {
+    "flux": "NVIDIA A100-PCIE-40GB",
+    "trellis": "NVIDIA A100-PCIE-40GB"
+  },
+  "background_removal_applied": true,
+  "timings_seconds": {
+    "flux_model_initialization": 2.7761,
+    "text_to_image": 113.5471,
+    "trellis_model_initialization": 112.5183,
+    "trellis_preprocessing": 1.7181,
+    "trellis_generation": 42.1664,
+    "glb_export": 106.4577,
+    "preview_rendering": 2.1032,
+    "trellis_case_end_to_end": 150.4607,
+    "combined_primary_end_to_end": 264.0078
+  },
+  "peak_cuda_memory_bytes": {
+    "flux": 24253156864,
+    "trellis": 4569313792
+  },
+  "rendering": {
+    "mode": "pbr_shaded_procedural_neutral",
+    "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+    "envmap_loaded": false,
+    "procedural_envmap": true,
+    "procedural_envmap_shape": [
+      256,
+      512,
+      3
+    ],
+    "procedural_envmap_value_range": [
+      0.20899999141693115,
+      3.411217212677002
+    ],
+    "warning": "OpenCV returned None while reading the EXR file."
+  },
+  "output_files": {
+    "intermediate": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/flux/intermediate.png",
+      "size_bytes": 935714,
+      "sha256": "ecb08d2fd6d3da9109eccfa1782d416f94977f3a07958ecf31a34b33d87adeb3"
+    },
+    "asset_glb": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/asset.glb",
+      "size_bytes": 20593924,
+      "sha256": "f0e123c237131abc44d154d2841b393a7a52b1e115444ad04bf41f34743845cf"
+    },
+    "rendered_views": [
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/view_00.png",
+        "size_bytes": 286468,
+        "sha256": "df4fe3c4d4480fc1d9d344598504fca87ce453158b5351a234619569b0720255"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/view_01.png",
+        "size_bytes": 232609,
+        "sha256": "14bce8abf2630ca0340498ecf36f1e4d8e5a28bdb8921f3f7a5a1c57a2687a31"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/view_02.png",
+        "size_bytes": 327288,
+        "sha256": "07c3abb7a9806e2dfec3706c3c51f7dcc4a618f330a571f43a540a107c658d01"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/view_03.png",
+        "size_bytes": 218674,
+        "sha256": "d2856528125c417b14c70db7dd3894a7b581d77682d498de24f82b463bb25985"
+      }
+    ],
+    "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/flux/metadata.json",
+    "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/metadata.json"
+  }
+}

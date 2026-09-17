@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "case_id": "txt03_perfume_bottle",
+  "status": "completed",
+  "started_at": "2026-09-17T16:05:20+08:00",
+  "source_input": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/flux/intermediate.png",
+  "source_sha256": "d54d439a0749d34f11df23761a35e8c9b5f1419c4730e1b639620f6b828852db",
+  "background_removal_applied": true,
+  "seed": 42,
+  "generation_parameters": {
+    "pipeline_type": "1024_cascade",
+    "sparse_structure_sampler": {
+      "steps": 12,
+      "guidance_strength": 7.5,
+      "guidance_rescale": 0.7,
+      "guidance_interval": [
+        0.6,
+        1.0
+      ],
+      "rescale_t": 5.0
+    },
+    "shape_slat_sampler": {
+      "steps": 12,
+      "guidance_strength": 7.5,
+      "guidance_rescale": 0.5,
+      "guidance_interval": [
+        0.6,
+        1.0
+      ],
+      "rescale_t": 3.0
+    },
+    "texture_slat_sampler": {
+      "steps": 12,
+      "guidance_strength": 1.0,
+      "guidance_rescale": 0.0,
+      "guidance_interval": [
+        0.6,
+        0.9
+      ],
+      "rescale_t": 3.0
+    },
+    "decimation_target": 500000,
+    "texture_size": 2048,
+    "render_resolution": 768,
+    "render_views": 4
+  },
+  "model_revisions": {
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+  },
+  "trellis_source_revision": "75fbf0183001ed9876c8dbb35de6b68552ee08bd",
+  "runtime": {
+    "hostname": "xgpg1",
+    "slurm_job_id": "855432",
+    "python": "3.10.21",
+    "torch": "2.6.0+cu124",
+    "torch_cuda": "12.4",
+    "pillow": "12.3.0",
+    "transformers": "5.17.0",
+    "gpu_name": "NVIDIA A100-PCIE-40GB"
+  },
+  "timings_seconds": {
+    "shared_model_initialization": 112.6066,
+    "preprocessing": 1.7217,
+    "trellis_generation": 42.0287,
+    "glb_export": 64.9684,
+    "per_case_end_to_end": 108.8215,
+    "preview_rendering": 1.9491
+  },
+  "output_files": {
+    "preprocessed_image": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/preprocessed.png",
+    "glb": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/asset.glb",
+    "render_key": "shaded",
+    "rendered_views": [
+      "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_00.png",
+      "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_01.png",
+      "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_02.png",
+      "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_03.png"
+    ]
+  },
+  "compatibility_patches": [
+    {
+      "name": "dinov3_transformers5_layer_path",
+      "applied": true,
+      "layer_path": "model.layer",
+      "layer_count": 24,
+      "upstream_reference": "microsoft/TRELLIS.2 pull request 156 and commit 3f4faad"
+    }
+  ],
+  "source_image": {
+    "stored_size": [
+      1024,
+      1024
+    ],
+    "oriented_size": [
+      1024,
+      1024
+    ],
+    "mode": "RGB",
+    "exif_orientation": 1
+  },
+  "peak_cuda_memory_bytes": 7895960064,
+  "rendering": {
+    "mode": "pbr_shaded_procedural_neutral",
+    "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+    "envmap_loaded": false,
+    "procedural_envmap": true,
+    "procedural_envmap_shape": [
+      256,
+      512,
+      3
+    ],
+    "procedural_envmap_value_range": [
+      0.20899999141693115,
+      3.411217212677002
+    ],
+    "warning": "OpenCV returned None while reading the EXR file."
+  },
+  "mesh": {
+    "vertices": 6391507,
+    "faces": 12937670,
+    "voxel_size": 0.0009765625
+  },
+  "finished_at": "2026-09-17T16:09:04+08:00"
+}

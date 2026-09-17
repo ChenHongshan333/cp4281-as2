@@ -1,0 +1,543 @@
+{
+  "schema_version": 1,
+  "stage": "Step 3b - Text-conditioned generation",
+  "status": "completed",
+  "slurm_job_id": "855432",
+  "created_at": "2026-09-17T16:17:25+08:00",
+  "case_count": 5,
+  "prompt_template_revision": 3,
+  "timing_policy": {
+    "primary_metric": "combined_primary_end_to_end",
+    "excludes_model_initialization": true,
+    "excludes_preview_rendering": true
+  },
+  "total_primary_generation_seconds": 912.7341,
+  "text_to_image_limitation_candidate": "txt05_lunar_rover",
+  "cases": [
+    {
+      "schema_version": 1,
+      "stage": "Step 3b - Text-conditioned generation",
+      "status": "completed",
+      "case_id": "txt01_desk_fan",
+      "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+      "prompt_template_revision": 3,
+      "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+      "subject_description": "a vintage mint-green metal desk fan with five blades, a circular wire cage, and a compact rounded base",
+      "expanded_prompt": "Studio image of a vintage mint-green metal desk fan with five blades, a circular wire cage, and a compact rounded base. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "challenge": "thin cage wires and repeated radial structures",
+      "selection_rationale": "Test whether the text-to-image and image-to-3D stages can preserve thin, disconnected-looking structures and an explicitly requested repeated-part count.",
+      "analysis_focus": "Whether FLUX preserves a single coherent wire cage and the correct blade count before 3D reconstruction.",
+      "text_to_image_limitation_candidate": false,
+      "seed": 42,
+      "prompt_tokenization": {
+        "clip_token_count": 70,
+        "clip_token_limit": 77,
+        "clip_within_limit": true,
+        "t5_token_count": 77,
+        "t5_requested_limit": 256,
+        "t5_within_requested_limit": true
+      },
+      "model_revisions": {
+        "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+        "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+        "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+        "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+        "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+      },
+      "gpu_name": {
+        "flux": "NVIDIA A100-PCIE-40GB",
+        "trellis": "NVIDIA A100-PCIE-40GB"
+      },
+      "background_removal_applied": true,
+      "timings_seconds": {
+        "flux_model_initialization": 2.7761,
+        "text_to_image": 113.5471,
+        "trellis_model_initialization": 112.5183,
+        "trellis_preprocessing": 1.7181,
+        "trellis_generation": 42.1664,
+        "glb_export": 106.4577,
+        "preview_rendering": 2.1032,
+        "trellis_case_end_to_end": 150.4607,
+        "combined_primary_end_to_end": 264.0078
+      },
+      "peak_cuda_memory_bytes": {
+        "flux": 24253156864,
+        "trellis": 4569313792
+      },
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "output_files": {
+        "intermediate": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/flux/intermediate.png",
+          "size_bytes": 935714,
+          "sha256": "ecb08d2fd6d3da9109eccfa1782d416f94977f3a07958ecf31a34b33d87adeb3"
+        },
+        "asset_glb": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/asset.glb",
+          "size_bytes": 20593924,
+          "sha256": "f0e123c237131abc44d154d2841b393a7a52b1e115444ad04bf41f34743845cf"
+        },
+        "rendered_views": [
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/view_00.png",
+            "size_bytes": 286468,
+            "sha256": "df4fe3c4d4480fc1d9d344598504fca87ce453158b5351a234619569b0720255"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/view_01.png",
+            "size_bytes": 232609,
+            "sha256": "14bce8abf2630ca0340498ecf36f1e4d8e5a28bdb8921f3f7a5a1c57a2687a31"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/view_02.png",
+            "size_bytes": 327288,
+            "sha256": "07c3abb7a9806e2dfec3706c3c51f7dcc4a618f330a571f43a540a107c658d01"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/view_03.png",
+            "size_bytes": 218674,
+            "sha256": "d2856528125c417b14c70db7dd3894a7b581d77682d498de24f82b463bb25985"
+          }
+        ],
+        "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/flux/metadata.json",
+        "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/trellis/metadata.json"
+      },
+      "case_summary": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt01_desk_fan/case_summary.json"
+    },
+    {
+      "schema_version": 1,
+      "stage": "Step 3b - Text-conditioned generation",
+      "status": "completed",
+      "case_id": "txt02_toolbox",
+      "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+      "prompt_template_revision": 3,
+      "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+      "subject_description": "a compact teal steel toolbox with a raised folding handle, two silver latches, and slightly rounded corners",
+      "expanded_prompt": "Studio image of a compact teal steel toolbox with a raised folding handle, two silver latches, and slightly rounded corners. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "challenge": "hard-surface geometry and small hardware",
+      "selection_rationale": "Provide a comparatively well-bounded hard-surface object for the smoke test while still evaluating symmetry, planar geometry, and small attached parts.",
+      "analysis_focus": "Whether planar faces, bilateral symmetry, handle attachment, and latch geometry remain consistent.",
+      "text_to_image_limitation_candidate": false,
+      "seed": 42,
+      "prompt_tokenization": {
+        "clip_token_count": 68,
+        "clip_token_limit": 77,
+        "clip_within_limit": true,
+        "t5_token_count": 76,
+        "t5_requested_limit": 256,
+        "t5_within_requested_limit": true
+      },
+      "model_revisions": {
+        "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+        "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+        "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+        "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+        "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+      },
+      "gpu_name": {
+        "flux": "NVIDIA A100-PCIE-40GB",
+        "trellis": "NVIDIA A100-PCIE-40GB"
+      },
+      "background_removal_applied": true,
+      "timings_seconds": {
+        "flux_model_initialization": 2.4041,
+        "text_to_image": 37.5764,
+        "trellis_model_initialization": 112.6455,
+        "trellis_preprocessing": 1.713,
+        "trellis_generation": 63.4361,
+        "glb_export": 83.2891,
+        "preview_rendering": 2.0947,
+        "trellis_case_end_to_end": 148.5418,
+        "combined_primary_end_to_end": 186.1182
+      },
+      "peak_cuda_memory_bytes": {
+        "flux": 24253156864,
+        "trellis": 9482222080
+      },
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "output_files": {
+        "intermediate": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/flux/intermediate.png",
+          "size_bytes": 603479,
+          "sha256": "905ddf1aeb90fdd2c707c943fb2b108e2aab70aed8c101e93a35b9ca83429ca9"
+        },
+        "asset_glb": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/asset.glb",
+          "size_bytes": 16616236,
+          "sha256": "0b6674d62f6eca575b13573a2cd1f7b1e9c817589f05a47d0f74c8da80487174"
+        },
+        "rendered_views": [
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/view_00.png",
+            "size_bytes": 284052,
+            "sha256": "f69ea3ec66ddbd8ca1847e5b2c56fd1aecbeed1bddd64336ad4f64adff0cd706"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/view_01.png",
+            "size_bytes": 267636,
+            "sha256": "2b216ece9ab3fed6ffbcdf68e275ac1a6c9999affa116d520cc0f42320258147"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/view_02.png",
+            "size_bytes": 286562,
+            "sha256": "a0b7cedd221b54770e4e950d2c2584a83fc384441839a525241f3ecc0aafe4a1"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/view_03.png",
+            "size_bytes": 258788,
+            "sha256": "f00c9906c764a82cb10d361affcef0f77f027f66e36f72b0a64d439b2dbcadb2"
+          }
+        ],
+        "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/flux/metadata.json",
+        "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/trellis/metadata.json"
+      },
+      "case_summary": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt02_toolbox/case_summary.json"
+    },
+    {
+      "schema_version": 1,
+      "stage": "Step 3b - Text-conditioned generation",
+      "status": "completed",
+      "case_id": "txt03_perfume_bottle",
+      "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+      "prompt_template_revision": 3,
+      "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+      "subject_description": "an asymmetric translucent amber glass perfume bottle with a faceted clear stopper and a curved silhouette",
+      "expanded_prompt": "Studio image of an asymmetric translucent amber glass perfume bottle with a faceted clear stopper and a curved silhouette. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "challenge": "transparency and asymmetric reflective material",
+      "selection_rationale": "Probe a material that is difficult for both image synthesis and surface-based 3D reconstruction, with asymmetry preventing an overly simple completion.",
+      "analysis_focus": "How the text-to-image depiction of transparency constrains the opaque surface reconstructed by TRELLIS.2.",
+      "text_to_image_limitation_candidate": false,
+      "seed": 42,
+      "prompt_tokenization": {
+        "clip_token_count": 65,
+        "clip_token_limit": 77,
+        "clip_within_limit": true,
+        "t5_token_count": 74,
+        "t5_requested_limit": 256,
+        "t5_within_requested_limit": true
+      },
+      "model_revisions": {
+        "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+        "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+        "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+        "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+        "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+      },
+      "gpu_name": {
+        "flux": "NVIDIA A100-PCIE-40GB",
+        "trellis": "NVIDIA A100-PCIE-40GB"
+      },
+      "background_removal_applied": true,
+      "timings_seconds": {
+        "flux_model_initialization": 1.9594,
+        "text_to_image": 39.2385,
+        "trellis_model_initialization": 112.6066,
+        "trellis_preprocessing": 1.7217,
+        "trellis_generation": 42.0287,
+        "glb_export": 64.9684,
+        "preview_rendering": 1.9491,
+        "trellis_case_end_to_end": 108.8215,
+        "combined_primary_end_to_end": 148.06
+      },
+      "peak_cuda_memory_bytes": {
+        "flux": 24253156864,
+        "trellis": 7895960064
+      },
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "output_files": {
+        "intermediate": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/flux/intermediate.png",
+          "size_bytes": 722490,
+          "sha256": "d54d439a0749d34f11df23761a35e8c9b5f1419c4730e1b639620f6b828852db"
+        },
+        "asset_glb": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/asset.glb",
+          "size_bytes": 20281160,
+          "sha256": "371c292b2fb4c70b515ef2c0f2dada1d5612d63069cc10fcafebf3132c834016"
+        },
+        "rendered_views": [
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_00.png",
+            "size_bytes": 142222,
+            "sha256": "10836fd0b625f44ea8edf13420e4b0c209ba6f6f3f4b1d5829084852c8a66573"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_01.png",
+            "size_bytes": 114254,
+            "sha256": "b74a738f70fb87e5189a5a062c091a30ea4833d968ca585f28bb1ecb05d6ff33"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_02.png",
+            "size_bytes": 148054,
+            "sha256": "f26d0b5ddd42b250e0b038ef214b8dc202f55da5b15e47a574fa688368f102c0"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_03.png",
+            "size_bytes": 121093,
+            "sha256": "1c2ae533f1b50d16db92eb33939b9692179d431824149e24a2dd210dfeeab75c"
+          }
+        ],
+        "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/flux/metadata.json",
+        "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/metadata.json"
+      },
+      "case_summary": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/case_summary.json"
+    },
+    {
+      "schema_version": 1,
+      "stage": "Step 3b - Text-conditioned generation",
+      "status": "completed",
+      "case_id": "txt04_root_sculpture",
+      "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+      "prompt_template_revision": 3,
+      "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+      "subject_description": "a small freestanding sculpture shaped like an intertwined weathered tree root with branching knots and a broad stable base",
+      "expanded_prompt": "Studio image of a small freestanding sculpture shaped like an intertwined weathered tree root with branching knots and a broad stable base. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "challenge": "irregular organic branching and concavities",
+      "selection_rationale": "Evaluate irregular organic topology, separated branches, self-occlusion, and concave regions that are not captured by simple box-like geometry.",
+      "analysis_focus": "Whether branches remain separated and whether hidden concavities are plausibly completed.",
+      "text_to_image_limitation_candidate": false,
+      "seed": 42,
+      "prompt_tokenization": {
+        "clip_token_count": 72,
+        "clip_token_limit": 77,
+        "clip_within_limit": true,
+        "t5_token_count": 81,
+        "t5_requested_limit": 256,
+        "t5_within_requested_limit": true
+      },
+      "model_revisions": {
+        "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+        "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+        "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+        "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+        "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+      },
+      "gpu_name": {
+        "flux": "NVIDIA A100-PCIE-40GB",
+        "trellis": "NVIDIA A100-PCIE-40GB"
+      },
+      "background_removal_applied": true,
+      "timings_seconds": {
+        "flux_model_initialization": 1.4847,
+        "text_to_image": 39.2289,
+        "trellis_model_initialization": 112.9938,
+        "trellis_preprocessing": 1.7125,
+        "trellis_generation": 32.3082,
+        "glb_export": 35.3514,
+        "preview_rendering": 2.0548,
+        "trellis_case_end_to_end": 69.424,
+        "combined_primary_end_to_end": 108.6529
+      },
+      "peak_cuda_memory_bytes": {
+        "flux": 24253156864,
+        "trellis": 3454682624
+      },
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "output_files": {
+        "intermediate": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/flux/intermediate.png",
+          "size_bytes": 946119,
+          "sha256": "a61200de64063625ba38f6905012720563ac8edf86a39784f4afc7b4f8982bb1"
+        },
+        "asset_glb": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/asset.glb",
+          "size_bytes": 17175324,
+          "sha256": "26c5464b69016e79f4e693f4fbad2a2af2e794be142fcd7cb7d6b44505d5f60e"
+        },
+        "rendered_views": [
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/view_00.png",
+            "size_bytes": 208010,
+            "sha256": "f2ccffa0f68a61b192b6fcce2072a6f4b73ccb6c31febe23f1cd1525142784e3"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/view_01.png",
+            "size_bytes": 188725,
+            "sha256": "27fdc8f08b12451359c42cc356f9bc0154f6b9731d9f9c764c30e895775d938f"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/view_02.png",
+            "size_bytes": 194408,
+            "sha256": "d72c3123866fe8f532084c20d6b755a76f3a84db1e1d9b87c3732f721a212b5d"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/view_03.png",
+            "size_bytes": 189506,
+            "sha256": "12ca5bef19628b1cf6151fe110d05011ac64df7db43433d6051209ffa37edc65"
+          }
+        ],
+        "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/flux/metadata.json",
+        "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/trellis/metadata.json"
+      },
+      "case_summary": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt04_root_sculpture/case_summary.json"
+    },
+    {
+      "schema_version": 1,
+      "stage": "Step 3b - Text-conditioned generation",
+      "status": "completed",
+      "case_id": "txt05_lunar_rover",
+      "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+      "prompt_template_revision": 3,
+      "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+      "subject_description": "a stylized compact lunar rover toy with four ribbed wheels, a small tilted dish antenna, and an asymmetric instrument box",
+      "expanded_prompt": "Studio image of a stylized compact lunar rover toy with four ribbed wheels, a small tilted dish antenna, and an asymmetric instrument box. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+      "challenge": "multiple components, count consistency, and asymmetry",
+      "selection_rationale": "Create a multi-part count-sensitive case in which any FLUX omission or merger can be traced directly into the final 3D result.",
+      "analysis_focus": "A candidate limitation case if FLUX changes wheel count, merges components, or hides the antenna attachment.",
+      "text_to_image_limitation_candidate": true,
+      "seed": 42,
+      "prompt_tokenization": {
+        "clip_token_count": 74,
+        "clip_token_limit": 77,
+        "clip_within_limit": true,
+        "t5_token_count": 84,
+        "t5_requested_limit": 256,
+        "t5_within_requested_limit": true
+      },
+      "model_revisions": {
+        "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+        "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+        "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+        "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+        "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+      },
+      "gpu_name": {
+        "flux": "NVIDIA A100-PCIE-40GB",
+        "trellis": "NVIDIA A100-PCIE-40GB"
+      },
+      "background_removal_applied": true,
+      "timings_seconds": {
+        "flux_model_initialization": 1.7877,
+        "text_to_image": 46.6689,
+        "trellis_model_initialization": 120.9184,
+        "trellis_preprocessing": 1.7127,
+        "trellis_generation": 105.4967,
+        "glb_export": 51.1202,
+        "preview_rendering": 5.3239,
+        "trellis_case_end_to_end": 159.2263,
+        "combined_primary_end_to_end": 205.8952
+      },
+      "peak_cuda_memory_bytes": {
+        "flux": 24253156864,
+        "trellis": 11461981184
+      },
+      "rendering": {
+        "mode": "pbr_shaded_procedural_neutral",
+        "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+        "envmap_loaded": false,
+        "procedural_envmap": true,
+        "procedural_envmap_shape": [
+          256,
+          512,
+          3
+        ],
+        "procedural_envmap_value_range": [
+          0.20899999141693115,
+          3.411217212677002
+        ],
+        "warning": "OpenCV returned None while reading the EXR file."
+      },
+      "output_files": {
+        "intermediate": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/flux/intermediate.png",
+          "size_bytes": 753920,
+          "sha256": "93ed1101a084d0add46b9ea833cf7ff44b002154d30c549f05b0a35d5329ef13"
+        },
+        "asset_glb": {
+          "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/asset.glb",
+          "size_bytes": 19301132,
+          "sha256": "5090ed76327404791495f6e614a56bf1d37ef426173ac4c3d9b1401ffb1185ec"
+        },
+        "rendered_views": [
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/view_00.png",
+            "size_bytes": 273467,
+            "sha256": "8dffefeb73bf287e9fcb69b656ee00fc0c68c4c4f779b7b298bc0c715d86abef"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/view_01.png",
+            "size_bytes": 297613,
+            "sha256": "2754bf88f79ac1fce7cc35d4b7f5dbb385ddbaaa78878d48cd430ef423c1ec5d"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/view_02.png",
+            "size_bytes": 263117,
+            "sha256": "fe6b372c08a608f206192b700481beddcede0c05ac696447bfb9d1303508cf5b"
+          },
+          {
+            "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/view_03.png",
+            "size_bytes": 302236,
+            "sha256": "6d9376ccbab82a63dc82a650d1d74ecb13c10009f583591b9506bf590f6fc0b7"
+          }
+        ],
+        "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/flux/metadata.json",
+        "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/trellis/metadata.json"
+      },
+      "case_summary": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt05_lunar_rover/case_summary.json"
+    }
+  ]
+}

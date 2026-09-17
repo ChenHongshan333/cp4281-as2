@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "stage": "Step 3b - FLUX text-to-image intermediate",
+  "status": "completed",
+  "case_id": "txt05_lunar_rover",
+  "started_at": "2026-09-17T15:54:58+08:00",
+  "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "prompt_template_sha256": "c25a213874b7147cce5c8b90d5b409f98d63d1c56bb9c8a8e5819f61f8bd9742",
+  "subject_description": "a stylized compact lunar rover toy with four ribbed wheels, a small tilted dish antenna, and an asymmetric instrument box",
+  "expanded_prompt": "Studio image of a stylized compact lunar rover toy with four ribbed wheels, a small tilted dish antenna, and an asymmetric instrument box. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "expanded_prompt_sha256": "3d1ce3fec1bffcb154cfe6df56103ad8ce18ab6ef3fdd37ad23b1b202edc1497",
+  "challenge": "multiple components, count consistency, and asymmetry",
+  "analysis_focus": "A candidate limitation case if FLUX changes wheel count, merges components, or hides the antenna attachment.",
+  "seed": 42,
+  "generation_parameters": {
+    "height": 1024,
+    "width": 1024,
+    "num_inference_steps": 4,
+    "guidance_scale": 0.0,
+    "max_sequence_length": 256,
+    "dtype": "bfloat16",
+    "memory_strategy": "model_cpu_offload"
+  },
+  "model": {
+    "id": "black-forest-labs/FLUX.1-schnell",
+    "revision": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+    "snapshot_path": "/home/h/hongshan/cp4281-as2/hf-cache/hub/models--black-forest-labs--FLUX.1-schnell/snapshots/741f7c3ce8b383c54771c7003378a50191e9efe9"
+  },
+  "environment": {
+    "hostname": "xgpg1",
+    "python": "3.10.21",
+    "torch": "2.6.0+cu124",
+    "diffusers": "0.40.0",
+    "transformers": "5.17.0",
+    "accelerate": "1.15.0",
+    "pillow": "12.3.0",
+    "gpu_name": "NVIDIA A100-PCIE-40GB"
+  },
+  "prompt_tokenization": {
+    "clip_token_count": 74,
+    "clip_token_limit": 77,
+    "clip_within_limit": true,
+    "t5_token_count": 84,
+    "t5_requested_limit": 256,
+    "t5_within_requested_limit": true
+  },
+  "finished_at": "2026-09-17T15:55:48+08:00",
+  "timings_seconds": {
+    "shared_model_initialization": 1.7877,
+    "text_to_image": 46.6689,
+    "per_case_end_to_end": 49.2707
+  },
+  "peak_cuda_memory_bytes": 24253156864,
+  "output_files": {
+    "intermediate_image": "intermediate.png",
+    "intermediate_image_sha256": "93ed1101a084d0add46b9ea833cf7ff44b002154d30c549f05b0a35d5329ef13",
+    "metadata": "metadata.json"
+  },
+  "output_image": {
+    "format": "PNG",
+    "mode": "RGB",
+    "width": 1024,
+    "height": 1024
+  }
+}

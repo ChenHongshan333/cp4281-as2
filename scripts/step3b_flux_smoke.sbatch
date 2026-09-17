@@ -43,8 +43,20 @@ mkdir -p "$TMPDIR" "$TRITON_CACHE_DIR" "$OUTPUT_PARENT"
 echo "Start: $(date --iso-8601=seconds)"
 echo "Node: $(hostname)"
 echo "Job: $SLURM_JOB_ID"
-nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader
+if ! nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader; then
+    echo "WARNING: nvidia-smi/NVML failed; validating CUDA directly with PyTorch."
+fi
 python --version
+python - <<'PY'
+import torch
+
+if not torch.cuda.is_available():
+    raise RuntimeError("PyTorch CUDA is unavailable")
+
+probe = torch.ones(1, device="cuda")
+print(f"PyTorch CUDA device: {torch.cuda.get_device_name(0)}")
+print(f"CUDA tensor probe: {probe}")
+PY
 
 test -f "$FLUX_CACHE/refs/main"
 ACTUAL_FLUX_REV=$(tr -d '\r\n' < "$FLUX_CACHE/refs/main")
@@ -95,6 +107,10 @@ assert metadata["generation_parameters"]["num_inference_steps"] == 4, metadata
 assert metadata["generation_parameters"]["guidance_scale"] == 0.0, metadata
 assert metadata["model"]["revision"] == "741f7c3ce8b383c54771c7003378a50191e9efe9", metadata
 assert metadata["timings_seconds"]["text_to_image"] > 0, metadata
+assert metadata["prompt_tokenization"]["clip_within_limit"] is True, metadata
+assert metadata["prompt_tokenization"]["clip_token_count"] <= 77, metadata
+assert metadata["prompt_tokenization"]["t5_within_requested_limit"] is True, metadata
+assert metadata["prompt_tokenization"]["t5_token_count"] <= 256, metadata
 
 with Image.open(image_path) as image:
     assert image.size == (1024, 1024), image.size

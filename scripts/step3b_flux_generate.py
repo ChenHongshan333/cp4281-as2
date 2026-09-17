@@ -64,6 +64,14 @@ def elapsed(start: float) -> float:
     return round(time.perf_counter() - start, 4)
 
 
+def token_count(tokenizer: Any, prompt: str) -> int:
+    encoded = tokenizer(prompt, add_special_tokens=True, truncation=False)
+    input_ids = encoded["input_ids"]
+    if input_ids and isinstance(input_ids[0], list):
+        input_ids = input_ids[0]
+    return len(input_ids)
+
+
 def write_json(path: Path, data: dict[str, Any]) -> None:
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
@@ -139,8 +147,12 @@ def main() -> None:
         "case_id": args.case_id,
         "started_at": now_iso(),
         "prompt_template": template,
+        "prompt_template_sha256": hashlib.sha256(template.encode("utf-8")).hexdigest(),
         "subject_description": case["subject_description"],
         "expanded_prompt": expanded_prompt,
+        "expanded_prompt_sha256": hashlib.sha256(
+            expanded_prompt.encode("utf-8")
+        ).hexdigest(),
         "challenge": case.get("challenge"),
         "analysis_focus": case.get("analysis_focus"),
         "seed": args.seed,
@@ -175,9 +187,33 @@ def main() -> None:
         init_start = time.perf_counter()
         pipeline = FluxPipeline.from_pretrained(
             str(args.model_path),
-            torch_dtype=torch.bfloat16,
+            dtype=torch.bfloat16,
             local_files_only=True,
         )
+
+        clip_token_count = token_count(pipeline.tokenizer, expanded_prompt)
+        clip_token_limit = int(pipeline.tokenizer.model_max_length)
+        t5_token_count = token_count(pipeline.tokenizer_2, expanded_prompt)
+        metadata["prompt_tokenization"] = {
+            "clip_token_count": clip_token_count,
+            "clip_token_limit": clip_token_limit,
+            "clip_within_limit": clip_token_count <= clip_token_limit,
+            "t5_token_count": t5_token_count,
+            "t5_requested_limit": args.max_sequence_length,
+            "t5_within_requested_limit": t5_token_count <= args.max_sequence_length,
+        }
+        write_json(metadata_path, metadata)
+        if clip_token_count > clip_token_limit:
+            raise RuntimeError(
+                "Expanded prompt exceeds the CLIP token limit: "
+                f"{clip_token_count} > {clip_token_limit}"
+            )
+        if t5_token_count > args.max_sequence_length:
+            raise RuntimeError(
+                "Expanded prompt exceeds the requested T5 token limit: "
+                f"{t5_token_count} > {args.max_sequence_length}"
+            )
+
         pipeline.enable_model_cpu_offload()
         pipeline.set_progress_bar_config(desc="FLUX.1-schnell")
         initialization_seconds = elapsed(init_start)

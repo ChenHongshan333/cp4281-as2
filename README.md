@@ -6,7 +6,7 @@ This project deploys `microsoft/TRELLIS.2-4B` on an NVIDIA GPU and uses it to ge
 
 The project also investigates the model's two-stage flow-matching process by extracting, decoding, and rendering intermediate sampler states. Finally, generated assets are assembled into a composed 3D scene.
 
-Current progress: **Steps 1–2 and Step 3a complete — awaiting approval to start Step 3b**
+Current progress: **Steps 1–3 complete — awaiting approval to start Step 4.**
 
 ## Table of Contents
 
@@ -15,6 +15,7 @@ Current progress: **Steps 1–2 and Step 3a complete — awaiting approval to st
 - [Step 3 — Deploy and Generate](#step-3--deploy-and-generate)
   - [Step 3a — Image-Conditioned Generation](#step-3a--image-conditioned-generation)
   - [Step 3b — Text-Conditioned Generation](#step-3b--text-conditioned-generation)
+  - [Step 3 Acceptance Audit](#step-3-acceptance-audit)
 - [Step 4 — Visualise the Diffusion Process](#step-4--visualise-the-diffusion-process)
 - [Step 5 — Composite a Scene](#step-5--composite-a-scene)
 - [Submission Checklist](#submission-checklist)
@@ -133,6 +134,7 @@ The installation was performed in the following order:
 6. Compile and test `nvdiffrast` and `nvdiffrec_render`.
 7. Compile and load-test CuMesh, O-Voxel, and FlexGEMM.
 8. Import the complete TRELLIS.2 pipeline and export final pip, conda, version, and source-revision manifests.
+9. Extend the same isolated environment for Step 3b with Diffusers, Accelerate, and psutil, then verify `FluxPipeline`, the pinned local FLUX snapshot, and `pip check` in a Slurm CPU job.
 
 Compilation ran in Slurm GPU jobs against an NVIDIA A100 80 GB PCIe MIG 3g.40gb instance. Temporary build trees and pip caches were placed together under `/tmp` to avoid cross-filesystem wheel operations. CUDA extensions were built for compute capability 8.0. The CUDA driver stub directory was supplied only to the linker for extensions that link against `libcuda.so`.
 
@@ -143,6 +145,9 @@ The reproducible scripts retained in this repository are:
 | [`scripts/setup_step2_render.sbatch`](scripts/setup_step2_render.sbatch) | Build and functionally test `nvdiffrast` and `nvdiffrec_render` |
 | [`scripts/setup_step2_geometry.sbatch`](scripts/setup_step2_geometry.sbatch) | Build and load-test CuMesh, O-Voxel, and FlexGEMM |
 | [`scripts/verify_step2_environment.sbatch`](scripts/verify_step2_environment.sbatch) | Perform the final TRELLIS.2 import, CUDA execution, dependency, version, and revision checks |
+| [`scripts/setup_step3b_accelerate.sbatch`](scripts/setup_step3b_accelerate.sbatch) | Add the pinned Accelerate dependency required by Diffusers offload support |
+| [`scripts/setup_step3b_diffusers.sbatch`](scripts/setup_step3b_diffusers.sbatch) | Add the pinned Diffusers text-to-image stack and its missing runtime dependencies |
+| [`scripts/verify_step3b_text_stack.sbatch`](scripts/verify_step3b_text_stack.sbatch) | Verify the final FLUX software stack, local checkpoint, and dependency consistency |
 
 ### Results
 
@@ -168,6 +173,9 @@ The isolated environment passed the complete TRELLIS.2 pipeline import, all comp
 | Gradio | 6.0.1 |
 | Trimesh | 5.1.0 |
 | utils3d | 0.0.2 |
+| Diffusers | 0.40.0; `FluxPipeline` import passed |
+| Accelerate | 1.15.0 |
+| psutil | 7.2.2 |
 
 Source identities used by the final environment:
 
@@ -187,11 +195,14 @@ The final verification completed on 15 September 2026 at 20:28:36 +08:00. Detail
 ~/cp4281-as2/logs/step2-final-pip-freeze.txt
 ~/cp4281-as2/logs/step2-final-conda-explicit.txt
 ~/cp4281-as2/logs/step2-final-conda-list.txt
+~/cp4281-as2/logs/step3b-text-stack-final-pip-freeze-855195.txt
 ```
+
+The Step 3b text stack extension was independently verified by Slurm job `855195` on 17 September 2026. It preserved PyTorch 2.6.0+cu124 and the compiled TRELLIS.2 environment while adding the packages listed above; `FluxPipeline` imported successfully and `pip check` reported no broken requirements.
 
 ## Step 3 — Deploy and Generate
 
-Step 3a is complete. Step 3b has not started.
+Both conditioning pipelines have been deployed and tested. The accepted image-conditioned batch is Slurm job `853514`, and the accepted text-conditioned batch is Slurm job `855432`. Together they produced ten GLB assets, forty rendered viewpoints, five original photographic inputs, and five saved FLUX intermediate images. The technical work, visual QA, and deliverable audit are complete. The Step 3b prompts were generated with AI assistance and manually reviewed and approved by the student; this provenance is disclosed in accordance with the assignment's AI-assistance rule.
 
 ### Step 3a — Image-Conditioned Generation
 
@@ -239,7 +250,86 @@ The selected Step 4 candidates remain the car, armchair, and bookshelf because t
 
 ### Step 3b — Text-Conditioned Generation
 
-Not started. This stage will use FLUX.1-schnell to create five isolated single-object images from the original prompts in `experiment_spec.json`, then pass those intermediate images through the same validated image-to-3D chain.
+#### Objective
+
+Generate five textured 3D assets through a chained text-to-image and image-to-3D workflow. Each case must retain its exact prompt, the generated single-object intermediate image, a GLB asset, at least two rendered viewpoints, and separate timing evidence for the text-to-image and 3D stages.
+
+The five subject descriptions and the shared template used in this batch were generated with AI assistance, then manually reviewed and approved by the student. They are project-specific and were not copied from TRELLIS.2 examples. This provenance is stated explicitly rather than presenting the prompts as solely student-authored.
+
+#### Implementation
+
+TRELLIS.2 has no text conditioner, so the deployed chain was:
+
+```text
+prompt -> FLUX.1-schnell -> intermediate.png -> RMBG-2.0
+       -> DINOv3 ViT-L/16 -> TRELLIS.2-4B -> textured GLB
+```
+
+The shared prompt template, revision 3, was:
+
+```text
+Studio image of {subject_description}. Isolated, centered, fully visible,
+three-quarter view, plain gray background, diffuse lighting, realistic
+material. No people, props, text, logo, watermark, cropping, or duplicates.
+```
+
+The template constrains composition and lighting so that FLUX produces the isolated, fully visible single-object images expected by the downstream image-conditioned pipeline. All expanded prompts were validated against the actual FLUX tokenizers before generation; the script fails instead of silently truncating a prompt that exceeds the CLIP 77-token limit or the configured T5 256-token limit.
+
+| Case | Subject description appended to the template | Challenge | CLIP / T5 tokens |
+|---|---|---|---:|
+| Desk fan | `a vintage mint-green metal desk fan with five blades, a circular wire cage, and a compact rounded base` | Thin cage wires and repeated radial structures | 70 / 77 |
+| Toolbox | `a compact teal steel toolbox with a raised folding handle, two silver latches, and slightly rounded corners` | Hard-surface geometry and small hardware | 68 / 76 |
+| Perfume bottle | `an asymmetric translucent amber glass perfume bottle with a faceted clear stopper and a curved silhouette` | Transparency, refraction cues, and asymmetry | 65 / 74 |
+| Root sculpture | `a small freestanding sculpture shaped like an intertwined weathered tree root with branching knots and a broad stable base` | Irregular organic branching and concavities | 72 / 81 |
+| Lunar rover | `a stylized compact lunar rover toy with four ribbed wheels, a small tilted dish antenna, and an asymmetric instrument box` | Component counts, occlusion, and asymmetry | 74 / 84 |
+
+FLUX.1-schnell was loaded offline from the pinned local snapshot at revision `741f7c3ce8b383c54771c7003378a50191e9efe9` through Diffusers 0.40.0. Generation used seed `42`, 1,024 by 1,024 pixels, four inference steps, guidance scale `0.0`, bfloat16 weights, and model CPU offload. The supporting text stack was formally verified in CPU job `855195` with Accelerate 1.15.0, psutil 7.2.2, Transformers 5.17.0, and a passing `pip check`.
+
+Each saved `intermediate.png` was then passed to the same validated image-conditioned implementation used by Step 3a. RMBG-2.0 removed its background, DINOv3 produced the visual conditioning features, and TRELLIS.2 generated the asset with seed `42` and the `1024_cascade` pipeline. Each result was exported at a 500,000-triangle target with 2,048-pixel textures and rendered from four viewpoints at 768 pixels.
+
+The reproducible implementation is preserved in:
+
+- [`scripts/step3b_flux_generate.py`](scripts/step3b_flux_generate.py), which expands and validates prompts, loads FLUX offline, generates the image, and records timing and hashes.
+- [`scripts/step3b_batch.sbatch`](scripts/step3b_batch.sbatch), which runs the five FLUX cases and feeds each saved image into the Step 3a image-to-3D implementation.
+- [`scripts/step3b_summarize.py`](scripts/step3b_summarize.py), which validates all outputs and writes per-case and batch summaries.
+- [`scripts/verify_step3b_prompts.sbatch`](scripts/verify_step3b_prompts.sbatch) and [`scripts/verify_step3b_text_stack.sbatch`](scripts/verify_step3b_text_stack.sbatch), which verify token limits and the text-generation software stack.
+
+The formal sequential batch was Slurm job `855432` on an NVIDIA A100-PCIE-40GB. The primary combined metric is FLUX image generation plus TRELLIS preprocessing, generation, and GLB export; it excludes model initialisation and preview rendering, which remain available separately in the metadata.
+
+#### Results
+
+| Case | FLUX time | TRELLIS time | Combined primary time | Visual assessment |
+|---|---:|---:|---:|---|
+| Desk fan | 113.55 s | 150.46 s | 264.01 s | The five blades and fan identity remain clear, but thin cage wires warp, merge, and form extra loops around the rear motor. |
+| Toolbox | 37.58 s | 148.54 s | 186.12 s | The strongest hard-surface result; planar faces, handle, box seam, and latch hardware remain coherent, with only minor attachment inconsistencies. |
+| Perfume bottle | 39.24 s | 108.82 s | 148.06 s | The silhouette, neck, and stopper remain recognisable, but the transparent glass and internal liquid cues collapse toward a nearly solid red material. |
+| Root sculpture | 39.23 s | 69.42 s | 108.65 s | Branching, wood texture, openings, and the broad root base are strong; a few fine branch tips become detached fragments. |
+| Lunar rover | 46.67 s | 159.23 s | 205.90 s | Four wheels, the dish, chassis, and instrument boxes remain recognisable, while occluded rear-side components are simplified or inferred. |
+
+The five combined primary times total 912.73 seconds (15 minutes 13 seconds). Every case has one saved FLUX intermediate image, one GLB, four shaded PBR viewpoints, separate FLUX and TRELLIS metadata, and a validated case summary. The accepted local batch is stored under:
+
+```text
+outputs/step3/text_conditioned/batch-855432/
+```
+
+The lunar rover is the primary example of the text-to-image bottleneck. FLUX produced a coherent three-quarter view but did not expose the rear instrument layout, hidden wheel attachments, or underside structure. TRELLIS.2 never received the text and therefore had to infer those occluded regions solely from the single image, producing a recognisable rover with simplified and partly invented rear geometry. The perfume bottle supplies a second limitation: two-dimensional highlights and refraction suggest transparent glass, but do not fully specify wall thickness, the liquid boundary, or view-dependent transmission, so the reconstructed material is substantially more opaque.
+
+### Step 3 Acceptance Audit
+
+| Assignment requirement | Evidence collected | Status |
+|---|---|---|
+| Five image-conditioned assets from the student's own images | Five author-captured JPEG inputs with SHA-256 values and provenance records | Passed |
+| Different image challenges and a reason for each selection | Thin structures, hard surfaces, transparency, organic upholstery, and repeated concavities are documented in `experiment_spec.json` and the Step 3a table | Passed |
+| Five text-conditioned assets through a self-built FLUX-to-TRELLIS chain | Five FLUX intermediates, five text-conditioned GLBs, implementation scripts, and per-case metadata | Passed technically |
+| Five project-specific text prompts | Five prompts were generated with AI assistance and manually reviewed and approved by the student; provenance is explicitly disclosed | Passed |
+| Prompt template shown and engineered for TRELLIS inputs | Template revision 3 and its rationale are recorded above; all token limits passed | Passed |
+| Input images and text prompts retained | Five JPEG inputs, five FLUX intermediate PNGs, the template, subject descriptions, and expanded prompts are retained locally | Passed |
+| Ten GLB assets | Five image-conditioned and five text-conditioned GLBs | Passed |
+| At least two viewpoints per asset | Four viewpoints per asset, forty previews in total | Passed |
+| Time cost for each generation | Ten primary timings plus component timings in metadata and batch summaries | Passed |
+| Explain that TRELLIS.2 never receives text and show a visible limitation | The chain is documented above; lunar rover is the primary limitation case and perfume bottle is a supporting material case | Passed |
+
+The authoritative local evidence is stored in [`outputs/step3/image_conditioned/batch-853514/`](outputs/step3/image_conditioned/batch-853514/), [`outputs/step3/text_conditioned/batch-855432/`](outputs/step3/text_conditioned/batch-855432/), and [`inputs/step3/experiment_spec.json`](inputs/step3/experiment_spec.json).
 
 ## Step 4 — Visualise the Diffusion Process
 
@@ -256,8 +346,9 @@ Not started. This step will arrange at least five generated assets into one inte
 - [x] Step 1: downloaded models, official sources, revisions, storage location, and substitution statement
 - [x] Step 2: ordered copy-pasteable environment commands and exact versions of Python, PyTorch, CUDA, and every compiled extension
 - [x] Step 3a: five original input images, selection rationale, five `.glb` assets, at least two rendered viewpoints per asset, and individual generation times
-- [ ] Step 3b: five original prompts, the prompt template, intermediate text-to-image outputs, five `.glb` assets, at least two rendered viewpoints per asset, and individual generation times
-- [ ] Step 3b: explain that TRELLIS.2 never receives text directly and include at least one case where the text-to-image stage limits the final result
+- [x] Step 3b: five project-specific prompts, the prompt template, five intermediate text-to-image outputs, five `.glb` assets, four rendered viewpoints per asset, and individual generation times
+- [x] Step 3b: explain that TRELLIS.2 never receives text directly and include at least one case where the text-to-image stage limits the final result
+- [x] Step 3b prompt provenance: disclose that the five prompts were AI-generated and manually reviewed and approved by the student
 - [ ] Step 4: select three Step 3a cases and show the input and final rendered asset for each
 - [ ] Step 4: two labelled strips per case, with five Stage 1 and five Stage 2 renders each, for 30 intermediate renders in total
 - [ ] Step 4: label every frame with its actual stage, true timestep, and a measurement
@@ -271,7 +362,7 @@ Not started. This step will arrange at least five generated assets into one inte
 
 - [ ] One PDF report containing all report items above
 - [x] Five image-conditioned `.glb` assets
-- [ ] Five text-conditioned `.glb` assets
+- [x] Five text-conditioned `.glb` assets
 - [ ] One composed scene containing at least five generated assets (`.glb` preferred; `.blend` or `.usd` accepted)
 
 ### Oral Preparation

@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "stage": "Step 3b - Text-conditioned generation",
+  "status": "completed",
+  "case_id": "txt03_perfume_bottle",
+  "prompt_authorship": "The five subject descriptions and shared prompt template were generated with AI assistance and manually reviewed and approved by the student.",
+  "prompt_template_revision": 3,
+  "prompt_template": "Studio image of {subject_description}. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "prompt_template_rationale": "The shared template keeps composition, viewpoint, background, and lighting consistent across cases while isolating a single complete object with strong boundaries for the downstream single-image TRELLIS.2 reconstruction. Subject descriptions vary the intended geometric or material challenge without changing the imaging conditions.",
+  "subject_description": "an asymmetric translucent amber glass perfume bottle with a faceted clear stopper and a curved silhouette",
+  "expanded_prompt": "Studio image of an asymmetric translucent amber glass perfume bottle with a faceted clear stopper and a curved silhouette. Isolated, centered, fully visible, three-quarter view, plain gray background, diffuse lighting, realistic material. No people, props, text, logo, watermark, cropping, or duplicates.",
+  "challenge": "transparency and asymmetric reflective material",
+  "selection_rationale": "Probe a material that is difficult for both image synthesis and surface-based 3D reconstruction, with asymmetry preventing an overly simple completion.",
+  "analysis_focus": "How the text-to-image depiction of transparency constrains the opaque surface reconstructed by TRELLIS.2.",
+  "text_to_image_limitation_candidate": false,
+  "seed": 42,
+  "prompt_tokenization": {
+    "clip_token_count": 65,
+    "clip_token_limit": 77,
+    "clip_within_limit": true,
+    "t5_token_count": 74,
+    "t5_requested_limit": 256,
+    "t5_within_requested_limit": true
+  },
+  "model_revisions": {
+    "black-forest-labs/FLUX.1-schnell": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+  },
+  "gpu_name": {
+    "flux": "NVIDIA A100-PCIE-40GB",
+    "trellis": "NVIDIA A100-PCIE-40GB"
+  },
+  "background_removal_applied": true,
+  "timings_seconds": {
+    "flux_model_initialization": 1.9594,
+    "text_to_image": 39.2385,
+    "trellis_model_initialization": 112.6066,
+    "trellis_preprocessing": 1.7217,
+    "trellis_generation": 42.0287,
+    "glb_export": 64.9684,
+    "preview_rendering": 1.9491,
+    "trellis_case_end_to_end": 108.8215,
+    "combined_primary_end_to_end": 148.06
+  },
+  "peak_cuda_memory_bytes": {
+    "flux": 24253156864,
+    "trellis": 7895960064
+  },
+  "rendering": {
+    "mode": "pbr_shaded_procedural_neutral",
+    "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+    "envmap_loaded": false,
+    "procedural_envmap": true,
+    "procedural_envmap_shape": [
+      256,
+      512,
+      3
+    ],
+    "procedural_envmap_value_range": [
+      0.20899999141693115,
+      3.411217212677002
+    ],
+    "warning": "OpenCV returned None while reading the EXR file."
+  },
+  "output_files": {
+    "intermediate": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/flux/intermediate.png",
+      "size_bytes": 722490,
+      "sha256": "d54d439a0749d34f11df23761a35e8c9b5f1419c4730e1b639620f6b828852db"
+    },
+    "asset_glb": {
+      "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/asset.glb",
+      "size_bytes": 20281160,
+      "sha256": "371c292b2fb4c70b515ef2c0f2dada1d5612d63069cc10fcafebf3132c834016"
+    },
+    "rendered_views": [
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_00.png",
+        "size_bytes": 142222,
+        "sha256": "10836fd0b625f44ea8edf13420e4b0c209ba6f6f3f4b1d5829084852c8a66573"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_01.png",
+        "size_bytes": 114254,
+        "sha256": "b74a738f70fb87e5189a5a062c091a30ea4833d968ca585f28bb1ecb05d6ff33"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_02.png",
+        "size_bytes": 148054,
+        "sha256": "f26d0b5ddd42b250e0b038ef214b8dc202f55da5b15e47a574fa688368f102c0"
+      },
+      {
+        "path": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/view_03.png",
+        "size_bytes": 121093,
+        "sha256": "1c2ae533f1b50d16db92eb33939b9692179d431824149e24a2dd210dfeeab75c"
+      }
+    ],
+    "flux_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/flux/metadata.json",
+    "trellis_metadata": "/home/h/hongshan/cp4281-as2/outputs/step3/text_conditioned/batch-855432/txt03_perfume_bottle/trellis/metadata.json"
+  }
+}
