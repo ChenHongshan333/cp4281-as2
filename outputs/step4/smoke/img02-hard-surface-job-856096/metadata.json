@@ -1,0 +1,504 @@
+{
+  "schema_version": 1,
+  "stage": "Step 4 - Visualise the diffusion process",
+  "status": "completed",
+  "case_id": "img02_hard_surface",
+  "started_at": "2026-09-17T19:24:07+08:00",
+  "source_input": "/home/h/hongshan/cp4281-as2/inputs/step3/image_conditioned/img02_hard_surface/white_car.JPG",
+  "source_sha256": "6856e821856b00ec47360a0c7c924280dc63ed95753af89b1ac80960cb6505fc",
+  "source_provenance": "Original photograph captured on location by the author.",
+  "challenge": "hard surfaces",
+  "selection_rationale": "Use a complete three-quarter view of a car to evaluate smooth hard surfaces, bilateral structure, wheels, windows, and small mechanical details.",
+  "seed": 42,
+  "pipeline_type": "1024_cascade",
+  "model_revisions": {
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+  },
+  "trellis_source_revision": "75fbf0183001ed9876c8dbb35de6b68552ee08bd",
+  "capture_policy": {
+    "captured_value": "pred_x_t (the post-update x_{t_prev})",
+    "stage1": {
+      "steps": 24,
+      "rescale_t": 5.0,
+      "target_range": [
+        0.5,
+        0.0
+      ],
+      "selection_targets": [
+        0.5,
+        0.375,
+        0.25,
+        0.125,
+        0.0
+      ]
+    },
+    "stage2": {
+      "steps": 12,
+      "rescale_t": 3.0,
+      "target_range": [
+        1.0,
+        0.0
+      ],
+      "selection_targets": [
+        1.0,
+        0.75,
+        0.5,
+        0.25,
+        0.0
+      ],
+      "formal_render_invocation": "shape_slat_flow_model_1024"
+    },
+    "note": "Stage 1 uses 24 rather than 12 Euler steps, so this Step 4 rerun is deterministic but is not claimed to be byte-identical to the accepted Step 3 asset."
+  },
+  "runtime": {
+    "hostname": "xgph0",
+    "slurm_job_id": "856096",
+    "python": "3.10.21",
+    "torch": "2.6.0+cu124",
+    "torch_cuda": "12.4",
+    "gpu_name": "NVIDIA A100 80GB PCIe"
+  },
+  "timings_seconds": {
+    "model_initialization": 117.2381,
+    "preprocessing": 5.458,
+    "generation_and_capture": 43.1112,
+    "save_captured_states": 0.165,
+    "stage1_decode_and_render": 0.1887,
+    "stage2_decode_and_render": 2.3562
+  },
+  "compatibility_patches": [
+    {
+      "name": "dinov3_transformers5_layer_path",
+      "applied": true,
+      "layer_path": "model.layer",
+      "layer_count": 24,
+      "upstream_reference": "microsoft/TRELLIS.2 pull request 156 and commit 3f4faad"
+    }
+  ],
+  "peak_cuda_memory_bytes": 3471427072,
+  "final_mesh": {
+    "vertices": 2298099,
+    "faces": 4648428,
+    "shape_resolution": 1024,
+    "render_mode": "pbr_shaded_procedural_neutral"
+  },
+  "finished_at": "2026-09-17T19:27:09+08:00",
+  "inputs": {
+    "original": "input.png",
+    "preprocessed": "preprocessed.png"
+  },
+  "final_render": {
+    "path": "final_render.png",
+    "size_bytes": 60696,
+    "sha256": "a288b3deec9422bee65ab1abb2dd7284c42968753d2ac0a3fdbd3dffdebe0103"
+  },
+  "captures": {
+    "stage1": {
+      "stage": "stage1_sparse_structure",
+      "invocation_index": 0,
+      "model_label": "sparse_structure_flow_model",
+      "steps": 24,
+      "rescale_t": 5.0,
+      "returned_timesteps": [
+        0.9913793103448275,
+        0.9821428571428572,
+        0.9722222222222222,
+        0.9615384615384615,
+        0.9500000000000001,
+        0.9375,
+        0.9239130434782608,
+        0.9090909090909092,
+        0.8928571428571429,
+        0.8749999999999999,
+        0.855263157894737,
+        0.8333333333333334,
+        0.8088235294117647,
+        0.7812499999999999,
+        0.75,
+        0.7142857142857144,
+        0.673076923076923,
+        0.625,
+        0.5681818181818183,
+        0.49999999999999994,
+        0.4166666666666667,
+        0.3125000000000001,
+        0.17857142857142844,
+        0.0
+      ],
+      "selected_states": [
+        {
+          "position": 0,
+          "state_index": 19,
+          "timestep": 0.49999999999999994,
+          "target_timestep": 0.5,
+          "path": "stage1/states/state_00_t0.500000.pt",
+          "size_bytes": 132642,
+          "sha256": "061deca5602ed715e2eae4c3bd8ad4108b61b1260725b2bc517a17caf5a33ab8"
+        },
+        {
+          "position": 1,
+          "state_index": 20,
+          "timestep": 0.4166666666666667,
+          "target_timestep": 0.375,
+          "path": "stage1/states/state_01_t0.416667.pt",
+          "size_bytes": 132642,
+          "sha256": "01db9697d9d15f13d7c0065f8c07367b7b416d3e1fe363947b135947d8cd3411"
+        },
+        {
+          "position": 2,
+          "state_index": 21,
+          "timestep": 0.3125000000000001,
+          "target_timestep": 0.25,
+          "path": "stage1/states/state_02_t0.312500.pt",
+          "size_bytes": 132642,
+          "sha256": "80a5b8415364a03a73d46c242ec22a8eb933defdaffd75662c8d38e6f02d967e"
+        },
+        {
+          "position": 3,
+          "state_index": 22,
+          "timestep": 0.17857142857142844,
+          "target_timestep": 0.125,
+          "path": "stage1/states/state_03_t0.178571.pt",
+          "size_bytes": 132642,
+          "sha256": "009df823324dda07f7530d3e1d9b6fdc555b155f70bad328da6aacf863f98099"
+        },
+        {
+          "position": 4,
+          "state_index": 23,
+          "timestep": 0.0,
+          "target_timestep": 0.0,
+          "path": "stage1/states/state_04_t0.000000.pt",
+          "size_bytes": 132642,
+          "sha256": "a48b90f22754ed8206807da04c6571c9cd6c90a4d825f77e319aad465ebf10f0"
+        }
+      ]
+    },
+    "stage2_low_resolution_evidence": {
+      "stage": "stage2_shape_slat",
+      "invocation_index": 0,
+      "model_label": "shape_slat_flow_model_512",
+      "steps": 12,
+      "rescale_t": 3.0,
+      "returned_timesteps": [
+        0.9705882352941178,
+        0.9374999999999999,
+        0.9,
+        0.8571428571428571,
+        0.8076923076923076,
+        0.75,
+        0.6818181818181819,
+        0.6,
+        0.5,
+        0.37499999999999994,
+        0.21428571428571436,
+        0.0
+      ],
+      "selected_states": [
+        {
+          "position": 0,
+          "state_index": 0,
+          "timestep": 0.9705882352941178,
+          "target_timestep": 1.0,
+          "path": "stage2_lr/states/state_00_t0.970588.pt",
+          "size_bytes": 290988,
+          "sha256": "bac2d15836436dd9c307f0719867458e4dc06ce82e1cdf91437188b81d283962"
+        },
+        {
+          "position": 1,
+          "state_index": 5,
+          "timestep": 0.75,
+          "target_timestep": 0.75,
+          "path": "stage2_lr/states/state_01_t0.750000.pt",
+          "size_bytes": 290988,
+          "sha256": "d85f783f4f8ccae4d20325706252d19d6f949977046abb5118a9ef86801ec864"
+        },
+        {
+          "position": 2,
+          "state_index": 8,
+          "timestep": 0.5,
+          "target_timestep": 0.5,
+          "path": "stage2_lr/states/state_02_t0.500000.pt",
+          "size_bytes": 290988,
+          "sha256": "37c4c20ba5da85e7a44cb27ed7cd1ec0395372eda608c15c0eaa243ecd055574"
+        },
+        {
+          "position": 3,
+          "state_index": 10,
+          "timestep": 0.21428571428571436,
+          "target_timestep": 0.25,
+          "path": "stage2_lr/states/state_03_t0.214286.pt",
+          "size_bytes": 290988,
+          "sha256": "400d99201e3e83432fdf39853f925109034979620723fd6ca0d6374ec50e012c"
+        },
+        {
+          "position": 4,
+          "state_index": 11,
+          "timestep": 0.0,
+          "target_timestep": 0.0,
+          "path": "stage2_lr/states/state_04_t0.000000.pt",
+          "size_bytes": 290988,
+          "sha256": "c70bdd87a3ea231f3b99800f8c5d91091e2e6660138e782bb928510795ef4e1d"
+        }
+      ]
+    },
+    "stage2_formal_high_resolution": {
+      "stage": "stage2_shape_slat",
+      "invocation_index": 1,
+      "model_label": "shape_slat_flow_model_1024",
+      "steps": 12,
+      "rescale_t": 3.0,
+      "returned_timesteps": [
+        0.9705882352941178,
+        0.9374999999999999,
+        0.9,
+        0.8571428571428571,
+        0.8076923076923076,
+        0.75,
+        0.6818181818181819,
+        0.6,
+        0.5,
+        0.37499999999999994,
+        0.21428571428571436,
+        0.0
+      ],
+      "selected_states": [
+        {
+          "position": 0,
+          "state_index": 0,
+          "timestep": 0.9705882352941178,
+          "target_timestep": 1.0,
+          "path": "stage2/states/state_00_t0.970588.pt",
+          "size_bytes": 1229548,
+          "sha256": "b38f444d9ecf9b66594c4fc1c2bb8dad812bdaa4e3726ab6ecc528b9f2768bd5"
+        },
+        {
+          "position": 1,
+          "state_index": 5,
+          "timestep": 0.75,
+          "target_timestep": 0.75,
+          "path": "stage2/states/state_01_t0.750000.pt",
+          "size_bytes": 1229548,
+          "sha256": "e3c7466c0231b8af5f9891b8938ff8ad5ff52e26bf87f160e7a2b0ee8d8df48a"
+        },
+        {
+          "position": 2,
+          "state_index": 8,
+          "timestep": 0.5,
+          "target_timestep": 0.5,
+          "path": "stage2/states/state_02_t0.500000.pt",
+          "size_bytes": 1229548,
+          "sha256": "7bc69af10d37bc8886ea75c5f3a3d40fc7f5cafaf5e89d930c3f6a6261a7c49e"
+        },
+        {
+          "position": 3,
+          "state_index": 10,
+          "timestep": 0.21428571428571436,
+          "target_timestep": 0.25,
+          "path": "stage2/states/state_03_t0.214286.pt",
+          "size_bytes": 1229548,
+          "sha256": "6dd13315ab3cfc5e8dc2cb86684e223103d04d9cd38684d9ec2e87c6ddc51aa9"
+        },
+        {
+          "position": 4,
+          "state_index": 11,
+          "timestep": 0.0,
+          "target_timestep": 0.0,
+          "path": "stage2/states/state_04_t0.000000.pt",
+          "size_bytes": 1229548,
+          "sha256": "3bdb0121377633a30093bf7759666530b5554c73f734c16cad01eaf8eb6e5c6c"
+        }
+      ]
+    }
+  },
+  "rendered_frames": {
+    "stage1": [
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 19,
+        "timestep": 0.49999999999999994,
+        "measurement": {
+          "occupied_voxels": 51,
+          "occupancy_fraction": 0.001556396484375,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 0,
+        "path": "stage1/frames/frame_00_t0.500000.png",
+        "size_bytes": 3689,
+        "sha256": "d29f3020cff421ad0ad96758263e00c24f4a477b9ec3b7bac7feb860bdc10739"
+      },
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 20,
+        "timestep": 0.4166666666666667,
+        "measurement": {
+          "occupied_voxels": 206,
+          "occupancy_fraction": 0.00628662109375,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 1,
+        "path": "stage1/frames/frame_01_t0.416667.png",
+        "size_bytes": 9486,
+        "sha256": "bae2594bde52e97650bd72e6796bb2f3d43402eaf74849b941d37ccf7eef9917"
+      },
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 21,
+        "timestep": 0.3125000000000001,
+        "measurement": {
+          "occupied_voxels": 1130,
+          "occupancy_fraction": 0.03448486328125,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 2,
+        "path": "stage1/frames/frame_02_t0.312500.png",
+        "size_bytes": 22532,
+        "sha256": "57278c1fd9cd1c52185bf215a23a751009c9c011dd37ea601c275e1901237744"
+      },
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 22,
+        "timestep": 0.17857142857142844,
+        "measurement": {
+          "occupied_voxels": 1953,
+          "occupancy_fraction": 0.059600830078125,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 3,
+        "path": "stage1/frames/frame_03_t0.178571.png",
+        "size_bytes": 18846,
+        "sha256": "5d3b1f7e51483523fae8b5a2062d9fe61044ba8dca627df28e96691e70fd992a"
+      },
+      {
+        "stage": "stage1_sparse_structure",
+        "invocation_index": 0,
+        "model_label": "sparse_structure_flow_model",
+        "state_index": 23,
+        "timestep": 0.0,
+        "measurement": {
+          "occupied_voxels": 2008,
+          "occupancy_fraction": 0.061279296875,
+          "structure_resolution": 32
+        },
+        "render_mode": "occupancy_voxel_color",
+        "position": 4,
+        "path": "stage1/frames/frame_04_t0.000000.png",
+        "size_bytes": 19021,
+        "sha256": "683dbfb8c5b58093c6e839dc9878a94b09672529164f958f1e907a147cf08e9c"
+      }
+    ],
+    "stage2": [
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 0,
+        "timestep": 0.9705882352941178,
+        "measurement": {
+          "vertices": 729982,
+          "faces": 886138,
+          "shape_resolution": 1024,
+          "sparse_tokens": 8526
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 0,
+        "path": "stage2/frames/frame_00_t0.970588.png",
+        "size_bytes": 96833,
+        "sha256": "5ff4a9888d8f8f0075c414513c7025cd63d28482d475bcdd55d89af69b6baa45"
+      },
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 5,
+        "timestep": 0.75,
+        "measurement": {
+          "vertices": 626920,
+          "faces": 735758,
+          "shape_resolution": 1024,
+          "sparse_tokens": 8526
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 1,
+        "path": "stage2/frames/frame_01_t0.750000.png",
+        "size_bytes": 90357,
+        "sha256": "767a5bc26e9013099a32db1caae2682818684a3c0e7c6319183a1ac2c2a94c2a"
+      },
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 8,
+        "timestep": 0.5,
+        "measurement": {
+          "vertices": 1012656,
+          "faces": 1522188,
+          "shape_resolution": 1024,
+          "sparse_tokens": 8526
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 2,
+        "path": "stage2/frames/frame_02_t0.500000.png",
+        "size_bytes": 97321,
+        "sha256": "1492accf687382f18d836f815b1faefae9a6936c5f38e6b7a75cd0ad4f3566d7"
+      },
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 10,
+        "timestep": 0.21428571428571436,
+        "measurement": {
+          "vertices": 2171403,
+          "faces": 4182392,
+          "shape_resolution": 1024,
+          "sparse_tokens": 8526
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 3,
+        "path": "stage2/frames/frame_03_t0.214286.png",
+        "size_bytes": 81437,
+        "sha256": "2b83f65e53799cb889490394e8c3aa042abd35c8055d7e607b65acb65f1ab395"
+      },
+      {
+        "stage": "stage2_shape_slat",
+        "invocation_index": 1,
+        "model_label": "shape_slat_flow_model_1024",
+        "state_index": 11,
+        "timestep": 0.0,
+        "measurement": {
+          "vertices": 2295416,
+          "faces": 4631952,
+          "shape_resolution": 1024,
+          "sparse_tokens": 8526
+        },
+        "render_mode": "mesh_surface_normals",
+        "position": 4,
+        "path": "stage2/frames/frame_04_t0.000000.png",
+        "size_bytes": 59864,
+        "sha256": "bf5acb408fae2639b537a43257da532becb40901037ee376633c2a9125594674"
+      }
+    ]
+  },
+  "acceptance": {
+    "stage1_frame_count": 5,
+    "stage2_frame_count": 5,
+    "all_true_timesteps_recorded": true,
+    "formal_stage2_is_high_resolution_pass": true,
+    "labelled_strips_created": false
+  }
+}
