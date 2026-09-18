@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "stage": "Optional extension - higher-resolution generation",
+  "status": "ready",
+  "hypothesis": "Compared with the controlled 1024_cascade baseline, 1536_cascade will use a smaller voxel size and may preserve repeated shelf boundaries and recesses more clearly, at the cost of additional generation time and peak CUDA memory.",
+  "baseline": {
+    "pipeline_type": "1024_cascade",
+    "output": "outputs/step3/image_conditioned/batch-853514/img05_complex_shape",
+    "metadata": "outputs/step3/image_conditioned/batch-853514/img05_complex_shape/metadata.json"
+  },
+  "experimental_pipeline_type": "1536_cascade",
+  "controlled_variables": {
+    "seed": 42,
+    "sparse_structure_steps": 12,
+    "shape_slat_steps": 12,
+    "texture_slat_steps": 12,
+    "decimation_target": 500000,
+    "texture_size": 2048,
+    "render_resolution": 768,
+    "render_views": 4
+  },
+  "image_conditioned_cases": [
+    {
+      "case_id": "img05_complex_shape",
+      "status": "ready",
+      "source_input": "inputs/step3/image_conditioned/img05_complex_shape/bookshelf.JPG",
+      "source_sha256": "598578420aad664d8a66a8f0a37c5c9ce3ef8d46f85dc8d75df7221eb4811358",
+      "source_provenance": "Original photograph captured on location by the author.",
+      "source_image": {
+        "format": "JPEG",
+        "stored_width": 5712,
+        "stored_height": 4284,
+        "exif_orientation": 6,
+        "has_alpha": false
+      },
+      "challenge": "concavities and repeated compartments",
+      "selection_rationale": "Use a freestanding bookshelf to evaluate whether 1536_cascade preserves repeated recesses, planar surfaces, thin shelves, asymmetry, and hidden interior structure more clearly than the controlled 1024_cascade baseline.",
+      "step4_candidate": true
+    }
+  ]
+}

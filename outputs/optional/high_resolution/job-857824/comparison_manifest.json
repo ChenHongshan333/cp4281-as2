@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "stage": "Optional extension - higher-resolution generation",
+  "status": "completed_pending_visual_qa",
+  "created_at": "2026-09-18T10:12:58+08:00",
+  "slurm_job_id": "857824",
+  "case_id": "img05_complex_shape",
+  "controlled_variables": {
+    "source_sha256": "598578420aad664d8a66a8f0a37c5c9ce3ef8d46f85dc8d75df7221eb4811358",
+    "seed": 42,
+    "generation_parameters_except_pipeline_type": {
+      "sparse_structure_sampler": {
+        "steps": 12,
+        "guidance_strength": 7.5,
+        "guidance_rescale": 0.7,
+        "guidance_interval": [
+          0.6,
+          1.0
+        ],
+        "rescale_t": 5.0
+      },
+      "shape_slat_sampler": {
+        "steps": 12,
+        "guidance_strength": 7.5,
+        "guidance_rescale": 0.5,
+        "guidance_interval": [
+          0.6,
+          1.0
+        ],
+        "rescale_t": 3.0
+      },
+      "texture_slat_sampler": {
+        "steps": 12,
+        "guidance_strength": 1.0,
+        "guidance_rescale": 0.0,
+        "guidance_interval": [
+          0.6,
+          0.9
+        ],
+        "rescale_t": 3.0
+      },
+      "decimation_target": 500000,
+      "texture_size": 2048,
+      "render_resolution": 768,
+      "render_views": 4
+    }
+  },
+  "baseline": {
+    "pipeline_type": "1024_cascade",
+    "trellis_generation_seconds": 61.5257,
+    "glb_export_seconds": 47.5584,
+    "per_case_end_to_end_seconds": 111.1562,
+    "peak_cuda_memory_bytes": 6970343424,
+    "mesh": {
+      "vertices": 5620620,
+      "faces": 11429892,
+      "voxel_size": 0.0009765625
+    }
+  },
+  "high_resolution": {
+    "pipeline_type": "1536_cascade",
+    "trellis_generation_seconds": 101.1527,
+    "glb_export_seconds": 45.5872,
+    "per_case_end_to_end_seconds": 149.6901,
+    "peak_cuda_memory_bytes": 15251746816,
+    "mesh": {
+      "vertices": 8092547,
+      "faces": 16344616,
+      "voxel_size": 0.0006510416666666666
+    }
+  },
+  "ratios_highres_over_baseline": {
+    "trellis_generation_time": 1.6440723144962186,
+    "peak_cuda_memory": 2.188091158247069,
+    "vertices": 1.4397961434859499,
+    "faces": 1.4299886648097813,
+    "voxel_size": 0.6666666666666666
+  },
+  "high_resolution_artifacts": {
+    "asset.glb": {
+      "size_bytes": 16961400,
+      "sha256": "c22b4531da1292a116aea29c6124cc72c354fcaa2fce75e428efafdf571d2382"
+    },
+    "metadata.json": {
+      "size_bytes": 4527,
+      "sha256": "85d9d362c6518dc4d91a699a3e30904c73943229c125215d08e441dfbbd0b7de"
+    },
+    "preprocessed.png": {
+      "size_bytes": 339605,
+      "sha256": "e6832464aede13d6276cbf6447116fb3f19d4fdefff21d8d8a92fa9d81f7f06e"
+    },
+    "view_00.png": {
+      "size_bytes": 179921,
+      "sha256": "6eaf0ff6f020bc17a472be5495be89e19b56b0b32e18c444b97a2c636e1d71a8"
+    },
+    "view_01.png": {
+      "size_bytes": 185715,
+      "sha256": "20f539a6b2d91ccde9790c05252faa15c853c302b2209600231ce408137d8b37"
+    },
+    "view_02.png": {
+      "size_bytes": 187463,
+      "sha256": "6e3b55f3d82debcef0f6ce01b95a996929fda82112641644349fa0fd78c247ce"
+    },
+    "view_03.png": {
+      "size_bytes": 175087,
+      "sha256": "3301fdc1b7f5b499827bd64dcad7e936f53a1a591b86e201b550026e1a82df8d"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "stage": "Optional extension - comparison figures",
+  "status": "completed",
+  "created_at": "2026-09-18T10:43:10+08:00",
+  "case_id": "img05_complex_shape",
+  "source_sha256": "598578420aad664d8a66a8f0a37c5c9ce3ef8d46f85dc8d75df7221eb4811358",
+  "seed": 42,
+  "source_images": {
+    "1024_cascade": {
+      "view_00.png": {
+        "path": "D:\\NUS CS\\Y3 S1\\CP4281\\assignments\\as2\\assignment2\\outputs\\step3\\image_conditioned\\batch-853514\\img05_complex_shape\\view_00.png",
+        "sha256": "3e6ee798d1f4f4fbe99e3c8584cb36917034ac598cd6077b7c6d90c97c24cdeb"
+      },
+      "view_01.png": {
+        "path": "D:\\NUS CS\\Y3 S1\\CP4281\\assignments\\as2\\assignment2\\outputs\\step3\\image_conditioned\\batch-853514\\img05_complex_shape\\view_01.png",
+        "sha256": "34b2e7eeb81c44a2fa8a0516c741fc784e85c63dd41d260809acae088da77700"
+      },
+      "view_02.png": {
+        "path": "D:\\NUS CS\\Y3 S1\\CP4281\\assignments\\as2\\assignment2\\outputs\\step3\\image_conditioned\\batch-853514\\img05_complex_shape\\view_02.png",
+        "sha256": "955a5462d69f3a8249254aa252cf2a31f9541b074d5ac86cbbcec9e6f9e87978"
+      },
+      "view_03.png": {
+        "path": "D:\\NUS CS\\Y3 S1\\CP4281\\assignments\\as2\\assignment2\\outputs\\step3\\image_conditioned\\batch-853514\\img05_complex_shape\\view_03.png",
+        "sha256": "e968b7c540ef77450392c1224ef19da88be6a45cdaf82870aadf2910c00f5ee0"
+      }
+    },
+    "1536_cascade": {
+      "view_00.png": {
+        "path": "D:\\NUS CS\\Y3 S1\\CP4281\\assignments\\as2\\assignment2\\outputs\\optional\\high_resolution\\job-857824\\img05_complex_shape_1536\\view_00.png",
+        "sha256": "6eaf0ff6f020bc17a472be5495be89e19b56b0b32e18c444b97a2c636e1d71a8"
+      },
+      "view_01.png": {
+        "path": "D:\\NUS CS\\Y3 S1\\CP4281\\assignments\\as2\\assignment2\\outputs\\optional\\high_resolution\\job-857824\\img05_complex_shape_1536\\view_01.png",
+        "sha256": "20f539a6b2d91ccde9790c05252faa15c853c302b2209600231ce408137d8b37"
+      },
+      "view_02.png": {
+        "path": "D:\\NUS CS\\Y3 S1\\CP4281\\assignments\\as2\\assignment2\\outputs\\optional\\high_resolution\\job-857824\\img05_complex_shape_1536\\view_02.png",
+        "sha256": "6e3b55f3d82debcef0f6ce01b95a996929fda82112641644349fa0fd78c247ce"
+      },
+      "view_03.png": {
+        "path": "D:\\NUS CS\\Y3 S1\\CP4281\\assignments\\as2\\assignment2\\outputs\\optional\\high_resolution\\job-857824\\img05_complex_shape_1536\\view_03.png",
+        "sha256": "3301fdc1b7f5b499827bd64dcad7e936f53a1a591b86e201b550026e1a82df8d"
+      }
+    }
+  },
+  "operations": [
+    "RGB conversion",
+    "Lanczos downsampling for the overview",
+    "identical pixel-coordinate crops for each resolution",
+    "Lanczos resizing of detail crops",
+    "labels and coloured borders"
+  ],
+  "detail_crop_boxes_xyxy": {
+    "repeated shelves (view 02)": [
+      220,
+      95,
+      550,
+      690
+    ],
+    "panel seams (view 03)": [
+      220,
+      95,
+      550,
+      690
+    ]
+  },
+  "outputs": {
+    "comparison_all_views.png": {
+      "size_bytes": 407314,
+      "sha256": "241b3912ee4833f6c654bd80c02c61687901ccff7e67733a0f1e0ffe503ff97a"
+    },
+    "comparison_detail_crops.png": {
+      "size_bytes": 919704,
+      "sha256": "714809093885da94383c82d72ee2b6fa9ff4a4fd542bfb6a93c676de6d4fffd3"
+    }
+  }
+}

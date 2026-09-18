@@ -6,7 +6,7 @@ This project deploys `microsoft/TRELLIS.2-4B` on an NVIDIA GPU and uses it to ge
 
 The project also investigates the model's two-stage flow-matching process by extracting, decoding, and rendering intermediate sampler states. Finally, generated assets are assembled into a composed 3D scene.
 
-Current progress: **Steps 1–5 complete — final report packaging remains.**
+Current progress: **Steps 1–5 and the optional extension complete — final PDF packaging remains.**
 
 ## Table of Contents
 
@@ -18,6 +18,7 @@ Current progress: **Steps 1–5 complete — final report packaging remains.**
   - [Step 3 Acceptance Audit](#step-3-acceptance-audit)
 - [Step 4 — Visualise the Diffusion Process](#step-4--visualise-the-diffusion-process)
 - [Step 5 — Composite a Scene](#step-5--composite-a-scene)
+- [Optional Extension — Higher-Resolution Generation](#optional-extension--higher-resolution-generation)
 - [Submission Checklist](#submission-checklist)
 
 ## Step 1 — Download Model Weights
@@ -453,6 +454,42 @@ Adaptive Maker Garage was designed as a compact mixed-use interior, with a vehic
 
 The final scene SHA-256 is `1600e5c535149d1e3810a1915dbb35897e9e14a4c23d078cf80d7b4578d48cdb`; the rendered-view SHA-256 is `c71f79f7ffb8e4e34f5f21c96218512a026833089601a39443e3760d33d69dfa`.
 
+## Optional Extension — Higher-Resolution Generation
+
+### Objective and Experimental Design
+
+The higher-resolution extension tests whether increasing TRELLIS.2 from `1024_cascade` to `1536_cascade` produces a visible improvement rather than merely a larger mesh. The bookshelf case was selected because its repeated compartments, thin shelves, planar panels, and recessed openings make changes in geometric regularity easy to inspect.
+
+The accepted Step 3a `1024_cascade` output is the baseline. A new `1536_cascade` result was generated from the same source photograph with the same SHA-256, seed `42`, 12 steps in each of the three samplers, guidance settings, 500,000-triangle export target, 2,048-pixel texture, four fixed 768-pixel views, and preprocessing path. Pipeline resolution was the only generation parameter changed. The declarative hypothesis and controlled variables are stored in [`inputs/optional/high_resolution_spec.json`](inputs/optional/high_resolution_spec.json).
+
+[`scripts/optional_highres.sbatch`](scripts/optional_highres.sbatch) verifies every model revision and input hash, runs the 1536 pipeline offline, checks all artifacts, and writes [`comparison_manifest.json`](outputs/optional/high_resolution/job-857824/comparison_manifest.json). The accepted run was Slurm job `857824` on node `xgph0` with an NVIDIA A100 80 GB PCIe GPU. [`scripts/optional_make_comparison.py`](scripts/optional_make_comparison.py) then verifies the matching metadata and source image hashes before assembling the labelled figures. It uses only RGB conversion, identical crop coordinates, Lanczos resizing, labels, and borders; the source renders are not generated or retouched.
+
+### Cost and Geometry
+
+| Metric | `1024_cascade` baseline | `1536_cascade` | 1536 / 1024 |
+|---|---:|---:|---:|
+| TRELLIS generation time | 61.5257 s | 101.1527 s | 1.644x |
+| GLB export time | 47.5584 s | 45.5872 s | 0.959x |
+| Per-case end-to-end time | 111.1562 s | 149.6901 s | 1.347x |
+| Peak CUDA memory allocated | 6.49 GiB | 14.20 GiB | 2.188x |
+| Working-mesh vertices | 5,620,620 | 8,092,547 | 1.440x |
+| Working-mesh faces | 11,429,892 | 16,344,616 | 1.430x |
+| Voxel size | 0.0009765625 | 0.0006510417 | 0.667x |
+
+The 1536 run reduced voxel size by one third, increased working-mesh vertices by 44.0% and faces by 43.0%, but required 64.4% more TRELLIS generation time and 118.8% more peak CUDA allocation. The baseline was generated on an A100 40 GB job and the 1536 case on an A100 80 GB job, so the observed timing ratio records practical cost but is not presented as a strict same-node hardware benchmark. The allocation and geometry measurements remain directly comparable because both were recorded by the same generation script around the corresponding pipeline run.
+
+### Matched Visual Comparison
+
+![Four matched views comparing 1024 and 1536 generation](outputs/optional/high_resolution/job-857824/figures/comparison_all_views.png)
+
+![Matched detail crops of repeated shelves and panel seams](outputs/optional/high_resolution/job-857824/figures/comparison_detail_crops.png)
+
+The higher-resolution result shows straighter shelf edges, more continuous vertical dividers, and more regular spacing between repeated recesses. On the panel-dominant view, 1536 preserves a clearer central seam and a more complete sequence of horizontal slots, while the 1024 result merges or drops several of them. These changes agree with the smaller voxel size and denser working mesh.
+
+The improvement is specifically geometric, not universal. Book covers, small top labels, and text remain unreadable, and some textures are noisier in the 1536 result. Higher resolution also represents the model's guesses on unseen faces more sharply; it cannot recover information absent from the single input photograph. The supported conclusion is therefore that higher resolution improves the regularity and separation of repeated structural elements, but does not improve semantic texture fidelity or resolve ambiguity in occluded surfaces.
+
+The resulting high-resolution asset is stored as [`asset.glb`](outputs/optional/high_resolution/job-857824/img05_complex_shape_1536/asset.glb), with four rendered views and complete [`metadata.json`](outputs/optional/high_resolution/job-857824/img05_complex_shape_1536/metadata.json). Its GLB SHA-256 is `c22b4531da1292a116aea29c6124cc72c354fcaa2fce75e428efafdf571d2382`.
+
 ## Submission Checklist
 
 ### Report
@@ -470,7 +507,7 @@ The final scene SHA-256 is `1600e5c535149d1e3810a1915dbb35897e9e14a4c23d078cf80d
 - [x] Step 4: explain both sampling locations, captured `x_t`, timestep schedules, and the separate decoding method used for each latent space
 - [x] Step 5: describe the scene concept, assembly tool, asset selection, scale, orientation, placement, and surface contact
 - [x] Step 5: include at least one rendered scene view
-- [ ] Optional: document either higher-resolution generation or a production-quality creative scene, if attempted
+- [x] Optional: document higher-resolution generation, its time and memory cost, and what visibly improved
 
 ### Files
 

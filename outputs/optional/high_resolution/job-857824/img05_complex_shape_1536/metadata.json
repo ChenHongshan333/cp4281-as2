@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "case_id": "img05_complex_shape",
+  "status": "completed",
+  "started_at": "2026-09-18T10:08:49+08:00",
+  "source_input": "/home/h/hongshan/cp4281-as2/inputs/step3/image_conditioned/img05_complex_shape/bookshelf.JPG",
+  "source_sha256": "598578420aad664d8a66a8f0a37c5c9ce3ef8d46f85dc8d75df7221eb4811358",
+  "background_removal_applied": true,
+  "seed": 42,
+  "generation_parameters": {
+    "pipeline_type": "1536_cascade",
+    "sparse_structure_sampler": {
+      "steps": 12,
+      "guidance_strength": 7.5,
+      "guidance_rescale": 0.7,
+      "guidance_interval": [
+        0.6,
+        1.0
+      ],
+      "rescale_t": 5.0
+    },
+    "shape_slat_sampler": {
+      "steps": 12,
+      "guidance_strength": 7.5,
+      "guidance_rescale": 0.5,
+      "guidance_interval": [
+        0.6,
+        1.0
+      ],
+      "rescale_t": 3.0
+    },
+    "texture_slat_sampler": {
+      "steps": 12,
+      "guidance_strength": 1.0,
+      "guidance_rescale": 0.0,
+      "guidance_interval": [
+        0.6,
+        0.9
+      ],
+      "rescale_t": 3.0
+    },
+    "decimation_target": 500000,
+    "texture_size": 2048,
+    "render_resolution": 768,
+    "render_views": 4
+  },
+  "model_revisions": {
+    "microsoft/TRELLIS.2-4B": "af44b45f2e35a493886929c6d786e563ec68364d",
+    "microsoft/TRELLIS-image-large": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+    "facebook/dinov3-vitl16-pretrain-lvd1689m": "ea8dc2863c51be0a264bab82070e3e8836b02d51",
+    "briaai/RMBG-2.0": "5df4c9c76d8170882c34f6986e848ee07fd0ba43"
+  },
+  "trellis_source_revision": "75fbf0183001ed9876c8dbb35de6b68552ee08bd",
+  "runtime": {
+    "hostname": "xgph0",
+    "slurm_job_id": "857824",
+    "python": "3.10.21",
+    "torch": "2.6.0+cu124",
+    "torch_cuda": "12.4",
+    "pillow": "12.3.0",
+    "transformers": "5.17.0",
+    "gpu_name": "NVIDIA A100 80GB PCIe"
+  },
+  "timings_seconds": {
+    "shared_model_initialization": 91.7059,
+    "preprocessing": 1.6944,
+    "trellis_generation": 101.1527,
+    "glb_export": 45.5872,
+    "per_case_end_to_end": 149.6901,
+    "preview_rendering": 5.3755
+  },
+  "output_files": {
+    "preprocessed_image": "/home/h/hongshan/cp4281-as2/outputs/optional/high_resolution/job-857824/img05_complex_shape_1536/preprocessed.png",
+    "glb": "/home/h/hongshan/cp4281-as2/outputs/optional/high_resolution/job-857824/img05_complex_shape_1536/asset.glb",
+    "render_key": "shaded",
+    "rendered_views": [
+      "/home/h/hongshan/cp4281-as2/outputs/optional/high_resolution/job-857824/img05_complex_shape_1536/view_00.png",
+      "/home/h/hongshan/cp4281-as2/outputs/optional/high_resolution/job-857824/img05_complex_shape_1536/view_01.png",
+      "/home/h/hongshan/cp4281-as2/outputs/optional/high_resolution/job-857824/img05_complex_shape_1536/view_02.png",
+      "/home/h/hongshan/cp4281-as2/outputs/optional/high_resolution/job-857824/img05_complex_shape_1536/view_03.png"
+    ]
+  },
+  "experiment_spec": {
+    "path": "/home/h/hongshan/cp4281-as2/inputs/optional/high_resolution_spec.json",
+    "schema_version": 1
+  },
+  "source_provenance": "Original photograph captured on location by the author.",
+  "challenge": "concavities and repeated compartments",
+  "selection_rationale": "Use a freestanding bookshelf to evaluate whether 1536_cascade preserves repeated recesses, planar surfaces, thin shelves, asymmetry, and hidden interior structure more clearly than the controlled 1024_cascade baseline.",
+  "step4_candidate": true,
+  "compatibility_patches": [
+    {
+      "name": "dinov3_transformers5_layer_path",
+      "applied": true,
+      "layer_path": "model.layer",
+      "layer_count": 24,
+      "upstream_reference": "microsoft/TRELLIS.2 pull request 156 and commit 3f4faad"
+    }
+  ],
+  "source_image": {
+    "stored_size": [
+      5712,
+      4284
+    ],
+    "oriented_size": [
+      4284,
+      5712
+    ],
+    "mode": "RGB",
+    "exif_orientation": 6
+  },
+  "peak_cuda_memory_bytes": 15251746816,
+  "rendering": {
+    "mode": "pbr_shaded_procedural_neutral",
+    "requested_envmap": "/home/h/hongshan/cp4281-as2/src/TRELLIS.2/assets/hdri/forest.exr",
+    "envmap_loaded": false,
+    "procedural_envmap": true,
+    "procedural_envmap_shape": [
+      256,
+      512,
+      3
+    ],
+    "procedural_envmap_value_range": [
+      0.20899999141693115,
+      3.411217212677002
+    ],
+    "warning": "OpenCV returned None while reading the EXR file."
+  },
+  "mesh": {
+    "vertices": 8092547,
+    "faces": 16344616,
+    "voxel_size": 0.0006510416666666666
+  },
+  "finished_at": "2026-09-18T10:12:56+08:00"
+}
