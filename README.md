@@ -6,20 +6,56 @@ This project deploys `microsoft/TRELLIS.2-4B` on an NVIDIA GPU and uses it to ge
 
 The project also investigates the model's two-stage flow-matching process by extracting, decoding, and rendering intermediate sampler states. Finally, generated assets are assembled into a composed 3D scene.
 
-Current progress: **Steps 1–5 and the optional extension complete — final PDF packaging remains.**
 
 ## Table of Contents
 
-- [Step 1 — Download Model Weights](#step-1--download-model-weights)
-- [Step 2 — Build the Environment](#step-2--build-the-environment)
-- [Step 3 — Deploy and Generate](#step-3--deploy-and-generate)
-  - [Step 3a — Image-Conditioned Generation](#step-3a--image-conditioned-generation)
-  - [Step 3b — Text-Conditioned Generation](#step-3b--text-conditioned-generation)
-  - [Step 3 Acceptance Audit](#step-3-acceptance-audit)
-- [Step 4 — Visualise the Diffusion Process](#step-4--visualise-the-diffusion-process)
-- [Step 5 — Composite a Scene](#step-5--composite-a-scene)
-- [Optional Extension — Higher-Resolution Generation](#optional-extension--higher-resolution-generation)
-- [Submission Checklist](#submission-checklist)
+- [TRELLIS.2 Conditional 3D Generation](#trellis2-conditional-3d-generation)
+  - [Overview](#overview)
+  - [Table of Contents](#table-of-contents)
+  - [Step 1 — Download Model Weights](#step-1--download-model-weights)
+    - [Objective](#objective)
+    - [Implementation](#implementation)
+    - [Results](#results)
+    - [Cluster Artifacts](#cluster-artifacts)
+  - [Step 2 — Build the Environment](#step-2--build-the-environment)
+    - [Objective](#objective-1)
+    - [Implementation](#implementation-1)
+    - [Results](#results-1)
+  - [Step 3 — Deploy and Generate](#step-3--deploy-and-generate)
+    - [Step 3a — Image-Conditioned Generation](#step-3a--image-conditioned-generation)
+      - [Objective](#objective-2)
+      - [Implementation](#implementation-2)
+      - [Results](#results-2)
+    - [Step 3b — Text-Conditioned Generation](#step-3b--text-conditioned-generation)
+      - [Objective](#objective-3)
+      - [Implementation](#implementation-3)
+      - [Results](#results-3)
+    - [Step 3 Acceptance Audit](#step-3-acceptance-audit)
+  - [Step 4 — Visualise the Diffusion Process](#step-4--visualise-the-diffusion-process)
+    - [Objective](#objective-4)
+    - [Sampler Capture Method](#sampler-capture-method)
+    - [Decoding and Rendering](#decoding-and-rendering)
+    - [Inputs and Final Assets](#inputs-and-final-assets)
+    - [Diffusion Strips](#diffusion-strips)
+      - [White hatchback](#white-hatchback)
+      - [Yellow armchair](#yellow-armchair)
+      - [Bookshelf](#bookshelf)
+    - [Results and Observations](#results-and-observations)
+  - [Step 5 — Composite a Scene](#step-5--composite-a-scene)
+    - [Objective](#objective-5)
+    - [Asset Selection and Placement](#asset-selection-and-placement)
+    - [Assembly and Rendering](#assembly-and-rendering)
+    - [Rendered View](#rendered-view)
+    - [Required Scene Summary](#required-scene-summary)
+    - [Results](#results-4)
+  - [Optional Extension — Higher-Resolution Generation](#optional-extension--higher-resolution-generation)
+    - [Objective and Experimental Design](#objective-and-experimental-design)
+    - [Cost and Geometry](#cost-and-geometry)
+    - [Matched Visual Comparison](#matched-visual-comparison)
+  - [Submission Checklist](#submission-checklist)
+    - [Report](#report)
+    - [Files](#files)
+    - [Oral Preparation](#oral-preparation)
 
 ## Step 1 — Download Model Weights
 
@@ -511,7 +547,7 @@ The resulting high-resolution asset is stored as [`asset.glb`](outputs/optional/
 
 ### Files
 
-- [ ] One PDF report containing all report items above
+- [x] One PDF report containing all report items above
 - [x] Five image-conditioned `.glb` assets
 - [x] Five text-conditioned `.glb` assets
 - [x] One composed scene containing at least five generated assets (`.glb` preferred; `.blend` or `.usd` accepted)
